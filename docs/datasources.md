@@ -8,27 +8,17 @@ Following is a list of the different data sources evaluated for the scrape as we
 
 The sources are described in the below:
 
-- [BackMarket](https://www.backmarket.co.uk)
+| Source | Description |
+|---|---|
+| [BackMarket](https://www.backmarket.co.uk) | Supplier of refurbished technological products. Very detailed information and easy to access. |
+| [Printerland](https://www.printerland.co.uk) | Printing equipment supplier.|
+| [Broadbandchoices](https://www.broadbandchoices.co.uk/mobile-broadband/dongles) | Price comparison site for broadband services. They have a specific section for mobile broadband dongles. |
+| [Currys](currys.co.uk) | Retailer of new technological products. Very detailed information.|
 
-Supplier of refurbished technological products. Very detailed information and easy to access.  
-
-- [Printerland](https://www.printerland.co.uk)  
-
-Printing equipment supplier.
-
-- [Broadbandchoices](https://www.broadbandchoices.co.uk/mobile-broadband/dongles)  
-
-Price comparison site for broadband services. They have a specific section for mobile broadband dongles.
-
-- [Currys](currys.co.uk)  
-
-Retailer of new technological products. Very detailed information.
-
-
-### Laptop
+### 1. Laptop
 
 | Source | Brand | Model | Processor | Memory (RAM) | HDD | Release Year | Screen Size | OS |
-|---|:---:|:---:|:---:|:---:|:---:|:---:|:-------------:|:----:|
+|---|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
 | BackMarket | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: |
 | Curry's | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | | :white_check_mark: | :white_check_mark: |
 | Source 3 | | | | | | :white_check_mark: | :white_check_mark: | :white_check_mark: |
@@ -37,7 +27,7 @@ Retailer of new technological products. Very detailed information.
 
 <br>
 
-### Mobile Broadband Dongles
+### 2. Mobile Broadband Dongles
 
 | Source | Network Speed | Price per month | Data Allowance |
 |---|:---:|:---:|:---:|
@@ -48,49 +38,49 @@ Retailer of new technological products. Very detailed information.
 
 <br>
 
-### Desktop  
+### 3. Desktop
 Desktop computers are often sold without a screen, keyboard and mouse. We might need to scrape these elements separately and obtain an average price for them. Then we can add the average component prices to get an estimate for a desktop.
 
 <br>
 
-#### **Desktop Computer**
+#### 3.1 **Desktop Computer**
 
 | Source     | Brand | Model | Processor | Memory (RAM) | HDD | Release Year | OS |
-|------------|-------|-------|-----------|--------------|-----|--------------|----|
+|------------|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
 | BackMarket | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: |
 | Curry's    | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | | :white_check_mark: |
 | Source 3 | | | | | | :white_check_mark: | :white_check_mark: |
 | Source 4 | | | | | | :white_check_mark: | :white_check_mark: |
 | Source 5 | | | | | | | |
 
-#### **PC Monitor**  
+#### 3.2 **PC Monitor**  
 
-| Source     | Brand | Model | Screen Size |
+| Source | Brand | Model | Screen Size |
 |------------|:---:|:---:|:---:|
 | BackMarket | :white_check_mark: | :white_check_mark: | :white_check_mark: |
-| Curry's    | :white_check_mark: | :white_check_mark: | :white_check_mark: |
+| Curry's | :white_check_mark: | :white_check_mark: | :white_check_mark: |
 
-#### **Keyboard**
+#### 3.3 **Keyboard**
 
-| Source     | Brand | Model |
+| Source | Brand | Model |
 |------------|:---:|:---:|
 | BackMarket | :white_check_mark: | :white_check_mark: |
-| Curry's    | :white_check_mark: | :white_check_mark: |
+| Curry's | :white_check_mark: | :white_check_mark: |
 
-#### **Mouse**
+#### 3.4 **Mouse**
 
-| Source     | Brand | Model |
-|------------|-------|-------|
+| Source | Brand | Model |
+|------------|:---:|:---:|
 | BackMarket | :white_check_mark: | :white_check_mark: |
-| Curry's    | :white_check_mark: | :white_check_mark: |
+| Curry's | :white_check_mark: | :white_check_mark: |
 
 <br>
 
-### Projector
+### 5. Projector
 
-| Source   | Brand | Model | Resolution |
+| Source | Brand | Model | Resolution |
 |----------|:---:|:---:|:---:|
-| Curry's  | :white_check_mark: | :white_check_mark: | :white_check_mark: |
+| Curry's | :white_check_mark: | :white_check_mark: | :white_check_mark: |
 | Source 2 | :white_check_mark: | :white_check_mark: | :white_check_mark: |
 
 Not sure what these are:
@@ -99,20 +89,18 @@ Not sure what these are:
 
 <br>
 
-### Laser Printer
+### 6. Laser Printer
 
-| Source      | Brand | Model | DPI Print Resolution |
+| Source | Brand | Model | DPI Print Resolution |
 |-------------|:---:|:---:|:---:|
 | Printerland | :white_check_mark: | :white_check_mark: | :white_check_mark: |
-| Curry's     | :white_check_mark: | :white_check_mark: | :white_check_mark: |
+| Curry's | :white_check_mark: | :white_check_mark: | :white_check_mark: |
 
 <br>
 
-### Tablet  
+### 7. Tablet
 
-| Source     | Brand | Model | Resolution | Processor | Screen Size | Battery Life | Release Year | Storage |
+| Source | Brand | Model | Resolution | Processor | Screen Size | Battery Life | Release Year | Storage |
 |------------|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
 | BackMarket | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: |
-| Curry's    | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: |
-
-
+| Curry's | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: |
