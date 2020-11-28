@@ -6,6 +6,7 @@ verify_ssl = true
 [dev-packages]
 black = "*"
 pytest = "*"
+pytest-cov = "*"
 deon = "*"
 mypy = "*"
 autoflake = "*"
@@ -17,6 +18,7 @@ scrapy = "*"
 pyodbc = "*"
 pandas = "*"
 selenium = "*"
+typer = "*"
 
 [requires]
 python_version = "3.8"
