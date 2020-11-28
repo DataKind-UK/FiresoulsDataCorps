@@ -1,13 +1,41 @@
+"""downloader.py
+"""
 import os
 import requests
-from typing import Optional
 
 
 class RequestFailedException(Exception):
+    """Exception raised when an error occurs while making the get request to
+    a site
+    """
+
     pass
 
 
 def downloadHTML(url: str, use_proxy: bool = True) -> str:
+    """Function to make request to website and download HTML code.
+    It will optionally use a proxy to make the request.
+    It's currently set to use the ScraperAPI service.
+
+    Parameters
+    ----------
+    url : str
+        URL address to scrape
+    use_proxy : bool, optional
+        If True, will use proxy service to make request, by default True
+
+    Returns
+    -------
+    str
+        HTML code of the website requested
+
+    Raises
+    ------
+    EnvironmentError
+        Raised if use_proxy is True, but no key has been set in the .env file
+    RequestFailedException
+        Raised if any issues occur during the page request.
+    """
     target_url = url
     if use_proxy:
         proxy_key = os.getenv("SCRAPERAPI")
