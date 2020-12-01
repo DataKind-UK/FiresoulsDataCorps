@@ -18,6 +18,11 @@ class BackmarketLaptopParser(BaseParser):
         brand_model = brand_model.split(' ', 1)
         return brand_model[0], brand_model[1]
 
+    @staticmethod
+    def _parse_processor(product: BeautifulSoup) -> str:
+        processor = product.find('ul').findAll('li')[1].find('b').text
+        processor = processor.strip()
+        return processor
 
     def parse(self):
         pass
