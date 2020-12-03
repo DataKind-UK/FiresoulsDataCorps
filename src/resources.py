@@ -23,7 +23,7 @@ class Laptop(BaseResource):
     ram: int
     storage: int
     release_year: int
-    screen_size: int
+    screen_size: float
     price: float
     scrape_source: str
     scrape_url: str
