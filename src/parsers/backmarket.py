@@ -6,7 +6,7 @@ from .base import BaseParser
 
 
 class BackmarketLaptopParser(BaseParser):
-    scrape_source = 'backmarket.com'
+    scrape_source = "backmarket.com"
 
     def _get_items(self):
         products = self.soup.findAll("a", {"data-qa": "productThumb"})
@@ -54,15 +54,15 @@ class BackmarketLaptopParser(BaseParser):
     def _parse_screen_size(product: BeautifulSoup) -> float:
         screen_size = product.find("h2", {"data-test": "title"}).text
         screen_size = screen_size.strip()
-        screen_size = re.search(r'.*(\d{2}[.]{0,1}\d{0,2})”\s',screen_size).group(1)
+        screen_size = re.search(r".*(\d{2}[.]{0,1}\d{0,2})”\s", screen_size).group(1)
         screen_size = float(screen_size)
         return screen_size
 
     @staticmethod
     def _parse_price(product: BeautifulSoup) -> float:
-        price = product.find('div',{'class':'price'}).text
+        price = product.find("div", {"class": "price"}).text
         price = price.strip()
-        price = re.search(r'.(\d{1,4}[.]{0,1}\d{0,2})',price).group(1)
+        price = re.search(r".(\d{1,4}[.]{0,1}\d{0,2})", price).group(1)
         price = float(price)
         return price
 
@@ -70,8 +70,7 @@ class BackmarketLaptopParser(BaseParser):
         return self.scrape_source
 
     def _parse_scrape_url(self, product) -> str:
-        return self.scrape_source + product['href']
-    
+        return self.scrape_source + product["href"]
 
     def parse(self):
         pass
