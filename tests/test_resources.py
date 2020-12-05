@@ -38,7 +38,7 @@ def test_laptop_todict(laptop):
         "screen_size": 15,
         "price": 2000,
         "scrape_source": "gumtree",
-        "scrape_date": datetime.datetime.today().date(),
+        "scrape_date": datetime.datetime.today().strftime('%Y-%m-%d'),
         "scrape_url": "url",
     }
 
