@@ -8,6 +8,7 @@ def main(site: str):
         blp = BackmarketLaptopParser()
         laptops = blp.parse()
         json_file = [x.asdict() for x in laptops]
+        # TODO Add a function to write these json files
         with open("file.json", "w") as f:
             json.dump(json_file, f)
     else:

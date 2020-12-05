@@ -9,18 +9,19 @@ mini DataCorps for Firesouls (Social Value Exchange)
 
 ## Usage  
 
-So far there is minimal version of the script, which only contains the dowloader
-function. This can be run through the `main.py` script using the following:
+So far there is basic version of the script, which contains the Backmarket
+laptop scraper implementation. This can be run through the `main.py` script using the following:
 
 ```
-python main.py <URL>
+python main.py <site_name>
 ```
 
 A quick test of this code is through the following command:  
 
 ```
-python main.py https://api.myip.com
+python main.py backmarket
 ```
 
-Which should output a JSON with the IP address and country. If using the Proxy service, this will not be your IP address.
+This script will output a file called `file.json` which contains the data for
+the scraped items.
 
