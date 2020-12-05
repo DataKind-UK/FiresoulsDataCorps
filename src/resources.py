@@ -12,7 +12,9 @@ class BaseResource:
         return astuple(self)
 
     def asdict(self):
-        return asdict(self)
+        dictionary = asdict(self)
+        dictionary['scrape_date'] = dictionary['scrape_date'].strftime('%Y-%m-%d')
+        return dictionary
 
 
 @dataclass
