@@ -5,7 +5,6 @@ from src.downloader import downloadHTML
 
 
 class BaseParser(ABC):
-
     @staticmethod
     def _make_soup(url: str):
         html = downloadHTML(url)

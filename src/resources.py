@@ -13,7 +13,7 @@ class BaseResource:
 
     def asdict(self):
         dictionary = asdict(self)
-        dictionary['scrape_date'] = dictionary['scrape_date'].strftime('%Y-%m-%d')
+        dictionary["scrape_date"] = dictionary["scrape_date"].strftime("%Y-%m-%d")
         return dictionary
 
 

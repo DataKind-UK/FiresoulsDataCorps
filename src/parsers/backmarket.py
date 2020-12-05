@@ -8,14 +8,16 @@ from src.resources import Laptop
 
 class BackmarketLaptopParser(BaseParser):
     scrape_source = "backmarket.co.uk"
-    url = 'https://www.backmarket.co.uk/refurbished-laptop-english.html'
+    url = "https://www.backmarket.co.uk/refurbished-laptop-english.html"
 
     def _get_items(self) -> List[BeautifulSoup]:
         products = self.soup.findAll("a", {"data-qa": "productThumb"})
         return products
 
     def _get_num_pages(self) -> int:
-        pages = len(self.soup.find('div',{'data-test':'pagination'}).findAll('button'))
+        pages = len(
+            self.soup.find("div", {"data-test": "pagination"}).findAll("button")
+        )
         return pages
 
     @staticmethod
@@ -55,8 +57,8 @@ class BackmarketLaptopParser(BaseParser):
         try:
             release_year = re.search(r"([0-9]{4})", release_year).group(1)
         except AttributeError:
-            print('\tRelease Year not specified for this laptop')
-            release_year = '0'
+            print("\tRelease Year not specified for this laptop")
+            release_year = "0"
         release_year = int(release_year)
         return release_year
 
@@ -72,7 +74,7 @@ class BackmarketLaptopParser(BaseParser):
     def _parse_price(product: BeautifulSoup) -> float:
         price = product.find("div", {"class": "price"}).text
         price = price.strip()
-        price = price.replace(',','')
+        price = price.replace(",", "")
         price = re.search(r".(\d{1,4}[.]{0,1}\d{0,2})", price).group(1)
         price = float(price)
         return price
@@ -93,7 +95,7 @@ class BackmarketLaptopParser(BaseParser):
             products = self._get_items()
             count = 0
             for product in products:
-                count+=1
+                count += 1
                 print(f"Parsing laptop {count} of {len(products)}")
                 brand, model = self._parse_brand_model(product)
                 processor = self._parse_processor(product)
@@ -104,9 +106,17 @@ class BackmarketLaptopParser(BaseParser):
                 price = self._parse_price(product)
                 source = self._scrape_source()
                 scrape_url = self._parse_scrape_url(product)
-                l = Laptop(brand, model, processor,ram, storage, release_year,screen_size,
-                price,source,scrape_url)
+                l = Laptop(
+                    brand,
+                    model,
+                    processor,
+                    ram,
+                    storage,
+                    release_year,
+                    screen_size,
+                    price,
+                    source,
+                    scrape_url,
+                )
                 laptops.append(l)
         return laptops
-
-

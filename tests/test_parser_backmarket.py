@@ -3,11 +3,12 @@ from bs4 import BeautifulSoup
 
 from src.parsers.backmarket import BackmarketLaptopParser
 
+
 @pytest.fixture
 def html_code():
     with open("tests/fixtures/backmarket/laptops_page_1.html", "r") as f:
         html = f.read()
-    soup = BeautifulSoup(html, 'html.parser')
+    soup = BeautifulSoup(html, "html.parser")
     return soup
 
 
@@ -18,12 +19,14 @@ def test_laptop_get_items(html_code):
     items = bls._get_items()
     assert len(items) == 30
 
+
 def test_get_num_pages(html_code):
     bls = BackmarketLaptopParser()
     bls.soup = html_code
 
     pages = bls._get_num_pages()
     assert pages == 5
+
 
 @pytest.mark.parametrize(
     "test_input,expected",
