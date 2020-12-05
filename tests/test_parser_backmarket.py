@@ -1,28 +1,29 @@
 import pytest
+import requests
 from bs4 import BeautifulSoup
 
 from src.parsers.backmarket import BackmarketLaptopParser
 
 
 @pytest.fixture
-def html_code():
+def soup():
     with open("tests/fixtures/backmarket/laptops_page_1.html", "r") as f:
         html = f.read()
     soup = BeautifulSoup(html, "html.parser")
     return soup
 
 
-def test_laptop_get_items(html_code):
+def test_laptop_get_items(soup):
     bls = BackmarketLaptopParser()
-    bls.soup = html_code
+    bls.soup = soup
 
     items = bls._get_items()
     assert len(items) == 30
 
 
-def test_get_num_pages(html_code):
+def test_get_num_pages(soup):
     bls = BackmarketLaptopParser()
-    bls.soup = html_code
+    bls.soup = soup
 
     pages = bls._get_num_pages()
     assert pages == 5
@@ -36,9 +37,9 @@ def test_get_num_pages(html_code):
         (6, ("Dell", "G5 15 5590")),
     ],
 )
-def test_laptop_parse_brand_model(html_code, test_input, expected):
+def test_laptop_parse_brand_model(soup, test_input, expected):
     bls = BackmarketLaptopParser()
-    bls.soup = html_code
+    bls.soup = soup
     items = bls._get_items()
     item = items[test_input]
     assert bls._parse_brand_model(item) == expected
@@ -52,47 +53,53 @@ def test_laptop_parse_brand_model(html_code, test_input, expected):
         (6, "Intel Core i7 1.8 GHz"),
     ],
 )
-def test_laptop_parse_processor(html_code, test_input, expected):
+def test_laptop_parse_processor(soup, test_input, expected):
     bls = BackmarketLaptopParser()
-    bls.soup = html_code
+    bls.soup = soup
     items = bls._get_items()
     item = items[test_input]
     assert bls._parse_processor(item) == expected
 
 
 @pytest.mark.parametrize("test_input,expected", [(0, 4), (4, 8), (6, 8)])
-def test_laptop_parse_ram(html_code, test_input, expected):
+def test_laptop_parse_ram(soup, test_input, expected):
     bls = BackmarketLaptopParser()
-    bls.soup = html_code
+    bls.soup = soup
     items = bls._get_items()
     item = items[test_input]
     assert bls._parse_ram(item) == expected
 
 
 @pytest.mark.parametrize("test_input,expected", [(0, 500), (4, 128), (6, 256)])
-def test_laptop_parse_storage(html_code, test_input, expected):
+def test_laptop_parse_storage(soup, test_input, expected):
     bls = BackmarketLaptopParser()
-    bls.soup = html_code
+    bls.soup = soup
     items = bls._get_items()
     item = items[test_input]
     assert bls._parse_storage(item) == expected
 
 
 @pytest.mark.parametrize("test_input,expected", [(0, 2014), (4, 2016), (6, 2019)])
-def test_laptop_parse_release_year(html_code, test_input, expected):
+def test_laptop_parse_release_year(soup, test_input, expected):
     bls = BackmarketLaptopParser()
-    bls.soup = html_code
+    bls.soup = soup
     items = bls._get_items()
     item = items[test_input]
     assert bls._parse_release_year(item) == expected
 
 
+def test_laptop_parse_release_year_not_defined():
+    bls = BackmarketLaptopParser()
+    item = BeautifulSoup("<html><ul><li><b></b></li></ul></html>", "html.parser")
+    bls._parse_release_year(item) == 0
+
+
 @pytest.mark.parametrize(
     "test_input,expected", [(0, 12.5), (2, 14), (4, 12.5), (6, 15.6)]
 )
-def test_laptop_parse_screen_size(html_code, test_input, expected):
+def test_laptop_parse_screen_size(soup, test_input, expected):
     bls = BackmarketLaptopParser()
-    bls.soup = html_code
+    bls.soup = soup
     items = bls._get_items()
     item = items[test_input]
     assert bls._parse_screen_size(item) == expected
@@ -101,17 +108,17 @@ def test_laptop_parse_screen_size(html_code, test_input, expected):
 @pytest.mark.parametrize(
     "test_input,expected", [(0, 299.0), (2, 280.0), (4, 425.0), (6, 879.0)]
 )
-def test_laptop_parse_price(html_code, test_input, expected):
+def test_laptop_parse_price(soup, test_input, expected):
     bls = BackmarketLaptopParser()
-    bls.soup = html_code
+    bls.soup = soup
     items = bls._get_items()
     item = items[test_input]
     assert bls._parse_price(item) == expected
 
 
-def test_laptop_scrape_source(html_code):
+def test_laptop_scrape_source(soup):
     bls = BackmarketLaptopParser()
-    bls.soup = html_code
+    bls.soup = soup
     assert bls._scrape_source() == "backmarket.co.uk"
 
 
@@ -136,9 +143,27 @@ def test_laptop_scrape_source(html_code):
         ),
     ],
 )
-def test_laptop_parse_url(html_code, test_input, expected):
+def test_laptop_parse_url(soup, test_input, expected):
     bls = BackmarketLaptopParser()
-    bls.soup = html_code
+    bls.soup = soup
     items = bls._get_items()
     item = items[test_input]
     assert bls._parse_scrape_url(item) == expected
+
+
+class MockSuccessfulResponse:
+    with open("tests/fixtures/backmarket/laptops_page_1.html", "r") as f:
+        text = f.read()
+    ok = True
+    status_code = 200
+
+
+def test_successful_make_request_method(monkeypatch):
+    def mock_get(*args, **kwargs):
+        return MockSuccessfulResponse()
+
+    monkeypatch.setattr(requests, "get", mock_get)
+
+    bls = BackmarketLaptopParser()
+    laptops = bls.parse()
+    assert len(laptops) == 150

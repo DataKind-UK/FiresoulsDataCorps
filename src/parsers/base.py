@@ -1,16 +1,16 @@
-from abc import ABC, abstractmethod
 from typing import Dict, Any
 from bs4 import BeautifulSoup
 from src.downloader import downloadHTML
 
 
-class BaseParser(ABC):
+class BaseParser:
     @staticmethod
     def _make_soup(url: str):
         html = downloadHTML(url)
         soup = BeautifulSoup(html, "html.parser")
         return soup
 
-    @abstractmethod
     def parse(self) -> Dict[str, Any]:
-        pass
+        raise NotImplementedError(
+            "This method needs to be implemented in child classes"
+        )
