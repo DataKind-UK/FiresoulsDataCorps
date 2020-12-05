@@ -1,16 +1,16 @@
 from abc import ABC, abstractmethod
 from typing import Dict, Any
 from bs4 import BeautifulSoup
+from src.downloader import downloadHTML
 
 
 class BaseParser(ABC):
-    def __init__(self, html: str):
-        self.html = html
-        self._make_soup()
 
-    def _make_soup(self):
-        soup = BeautifulSoup(self.html, "html.parser")
-        self.soup = soup
+    @staticmethod
+    def _make_soup(url: str):
+        html = downloadHTML(url)
+        soup = BeautifulSoup(html, "html.parser")
+        return soup
 
     @abstractmethod
     def parse(self) -> Dict[str, Any]:
