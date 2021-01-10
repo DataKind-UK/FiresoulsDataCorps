@@ -16,7 +16,7 @@ class BackmarketLaptopParser(BaseParser):
 
     def _get_num_pages(self) -> int:
         pages = len(
-            self.soup.find("div", {"data-test": "pagination"}).findAll("button")
+            self.soup.find("nav", {"data-test": "pagination"}).findAll("button")
         )
         return pages
 
