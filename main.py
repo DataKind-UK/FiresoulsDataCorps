@@ -4,7 +4,7 @@ from src.parsers.backmarket import BackmarketLaptopParser
 
 
 def main(site: str):
-    if site == 'backmarket':
+    if site == "backmarket":
         blp = BackmarketLaptopParser()
         laptops = blp.parse()
         json_file = [x.asdict() for x in laptops]
