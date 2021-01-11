@@ -51,6 +51,14 @@ class ValueComputersLaptopParser(BaseParser):
         sku = sku.text.split(":")[1].strip()
         return sku
 
+    @staticmethod
+    def _parse_ram(ram: str):
+        if len(str(ram)) > 0:
+            if isinstance(ram, float):
+                return None
+            elif 'GB' in ram:
+                return int(ram.replace('GB', '').strip())
+
     def _scrape_source(self) -> str:
         return self.scrape_source
 
@@ -121,7 +129,7 @@ class ValueComputersLaptopParser(BaseParser):
             brand = ""
             model = ""
             processor = r["Processor"]
-            ram = r["RAM"]
+            ram = self._parse_ram(r["RAM"]),
             storage = r["Storage"]
             release_year = ""
             screen_size = r["Screen Size"]
