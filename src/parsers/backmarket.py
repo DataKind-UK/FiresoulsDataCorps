@@ -1,6 +1,6 @@
 import pdb
 import re
-from typing import Tuple, List
+from typing import Tuple, List, Dict, Optional
 from bs4 import BeautifulSoup
 from .base import BaseParser
 from src.resources import Laptop, Tablet
@@ -126,7 +126,83 @@ class BackmarketLaptopParser(BackmarketBaseParser):
 
 
 class BackmarketTabletParser(BackmarketBaseParser):
-    
+    url = "https://www.backmarket.co.uk/refurbished-tablets.html"
+
+    @staticmethod
+    def _parse_price(product: BeautifulSoup) -> float:
+        price = product.find("div", {"class": "price primary large"}).text
+        price = price.strip()
+        price = price.replace("£", "")
+        price = float(price)
+        return price
+
+    @staticmethod
+    def _parse_characteristics(product: BeautifulSoup) -> Dict[str, str]:
+        chardict = {}
+        chars = product.findAll("ul")[6].findAll("li")
+        for char in chars:
+            key = char.find("strong").text.replace(":", "").strip()
+            chardict[key] = char.text.replace(key, "").replace(":", "").strip()
+        return chardict
+
+    @staticmethod
+    def _parse_brand(chardict: Dict[str, str]) -> Optional[str]:
+        return chardict.get('Brand').lower()
+
+    @staticmethod
+    def _parse_model(chardict: Dict[str, str]) -> Optional[str]:
+        return chardict.get('Model').lower()
+
+    @staticmethod
+    def _parse_processor(chardict: Dict[str, str]) -> Optional[str]:
+        processor = chardict.get('Processor brand', '') + ' ' + chardict.get('Processor speed', '')
+        if processor == ' ':
+            return None
+        return processor
+
+    @staticmethod
+    def _parse_screen_size(chardict: Dict[str, str]) -> float:
+        screen_size = chardict.get('Screen size (in)','0')
+        return float(screen_size)
+
+    @staticmethod
+    def _parse_screen_resolution(chardict: Dict[str, str]) -> Optional[str]:
+        return chardict.get('Resolution')
+
+    @staticmethod
+    def _parse_storage(chardict: Dict[str, str]) -> int:
+        storage =  chardict.get('Storage')
+        storage = re.search(r'(\d+)', storage).group(1)
+        return int(storage)
+
+    @staticmethod
+    def _parse_release_year(chardict: Dict[str, str]) -> int:
+        year =  chardict.get('Year of Release', '0')
+        return int(year)
+
+    def parse_single(self, url: str) -> Tablet:
+        soup = self._make_soup(url)
+        chardict = self._parse_characteristics(soup)
+        brand = self._parse_brand(chardict)
+        model = self._parse_model(chardict)
+        processor = self._parse_processor(chardict)
+        screen_size = self._parse_screen_size(chardict)
+        screen_resolution = self._parse_screen_resolution(chardict)
+        storage = self._parse_storage(chardict)
+        release_year = self._parse_release_year(chardict)
+        price = self._parse_price(soup)
+        tablet = Tablet(brand,
+                        model,
+                        processor,
+                        screen_size,
+                        screen_resolution,
+                        storage,
+                        release_year,
+                        price,
+                        self.scrape_source,
+                        url)
+        return tablet
+
     def parse(self) -> List[Tablet]:
         self.soup = self._make_soup(self.url)
         num_pages = self._get_num_pages()
