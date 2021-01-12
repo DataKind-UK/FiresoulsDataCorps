@@ -3,12 +3,11 @@ import re
 from typing import Tuple, List
 from bs4 import BeautifulSoup
 from .base import BaseParser
-from src.resources import Laptop
+from src.resources import Laptop, Tablet
 
 
-class BackmarketLaptopParser(BaseParser):
+class BackmarketBaseParser(BaseParser):
     scrape_source = "backmarket.co.uk"
-    url = "https://www.backmarket.co.uk/refurbished-laptop-english.html"
 
     def _get_items(self) -> List[BeautifulSoup]:
         products = self.soup.findAll("a", {"data-qa": "productThumb"})
@@ -19,6 +18,10 @@ class BackmarketLaptopParser(BaseParser):
             self.soup.find("nav", {"data-test": "pagination"}).findAll("button")
         )
         return pages
+
+
+class BackmarketLaptopParser(BackmarketBaseParser):
+    url = "https://www.backmarket.co.uk/refurbished-laptop-english.html"
 
     @staticmethod
     def _parse_brand_model(product: BeautifulSoup) -> Tuple[str, str]:
@@ -120,3 +123,11 @@ class BackmarketLaptopParser(BaseParser):
                 )
                 laptops.append(l)
         return laptops
+
+
+class BackmarketTabletParser(BackmarketBaseParser):
+    
+    def parse(self) -> List[Tablet]:
+        self.soup = self._make_soup(self.url)
+        num_pages = self._get_num_pages()
+        tablets = []
