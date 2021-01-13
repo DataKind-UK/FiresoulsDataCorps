@@ -3,6 +3,8 @@
 import os
 import requests
 
+from retry import retry
+
 
 class RequestFailedException(Exception):
     """Exception raised when an error occurs while making the get request to
@@ -11,7 +13,7 @@ class RequestFailedException(Exception):
 
     pass
 
-
+@retry(RequestFailedException, tries=3, delay=2)
 def downloadHTML(url: str, use_proxy: bool = True) -> str:
     """Function to make request to website and download HTML code.
     It will optionally use a proxy to make the request.
