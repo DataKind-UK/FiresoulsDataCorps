@@ -14,9 +14,13 @@ class BackmarketBaseParser(BaseParser):
         return products
 
     def _get_num_pages(self) -> int:
-        pages = len(
-            self.soup.find("nav", {"data-test": "pagination"}).findAll("button")
-        )
+        try:
+            pages = len(
+                self.soup.find("nav", {"data-test": "pagination"}).findAll("button")
+            )
+        except AttributeError:
+            pages = 1
+            print("Could not find a pagination object on the site, please make sure it's not due to a website change")
         return pages
 
 
@@ -220,6 +224,7 @@ class BackmarketTabletParser(BackmarketBaseParser):
             count = 0
             for product in products:
                 count += 1
+                print(f"Parsing tablet {count} of {len(products)}")
                 t = self.parse_single("www.backmarket.co.uk" + product["href"])
                 tablets.append(t)
         return tablets
