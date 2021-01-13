@@ -12,10 +12,10 @@ app = typer.Typer()
 @app.command()
 def scrape(site: str, product: str):
     if site == "backmarket":
-        if product == 'laptop':
+        if product == "laptop":
             blp = BackmarketLaptopParser()
             items = blp.parse()
-        elif product == 'tablet':
+        elif product == "tablet":
             btp = BackmarketTabletParser()
             items = btp.parse()
         else:
@@ -23,7 +23,7 @@ def scrape(site: str, product: str):
             raise Exception
 
         json_file = [x.asdict() for x in items]
-        timestamp = datetime.now().strftime('%Y-%m-%d_%H-%M-%S')
+        timestamp = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
         # TODO Add a function to write these json files
         with open(f"{site}_{product}_{timestamp}.json", "w") as f:
             json.dump(json_file, f)

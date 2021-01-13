@@ -132,7 +132,7 @@ class BackmarketTabletParser(BackmarketBaseParser):
     def _parse_price(product: BeautifulSoup) -> float:
         price = product.find("div", {"class": "price primary large"}).text
         price = price.strip()
-        price = price.replace("£", "").replace(',','')
+        price = price.replace("£", "").replace(",", "")
         price = float(price)
         return price
 
@@ -220,6 +220,6 @@ class BackmarketTabletParser(BackmarketBaseParser):
             count = 0
             for product in products:
                 count += 1
-                t = self.parse_single('www.backmarket.co.uk'+product['href'])
+                t = self.parse_single("www.backmarket.co.uk" + product["href"])
                 tablets.append(t)
         return tablets

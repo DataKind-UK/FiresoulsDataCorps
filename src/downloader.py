@@ -13,6 +13,7 @@ class RequestFailedException(Exception):
 
     pass
 
+
 @retry(RequestFailedException, tries=3, delay=2)
 def downloadHTML(url: str, use_proxy: bool = True) -> str:
     """Function to make request to website and download HTML code.
