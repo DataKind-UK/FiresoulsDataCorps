@@ -132,7 +132,7 @@ class BackmarketTabletParser(BackmarketBaseParser):
     def _parse_price(product: BeautifulSoup) -> float:
         price = product.find("div", {"class": "price primary large"}).text
         price = price.strip()
-        price = price.replace("£", "")
+        price = price.replace("£", "").replace(',','')
         price = float(price)
         return price
 
@@ -147,37 +147,41 @@ class BackmarketTabletParser(BackmarketBaseParser):
 
     @staticmethod
     def _parse_brand(chardict: Dict[str, str]) -> Optional[str]:
-        return chardict.get('Brand').lower()
+        return chardict.get("Brand").lower()
 
     @staticmethod
     def _parse_model(chardict: Dict[str, str]) -> Optional[str]:
-        return chardict.get('Model').lower()
+        return chardict.get("Model").lower()
 
     @staticmethod
     def _parse_processor(chardict: Dict[str, str]) -> Optional[str]:
-        processor = chardict.get('Processor brand', '') + ' ' + chardict.get('Processor speed', '')
-        if processor == ' ':
+        processor = (
+            chardict.get("Processor brand", "")
+            + " "
+            + chardict.get("Processor speed", "")
+        )
+        if processor == " ":
             return None
         return processor
 
     @staticmethod
     def _parse_screen_size(chardict: Dict[str, str]) -> float:
-        screen_size = chardict.get('Screen size (in)','0')
+        screen_size = chardict.get("Screen size (in)", "0")
         return float(screen_size)
 
     @staticmethod
     def _parse_screen_resolution(chardict: Dict[str, str]) -> Optional[str]:
-        return chardict.get('Resolution')
+        return chardict.get("Resolution")
 
     @staticmethod
     def _parse_storage(chardict: Dict[str, str]) -> int:
-        storage =  chardict.get('Storage')
-        storage = re.search(r'(\d+)', storage).group(1)
+        storage = chardict.get("Storage")
+        storage = re.search(r"(\d+)", storage).group(1)
         return int(storage)
 
     @staticmethod
     def _parse_release_year(chardict: Dict[str, str]) -> int:
-        year =  chardict.get('Year of Release', '0')
+        year = chardict.get("Year of Release", "0")
         return int(year)
 
     def parse_single(self, url: str) -> Tablet:
@@ -191,19 +195,31 @@ class BackmarketTabletParser(BackmarketBaseParser):
         storage = self._parse_storage(chardict)
         release_year = self._parse_release_year(chardict)
         price = self._parse_price(soup)
-        tablet = Tablet(brand,
-                        model,
-                        processor,
-                        screen_size,
-                        screen_resolution,
-                        storage,
-                        release_year,
-                        price,
-                        self.scrape_source,
-                        url)
+        tablet = Tablet(
+            brand,
+            model,
+            processor,
+            screen_size,
+            screen_resolution,
+            storage,
+            release_year,
+            price,
+            self.scrape_source,
+            url,
+        )
         return tablet
 
     def parse(self) -> List[Tablet]:
         self.soup = self._make_soup(self.url)
         num_pages = self._get_num_pages()
         tablets = []
+        for i in range(num_pages):
+            print(f"Downloading page: {i+1}/{num_pages}")
+            self.soup = self._make_soup(f"{self.url}?page={i+1}")
+            products = self._get_items()
+            count = 0
+            for product in products:
+                count += 1
+                t = self.parse_single('www.backmarket.co.uk'+product['href'])
+                tablets.append(t)
+        return tablets
