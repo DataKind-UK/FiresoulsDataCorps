@@ -20,7 +20,9 @@ class BackmarketBaseParser(BaseParser):
             )
         except AttributeError:
             pages = 1
-            print("Could not find a pagination object on the site, please make sure it's not due to a website change")
+            print(
+                "Could not find a pagination object on the site, please make sure it's not due to a website change"
+            )
         return pages
 
 
