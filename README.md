@@ -21,17 +21,16 @@ available:
 This command kickstarts the scraping process for a given site.
 
 ```
-python main.py scrape <site_name>
+python main.py scrape <site_name> <resource_type>
 ```
 
 A quick test of this code is through the following command:  
 
 ```
-python main.py scrape backmarket
+python main.py scrape backmarket laptop
 ```
 
-This script will output a file called `file.json` which contains the data for
-the scraped items.
+This script will output a file called `{site}_{resource}_{timestamp}.json` which contains the data for the scraped items.
 
 ### Summarise  
 

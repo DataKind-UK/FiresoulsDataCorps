@@ -30,3 +30,18 @@ class Laptop(BaseResource):
     scrape_source: str
     scrape_url: str
     scrape_date: datetime.date = datetime.datetime.today().date()
+
+
+@dataclass
+class Tablet(BaseResource):
+    brand: str
+    model: str
+    processor: str
+    screen_size: float
+    screen_resolution: str
+    storage: int
+    release_year: int
+    price: float
+    scrape_source: str
+    scrape_url: str
+    scrape_date: datetime.date = datetime.datetime.today().date()
