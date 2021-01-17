@@ -3,6 +3,7 @@ import pandas as pd
 from tqdm import tqdm
 import time
 import re
+import math
 from typing import List
 from src.parsers.base import BaseParser
 from src.resources import Laptop
@@ -72,9 +73,12 @@ class ValueComputersLaptopParser(BaseParser):
 
     @staticmethod
     def _parse_storage(storage: str):
-        storage = re.search(r"([0-9]*)", storage).group(1)
-        storage = float(storage)
-        return storage
+        if storage == 'nan':
+            return None
+        else:
+            storage = re.search(r"([0-9]*)", storage).group(1)
+            storage = float(storage)
+            return storage
 
     @staticmethod
     def _parse_brand(title: str):
@@ -175,7 +179,7 @@ class ValueComputersLaptopParser(BaseParser):
             model = ""
             processor = r["Processor"]
             ram = self._parse_ram(r["RAM"])
-            storage = self._parse_storage(r["Storage"])
+            storage = self._parse_storage(str(r["Storage"]))
             release_year = ""
             screen_size = self._parse_screen_size(r["Screen Size"])
             price = r["price"]
