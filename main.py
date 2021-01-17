@@ -2,12 +2,8 @@ import typer
 import json
 from typing import Optional, List
 from src.parsers.backmarket import BackmarketLaptopParser
-<<<<<<< HEAD
 from src.parsers.valuecomputers import ValueComputersLaptopParser
-=======
 from src.summariser import Summary
-
->>>>>>> dev
 
 app = typer.Typer()
 
