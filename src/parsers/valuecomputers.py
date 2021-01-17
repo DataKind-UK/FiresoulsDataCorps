@@ -134,7 +134,7 @@ class ValueComputersLaptopParser(BaseParser):
         return df
 
     def get_all_laptops_specs(self, df: pd.DataFrame) -> pd.DataFrame:
-        for i, r in tqdm(df.head().iterrows(), total=len(df)):
+        for i, r in tqdm(df.iterrows(), total=len(df)):
             time.sleep(1)
             if i == 0:
                 df_specs = self.get_laptop_specs(r)
