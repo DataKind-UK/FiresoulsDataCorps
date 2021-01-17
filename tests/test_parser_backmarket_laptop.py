@@ -1,8 +1,11 @@
+"""Laptop Parser Tests
+"""
+
 import pytest
 import requests
 from bs4 import BeautifulSoup
 
-from src.parsers.backmarket import BackmarketLaptopParser
+from src.parsers.backmarket import BackmarketLaptopParser, BackmarketTabletParser
 
 
 @pytest.fixture
