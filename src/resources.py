@@ -33,6 +33,25 @@ class Laptop(BaseResource):
 
 
 @dataclass
+class Desktop(BaseResource):
+    brand: str
+    model: str
+    processor: str
+    screen_size: float
+    ram: int
+    storage_hdd: int
+    storage_sdd: int
+    release_year: int
+    screen_size: float
+    optical_drive: str
+    operative_system: str
+    price: float
+    scrape_source: str
+    scrape_url: str
+    scrape_date: datetime.date = datetime.datetime.today().date()
+
+
+@dataclass
 class Tablet(BaseResource):
     brand: str
     model: str
@@ -41,6 +60,17 @@ class Tablet(BaseResource):
     screen_resolution: str
     storage: int
     release_year: int
+    price: float
+    scrape_source: str
+    scrape_url: str
+    scrape_date: datetime.date = datetime.datetime.today().date()
+
+
+@dataclass
+class Monitor(BaseResource):
+    brand: str
+    model: str
+    screen_size: float
     price: float
     scrape_source: str
     scrape_url: str

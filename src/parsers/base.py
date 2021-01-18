@@ -5,8 +5,8 @@ from src.downloader import downloadHTML
 
 class BaseParser:
     @staticmethod
-    def _make_soup(url: str):
-        html = downloadHTML(url)
+    def _make_soup(url: str, use_proxy: bool = True):
+        html = downloadHTML(url, use_proxy)
         soup = BeautifulSoup(html, "html.parser")
         return soup
 

@@ -1,10 +1,10 @@
 import typer
 import json
 from typing import Optional, List
+from src.parsers.valuecomputers import ValueComputersLaptopParser, ValueComputersDesktopParser
 from datetime import datetime
 from src.parsers.backmarket import BackmarketLaptopParser, BackmarketTabletParser
 from src.summariser import Summary
-
 
 app = typer.Typer()
 
@@ -18,17 +18,23 @@ def scrape(site: str, product: str):
         elif product == "tablet":
             btp = BackmarketTabletParser()
             items = btp.parse()
-        else:
-            print(f"Product {product} not implemented for {site}")
-            raise Exception
-
-        json_file = [x.asdict() for x in items]
-        timestamp = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
-        # TODO Add a function to write these json files
-        with open(f"{site}_{product}_{timestamp}.json", "w") as f:
-            json.dump(json_file, f)
+    elif site == 'valuecomputers':
+        if product == 'laptop':
+            vclp = ValueComputersLaptopParser()
+            items = vclp.parse()
+        elif product == 'desktop':
+            # vcdt = ValueComputersDesktopParser()
+            # items = vcdt.parse()
+            pass
     else:
-        print(f"Site {site} not implemented")
+        print(f"Product {product} not implemented for {site}")
+        raise Exception
+
+    json_file = [x.asdict() for x in items]
+    timestamp = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
+    # TODO Add a function to write these json files
+    with open(f"{site}_{product}_{timestamp}.json", "w") as f:
+        json.dump(json_file, f)
 
 
 @app.command()
