@@ -37,6 +37,7 @@ class Desktop(BaseResource):
     brand: str
     model: str
     processor: str
+    screen_size: float
     ram: int
     storage_hdd: int
     storage_sdd: int
@@ -63,6 +64,7 @@ class Tablet(BaseResource):
     scrape_source: str
     scrape_url: str
     scrape_date: datetime.date = datetime.datetime.today().date()
+
 
 @dataclass
 class Monitor(BaseResource):
