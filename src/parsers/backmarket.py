@@ -31,7 +31,7 @@ class BackmarketLaptopParser(BackmarketBaseParser):
 
     @staticmethod
     def _parse_brand_model(product: BeautifulSoup) -> Tuple[str, str]:
-        title = product.find("h2", {"data-test": "title"}).text
+        title = product.find("p").text
         title = title.strip()
         brand_model = re.search(r"^(.+)?\s\d{2}[.]?\d{0,2}”", title).group(1)
         brand_model = brand_model.split(" ", 1)
@@ -39,13 +39,13 @@ class BackmarketLaptopParser(BackmarketBaseParser):
 
     @staticmethod
     def _parse_processor(product: BeautifulSoup) -> str:
-        processor = product.find("ul").findAll("li")[1].find("b").text
+        processor = product.find("ul").findAll("li")[1].findAll("span")[1].text
         processor = processor.strip()
         return processor
 
     @staticmethod
     def _parse_ram(product: BeautifulSoup) -> int:
-        ram = product.find("ul").findAll("li")[4].find("b").text
+        ram = product.find("ul").findAll("li")[4].findAll("span")[1].text
         ram = ram.strip()
         ram = ram.replace("GB", "")
         ram = int(ram)
@@ -53,7 +53,7 @@ class BackmarketLaptopParser(BackmarketBaseParser):
 
     @staticmethod
     def _parse_storage(product: BeautifulSoup) -> int:
-        storage = product.find("ul").findAll("li")[3].find("b").text
+        storage = product.find("ul").findAll("li")[3].findAll("span")[1].text
         storage = storage.strip()
         storage = storage.split()[0]
         storage = int(storage)
@@ -61,7 +61,7 @@ class BackmarketLaptopParser(BackmarketBaseParser):
 
     @staticmethod
     def _parse_release_year(product: BeautifulSoup) -> int:
-        release_year = product.find("ul").findAll("li")[0].find("b").text
+        release_year = product.find("ul").findAll("li")[0].findAll("span")[1].text
         release_year = release_year.strip()
         try:
             release_year = re.search(r"([0-9]{4})", release_year).group(1)
@@ -73,7 +73,7 @@ class BackmarketLaptopParser(BackmarketBaseParser):
 
     @staticmethod
     def _parse_screen_size(product: BeautifulSoup) -> float:
-        screen_size = product.find("h2", {"data-test": "title"}).text
+        screen_size = product.find("p").text
         screen_size = screen_size.strip()
         screen_size = re.search(r".*(\d{2}[.]{0,1}\d{0,2})”\s?", screen_size).group(1)
         screen_size = float(screen_size)
@@ -81,7 +81,7 @@ class BackmarketLaptopParser(BackmarketBaseParser):
 
     @staticmethod
     def _parse_price(product: BeautifulSoup) -> float:
-        price = product.find("div", {"class": "price"}).text
+        price = product.find("div", {"data-qa": "prices"}).text
         price = price.strip()
         price = price.replace(",", "")
         price = re.search(r".(\d{1,4}[.]{0,1}\d{0,2})", price).group(1)
