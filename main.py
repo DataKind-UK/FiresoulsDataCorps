@@ -1,9 +1,13 @@
 import typer
 import json
 from typing import Optional, List
-from src.parsers.valuecomputers import ValueComputersLaptopParser, ValueComputersDesktopParser
 from datetime import datetime
+from src.parsers.valuecomputers import (
+    ValueComputersLaptopParser,
+    ValueComputersDesktopParser,
+)
 from src.parsers.backmarket import BackmarketLaptopParser, BackmarketTabletParser
+from src.parsers.broadbandchoices import BroadbandchoicesDongleParser
 from src.summariser import Summary
 
 app = typer.Typer()
@@ -18,14 +22,18 @@ def scrape(site: str, product: str):
         elif product == "tablet":
             btp = BackmarketTabletParser()
             items = btp.parse()
-    elif site == 'valuecomputers':
-        if product == 'laptop':
+    elif site == "valuecomputers":
+        if product == "laptop":
             vclp = ValueComputersLaptopParser()
             items = vclp.parse()
-        elif product == 'desktop':
+        elif product == "desktop":
             # vcdt = ValueComputersDesktopParser()
             # items = vcdt.parse()
             pass
+    elif site == "broadbandchoices":
+        if product == "dongle":
+            bbc = BroadbandchoicesDongleParser()
+            items = bbc.parse()
     else:
         print(f"Product {product} not implemented for {site}")
         raise Exception

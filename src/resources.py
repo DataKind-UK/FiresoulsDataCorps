@@ -42,7 +42,6 @@ class Desktop(BaseResource):
     storage_hdd: int
     storage_sdd: int
     release_year: int
-    screen_size: float
     optical_drive: str
     operative_system: str
     price: float
