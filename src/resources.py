@@ -75,3 +75,15 @@ class Monitor(BaseResource):
     scrape_source: str
     scrape_url: str
     scrape_date: datetime.date = datetime.datetime.today().date()
+
+
+@dataclass
+class WiFiDongle(BaseResource):
+    provider: str
+    service_name: str
+    upfront_cost: float
+    total_cost: float
+    data_allowance: str
+    contract_months: int
+    monthly_cost: float
+    scrape_date: datetime.date = datetime.datetime.today().date()

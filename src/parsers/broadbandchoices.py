@@ -5,6 +5,7 @@ from typing import Tuple, List
 import re
 from bs4 import BeautifulSoup
 from .base import BaseParser
+from src.resources import WiFiDongle
 
 class BroadbandchoicesDongleParser(BaseParser):
     URL = "https://www.broadbandchoices.co.uk/mobile-broadband/dongles?unlimitedData=true"
@@ -54,7 +55,20 @@ class BroadbandchoicesDongleParser(BaseParser):
         monthly_cost = monthly_cost.replace('£', '')
         return float(monthly_cost)
 
-    def parse(self):
+    def parse(self) -> List[WiFiDongle]:
+        dongles = []
         self.soup = self._make_soup(self.URL)
         elems = self.get_elements()
-        
+        for elem in elems:
+            data = self._get_data(elem)
+            provider, service = self.get_provider_service(elem)
+            upfront_cost = self.get_upfront_cost(data)
+            total_cost = self.get_total_cost(data)
+            data_allowance = self.get_allowance(data)
+            contract_months = self.get_contract_months(data)
+            monthly_cost = self.get_monthly_cost(data)
+            prod = WiFiDongle(provider, service, upfront_cost, total_cost,
+                              data_allowance, contract_months, monthly_cost)
+            dongles.append(prod)
+        return dongles
+
