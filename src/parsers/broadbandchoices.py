@@ -9,6 +9,7 @@ from src.resources import WiFiDongle
 
 
 class BroadbandchoicesDongleParser(BaseParser):
+    scrape_source = "broadbandchoices.co.uk"
     URL = (
         "https://www.broadbandchoices.co.uk/mobile-broadband/dongles?unlimitedData=true"
     )
@@ -77,6 +78,8 @@ class BroadbandchoicesDongleParser(BaseParser):
                 data_allowance,
                 contract_months,
                 monthly_cost,
+                self.scrape_source,
+                self.URL,
             )
             dongles.append(prod)
         return dongles

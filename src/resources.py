@@ -85,4 +85,6 @@ class WiFiDongle(BaseResource):
     data_allowance: str
     contract_months: int
     monthly_cost: float
+    scrape_source: str
+    scrape_url: str
     scrape_date: datetime.date = datetime.datetime.today().date()
