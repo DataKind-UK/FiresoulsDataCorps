@@ -1,7 +1,7 @@
 """
 Class to extract printer prices from the Printerland.co.uk website
 """
-from typing import Tuple, List
+from typing import Tuple, List, Optional
 import re
 from bs4 import BeautifulSoup
 from .base import BaseParser
@@ -10,7 +10,7 @@ from src.resources import Printer
 
 class PrinterlandParser(BaseParser):
     source = "printerland.co.uk"
-    URL = "https://www.printerland.co.uk/printers/multifunction/laser/colour"
+    url = "https://www.printerland.co.uk/printers/multifunction/laser/colour"
 
     def _get_elements(self) -> BeautifulSoup:
         elements = self.soup.findAll("li", {"class": "product__item"})
@@ -39,21 +39,29 @@ class PrinterlandParser(BaseParser):
         return key_features[0]
 
     @staticmethod
-    def _get_printing_speed_ppm(key_features: List[str]) -> int:
+    def _get_printing_speed_ppm(key_features: List[str]) -> Optional[int]:
         for feat in key_features:
-            match = re.search(r"(\d+)ppm Colour", feat)
+            match = re.search(r"^Up to (\d+)ppm.+Print$", feat)
             if match is not None:
                 break
-        speed = match.group(1)
+        try:
+            speed = match.group(1)
+        except AttributeError:
+            print('\t Printing speed not found')
+            return None
         return int(speed)
 
     @staticmethod
-    def _get_print_resolution(key_features: List[str]) -> str:
+    def _get_print_resolution(key_features: List[str]) -> Optional[str]:
         for feat in key_features:
             match = re.search(r"^Up to (\d*,?\d+ x \d*,?\d+).+Print$", feat)
             if match is not None:
                 break
-        res = match.group(1)
+        try:
+            res = match.group(1)
+        except AttributeError:
+            print('\tPrint resolution not found')
+            return None
         return res
 
     @staticmethod
@@ -68,7 +76,7 @@ class PrinterlandParser(BaseParser):
     def _get_price(item: BeautifulSoup) -> float:
         price_box = item.find('span', {'class': 'price-ex'})
         price = price_box.find('span', {'class': 'price'}).text
-        price = price.replace('£', '')
+        price = price.replace('£', '').replace(',','')
         return float(price)
 
     def _get_scrape_url(self, item: BeautifulSoup) -> str:
@@ -94,7 +102,11 @@ class PrinterlandParser(BaseParser):
                 print_resolution = self._get_print_resolution(key_features)
                 connectivity = self._get_connectivity(key_features)
                 release_year = None
-                price = self._get_price(product)
+                try:
+                    price = self._get_price(product)
+                except AttributeError:
+                    print('\tPrice not available for item')
+                    continue
                 source = self.source
                 scrape_url = self._get_scrape_url(product)
                 l = Printer(
