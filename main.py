@@ -27,8 +27,8 @@ def scrape(site: str, product: str):
             vclp = ValueComputersLaptopParser()
             items = vclp.parse()
         elif product == "desktop":
-            # vcdt = ValueComputersDesktopParser()
-            # items = vcdt.parse()
+            vcdt = ValueComputersDesktopParser()
+            items = vcdt.parse()
             pass
     elif site == "broadbandchoices":
         if product == "dongle":

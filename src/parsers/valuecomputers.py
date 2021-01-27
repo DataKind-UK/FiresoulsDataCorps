@@ -276,19 +276,34 @@ class ValueComputersDesktopParser(BaseParser):
 
     @staticmethod
     def _parse_storage(storage: str):
+        storage_hdd = None
+        storage_sdd = None
+
         if storage == "nan":
-            return None
+            return None, None
         else:
-            storage = re.search(r"([0-9]*)", storage).group(1)
-            storage = float(storage)
-            return storage
+            if 'hdd' in storage.lower():
+                storage_hdd = re.search(r"([0-9]*)", storage).group(1)
+                storage_hdd = float(storage_hdd)
+                if 'tb' in storage.lower():
+                    return storage_hdd * 1000, None
+                else:
+                    return storage_hdd, None
+            elif 'ssd' in storage.lower():
+                storage_ssd = re.search(r"([0-9]*)", storage).group(1)
+                storage_ssd = float(storage_ssd)
+                if 'tb' in storage.lower():
+                    return None, storage_ssd * 1000
+                else:
+                    return None, storage_ssd
+            else:
+                return None, None
 
     def get_desktop_specs(self, row):
         """
         Returns a dataframe
         """
         title, url = row
-        print(url)
         soup = self._make_soup(url, False)
         price = self._parse_price(soup)
         brand = self._parse_brand(title)
@@ -298,7 +313,9 @@ class ValueComputersDesktopParser(BaseParser):
             table = specs.find("table")
             for row in table.find_all("tr"):
                 cols = row.find_all("td")
-                specs_list.append((url, cols[0].text, cols[1].text))
+                # There could be cases with a single cell describing the desktop.
+                if len(cols) == 2:
+                    specs_list.append((url, cols[0].text, cols[1].text))
 
         columns = ["url", "spec", "value"]
         df_laptop = pd.DataFrame(specs_list, columns=columns)
@@ -319,13 +336,13 @@ class ValueComputersDesktopParser(BaseParser):
             model = ""
             processor = r["Processor"]
             ram = self._parse_ram(r["RAM"])
-            storage = self._parse_storage(str(r["Storage"]))
+            storage_hdd, storage_sdd = self._parse_storage(str(r["Storage"]))
             optical_drive = r["Optical Drive"]
-            operative_system = r["Operative System"]
+            operative_system = r["Operating System"]
             screen_size = r["Screen Size"]
-            release_year = ""
+            release_year = str("")
             price = r["price"]
-            source = self._scrape_source()
+            scrape_source = self._scrape_source()
             scrape_url = r["url"]
 
             d = Desktop(
@@ -337,7 +354,6 @@ class ValueComputersDesktopParser(BaseParser):
                 storage_hdd,
                 storage_sdd,
                 release_year,
-                screen_size,
                 optical_drive,
                 operative_system,
                 price,
