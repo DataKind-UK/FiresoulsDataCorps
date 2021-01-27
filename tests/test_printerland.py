@@ -99,6 +99,13 @@ def test_get_connectivity(parser):
     res = parser._get_connectivity(kf)
     assert res == "USB & Network"
 
+def test_get_price(parser):
+    elems = parser._get_elements()
+    res = parser._get_price(elems[0])
+    assert res == 543.99
+    res = parser._get_price(elems[4])
+    assert res == 268.99
+
 
 def test_get_scrape_url(parser):
     elems = parser._get_elements()

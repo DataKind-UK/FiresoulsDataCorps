@@ -89,3 +89,17 @@ class WiFiDongle(BaseResource):
     scrape_source: str
     scrape_url: str
     scrape_date: datetime.date = datetime.datetime.today().date()
+
+@dataclass
+class Printer(BaseResource):
+    brand: str
+    model: str
+    functions: str
+    printing_speed_ppm: int
+    print_resolution: str
+    connectivity: str
+    release_year: int
+    price: float
+    scrape_source: str
+    scrape_url: str
+    scrape_date: datetime.date = datetime.datetime.today().date()

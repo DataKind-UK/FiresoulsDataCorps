@@ -5,6 +5,7 @@ from typing import Tuple, List
 import re
 from bs4 import BeautifulSoup
 from .base import BaseParser
+from src.resources import Printer
 
 
 class PrinterlandParser(BaseParser):
@@ -63,5 +64,50 @@ class PrinterlandParser(BaseParser):
                 break
         return feat
 
+    @staticmethod
+    def _get_price(item: BeautifulSoup) -> float:
+        price_box = item.find('span', {'class': 'price-ex'})
+        price = price_box.find('span', {'class': 'price'}).text
+        price = price.replace('£', '')
+        return float(price)
+
     def _get_scrape_url(self, item: BeautifulSoup) -> str:
         return self.source + "/" + item.find("a")["href"]
+
+
+    def parse(self) -> List[Printer]:
+        self.soup = self._make_soup(self.url)
+        num_pages = self._get_num_pages()
+        printers = []
+        for i in range(num_pages):
+            print(f"Downloading page: {i+1}/{num_pages}")
+            self.soup = self._make_soup(f"{self.url}?page={i+1}")
+            products = self._get_elements()
+            count = 0
+            for product in products:
+                count += 1
+                print(f"Parsing printer {count} of {len(products)}")
+                brand, model = self._get_brand_model(product)
+                key_features = self._get_key_features(product)
+                functions = self._get_functions(key_features)
+                printing_speed_ppm = self._get_printing_speed_ppm(key_features)
+                print_resolution = self._get_print_resolution(key_features)
+                connectivity = self._get_connectivity(key_features)
+                release_year = None
+                price = self._get_price(product)
+                source = self.source
+                scrape_url = self._get_scrape_url(product)
+                l = Printer(
+                    brand,
+                    model,
+                    functions,
+                    printing_speed_ppm,
+                    print_resolution,
+                    connectivity,
+                    release_year,
+                    price,
+                    source,
+                    scrape_url,
+                )
+                printers.append(l)
+        return printers
