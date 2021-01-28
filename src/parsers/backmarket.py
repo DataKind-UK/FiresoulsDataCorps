@@ -201,6 +201,7 @@ class BackmarketTabletParser(BackmarketBaseParser):
         storage = self._parse_storage(chardict)
         release_year = self._parse_release_year(chardict)
         price = self._parse_price(soup)
+        currency = "£"
         tablet = Tablet(
             brand,
             model,
@@ -210,6 +211,7 @@ class BackmarketTabletParser(BackmarketBaseParser):
             storage,
             release_year,
             price,
+            currency,
             self.scrape_source,
             url,
         )
