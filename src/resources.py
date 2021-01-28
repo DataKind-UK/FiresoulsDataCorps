@@ -60,6 +60,7 @@ class Tablet(BaseResource):
     storage: int
     release_year: int
     price: float
+    currenty: str
     scrape_source: str
     scrape_url: str
     scrape_date: datetime.date = datetime.datetime.today().date()

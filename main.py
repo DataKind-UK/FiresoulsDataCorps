@@ -8,6 +8,7 @@ from src.parsers.valuecomputers import (
 )
 from src.parsers.backmarket import BackmarketLaptopParser, BackmarketTabletParser
 from src.parsers.broadbandchoices import BroadbandchoicesDongleParser
+from src.parsers.tabletmonkeys import TabletMonkeysTablets
 from src.summariser import Summary
 
 app = typer.Typer()
@@ -34,6 +35,10 @@ def scrape(site: str, product: str):
         if product == "dongle":
             bbc = BroadbandchoicesDongleParser()
             items = bbc.parse()
+    elif site == "tabletmonkeys":
+        if product == "tablet":
+            tmt = TabletMonkeysTablets()
+            items = tmt.parse()
     else:
         print(f"Product {product} not implemented for {site}")
         raise Exception
