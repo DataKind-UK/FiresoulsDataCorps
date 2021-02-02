@@ -86,3 +86,22 @@ def test_parse_ram_storage(products):
     assert (res2a, res2b) == (4, 128)
     res3a, res3b = clp._parse_ram_storage(products[1])
     assert (res3a, res3b) == (None, 512)
+
+def test_parse_price(products):
+    clp = CurrysLaptopParser()
+    res = clp._parse_price(products[0])
+    assert res == 199.0
+    res = clp._parse_price(products[5])
+    assert res == 299.0
+
+def test_parse_source():
+    clp = CurrysLaptopParser()
+    res = clp._scrape_source()
+    assert res == "currys.co.uk"
+
+def test_parse_scrape_url(products):
+    clp = CurrysLaptopParser()
+    res = clp._parse_scrape_url(products[0])
+    assert res == "https://www.currys.co.uk/gbuk/computing/laptops/laptops/lenovo-ideapad-slim-1-11-6-laptop-amd-athlon-silver-64-gb-emmc-grey-10219103-pdt.html"
+    res = clp._parse_scrape_url(products[5])
+    assert res == "https://www.currys.co.uk/gbuk/computing/laptops/laptops/hp-15s-eq1540na-15-6-laptop-amd-athlon-silver-128-gb-ssd-black-10220249-pdt.html"

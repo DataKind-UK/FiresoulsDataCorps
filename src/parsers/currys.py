@@ -1,5 +1,6 @@
 import math
 import re
+from datetime import datetime
 from typing import Tuple, List, Dict, Optional
 from bs4 import BeautifulSoup
 from .base import BaseParser
@@ -38,13 +39,16 @@ class CurrysLaptopParser(CurrysBaseParser):
         return brand
 
     @staticmethod
-    def _parse_model_screen_size(product: BeautifulSoup) -> Tuple[str, float]:
+    def _parse_model_screen_size(product: BeautifulSoup) -> Tuple[str, Optional[float]]:
         name = product.find("span", {"data-product": "name"}).text
         name = name.split(" - ")[0].strip().lower()
         name = name.replace("laptop", "")
-        screen_size = re.search(r".+(\d{2}[.]?\d{0,2}\").+", name).group(1)
-        name = name.replace(screen_size, "").strip()
-        screen_size = float(screen_size.replace('"', ""))
+        screen_size = re.search(r"[.+]?(\d{2}[.]?\d{0,2}\")[.+]?", name)
+        if screen_size is not None:
+            screen_size = screen_size.group(1)
+            name = name.replace(screen_size, "")
+            screen_size = float(screen_size.replace('"', ""))
+        name = name.strip()
         return name, screen_size
 
     @staticmethod
@@ -70,73 +74,56 @@ class CurrysLaptopParser(CurrysBaseParser):
             storage = int(storage)
         return ram, storage
 
-    # @staticmethod
-    # def _parse_storage(product: BeautifulSoup) -> int:
-    #     storage = product.find("ul").findAll("li")[3].findAll("span")[1].text
-    #     storage = storage.strip()
-    #     storage = storage.split()[0]
-    #     storage = int(storage)
-    #     return storage
+    @staticmethod
+    def _parse_price(product: BeautifulSoup) -> float:
+        price = product.find("div", {"class": "productPrices"}).text
+        price = price.strip()
+        price = price.replace(",", "")
+        price = re.search(r".(\d{1,4}[.]{0,1}\d{0,2})", price).group(1)
+        price = float(price)
+        return price
 
-    # @staticmethod
-    # def _parse_release_year(product: BeautifulSoup) -> int:
-    #     release_year = product.find("ul").findAll("li")[0].findAll("span")[1].text
-    #     release_year = release_year.strip()
-    #     try:
-    #         release_year = re.search(r"([0-9]{4})", release_year).group(1)
-    #     except AttributeError:
-    #         print("\tRelease Year not specified for this laptop")
-    #         release_year = "0"
-    #     release_year = int(release_year)
-    #     return release_year
+    def _scrape_source(self) -> str:
+        return self.scrape_source
 
-    # @staticmethod
-    # def _parse_price(product: BeautifulSoup) -> float:
-    #     price = product.find("div", {"data-qa": "prices"}).text
-    #     price = price.strip()
-    #     price = price.replace(",", "")
-    #     price = re.search(r".(\d{1,4}[.]{0,1}\d{0,2})", price).group(1)
-    #     price = float(price)
-    #     return price
+    def _parse_scrape_url(self, product) -> str:
+        url = product.find("div", {"class": "desc"})
+        url = url.find("a", {"class": "in"})['href']
+        return url
 
-    # def _scrape_source(self) -> str:
-    #     return self.scrape_source
-
-    # def _parse_scrape_url(self, product) -> str:
-    #     return self.scrape_source + product["href"]
-
-    # def parse(self) -> List[Laptop]:
-    #     self.soup = self._make_soup(self.url)
-    #     num_pages = self._get_num_pages()
-    #     laptops = []
-    #     for i in range(num_pages):
-    #         print(f"Downloading page: {i+1}/{num_pages}")
-    #         self.soup = self._make_soup(f"{self.url}?page={i+1}")
-    #         products = self._get_items()
-    #         count = 0
-    #         for product in products:
-    #             count += 1
-    #             print(f"Parsing laptop {count} of {len(products)}")
-    #             brand, model = self._parse_brand_model(product)
-    #             processor = self._parse_processor(product)
-    #             ram = self._parse_ram(product)
-    #             storage = self._parse_storage(product)
-    #             release_year = self._parse_release_year(product)
-    #             screen_size = self._parse_screen_size(product)
-    #             price = self._parse_price(product)
-    #             source = self._scrape_source()
-    #             scrape_url = self._parse_scrape_url(product)
-    #             l = Laptop(
-    #                 brand,
-    #                 model,
-    #                 processor,
-    #                 ram,
-    #                 storage,
-    #                 release_year,
-    #                 screen_size,
-    #                 price,
-    #                 source,
-    #                 scrape_url,
-    #             )
-    #             laptops.append(l)
-    #     return laptops
+    def parse(self) -> List[Laptop]:
+        self.soup = self._make_soup(self._structure_url())
+        num_pages = self._get_num_pages()
+        laptops = []
+        for i in range(num_pages):
+            print(f"Downloading page: {i+1}/{num_pages}")
+            self.soup = self._make_soup(self._structure_url(i+1))
+            products = self._get_items()
+            count = 0
+            for product in products:
+                count += 1
+                print(f"Parsing laptop {count} of {len(products)}")
+                scrape_url = self._parse_scrape_url(product)
+                print(scrape_url)
+                brand = self._parse_brand(product)
+                model, screen_size = self._parse_model_screen_size(product)
+                processor = self._parse_processor(product)
+                ram, storage = self._parse_ram_storage(product)
+                release_year = datetime.now().year - 1
+                price = self._parse_price(product)
+                source = self._scrape_source()
+                scrape_url = self._parse_scrape_url(product)
+                l = Laptop(
+                    brand,
+                    model,
+                    processor,
+                    ram,
+                    storage,
+                    release_year,
+                    screen_size,
+                    price,
+                    source,
+                    scrape_url,
+                )
+                laptops.append(l)
+        return laptops
