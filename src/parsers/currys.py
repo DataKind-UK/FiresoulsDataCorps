@@ -4,7 +4,7 @@ from datetime import datetime
 from typing import Tuple, List, Dict, Optional
 from bs4 import BeautifulSoup
 from .base import BaseParser
-from src.resources import Laptop
+from src.resources import Laptop, Projector
 
 
 class CurrysBaseParser(BaseParser):
@@ -104,7 +104,6 @@ class CurrysLaptopParser(CurrysBaseParser):
                 count += 1
                 print(f"Parsing laptop {count} of {len(products)}")
                 scrape_url = self._parse_scrape_url(product)
-                print(scrape_url)
                 brand = self._parse_brand(product)
                 model, screen_size = self._parse_model_screen_size(product)
                 processor = self._parse_processor(product)
@@ -211,3 +210,44 @@ class CurrysProjectorParser(CurrysBaseParser):
         url = product.find("header", {"class": "productTitle"})
         url = url.find("a")['href']
         return url
+
+    def parse(self) -> List[Projector]:
+        self.soup = self._make_soup(self._structure_url())
+        num_pages = self._get_num_pages()
+        projectors = []
+        for i in range(num_pages):
+            print(f"Downloading page: {i+1}/{num_pages}")
+            self.soup = self._make_soup(self._structure_url(i+1))
+            products = self._get_items()
+            count = 0
+            for product in products:
+                count += 1
+                print(f"Parsing laptop {count} of {len(products)}")
+                scrape_url = self._parse_scrape_url(product)
+                brand = self._parse_brand(product)
+                model = self._parse_model(product)
+                price = self._parse_price(product)
+                scrape_url = self._parse_scrape_url(product)
+                product_soup = self._make_soup(scrape_url)
+                product_tech_specs = self._parse_tech_specs(product_soup)
+                screen_size = self._parse_screen_size(product_tech_specs)
+                projection_type = self._parse_projection_type(product_tech_specs)
+                resolution = self._parse_resolution(product_tech_specs)
+                brightness = self._parse_brightness(product_tech_specs)
+                technology = self._parse_technology(product_tech_specs)
+                source = self._scrape_source()
+                
+                p = Projector(
+                    brand,
+                    model,
+                    screen_size,
+                    projection_type,
+                    resolution,
+                    brightness,
+                    technology,
+                    price,
+                    source,
+                    scrape_url,
+                )
+                projectors.append(p)
+        return projectors

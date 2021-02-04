@@ -10,7 +10,7 @@ from src.parsers.backmarket import BackmarketLaptopParser, BackmarketTabletParse
 from src.parsers.broadbandchoices import BroadbandchoicesDongleParser
 from src.parsers.tabletmonkeys import TabletMonkeysTablets
 from src.parsers.printerland import PrinterlandParser
-from src.parsers.currys import CurrysLaptopParser
+from src.parsers.currys import CurrysLaptopParser, CurrysProjectorParser
 from src.summariser import Summary
 
 app = typer.Typer()
@@ -49,6 +49,9 @@ def scrape(site: str, product: str):
         if product == "laptop":
             clp = CurrysLaptopParser()
             items = clp.parse()
+        if product == "projector":
+            cpp = CurrysProjectorParser()
+            items = cpp.parse()
     else:
         print(f"Product {product} not implemented for {site}")
         raise Exception
