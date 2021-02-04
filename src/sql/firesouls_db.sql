@@ -1,30 +1,25 @@
--- MySQL dump 10.13  Distrib 8.0.23, for Linux (x86_64)
---
--- Host: localhost    Database: firesouls_db
--- ------------------------------------------------------
--- Server version	8.0.23
-
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!50503 SET NAMES utf8mb4 */;
-/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
-/*!40103 SET TIME_ZONE='+00:00' */;
-/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
-/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
-/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
-/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
-
-CREATE DATABASE IF NOT EXISTS firesouls_db;
+CREATE DATABASE /*!32312 IF NOT EXISTS*/ firesouls_db /*!40100 DEFAULT CHARACTER SET utf8mb4 */;
 USE firesouls_db;
 
---
--- Table structure for table `laptop`
---
+DROP TABLE IF EXISTS desktop;
+CREATE TABLE `desktop` (
+  `brand` varchar(255) DEFAULT NULL,
+  `model` varchar(255) DEFAULT NULL,
+  `processor` varchar(255) DEFAULT NULL,
+  `screen_size` float DEFAULT NULL,
+  `ram` int DEFAULT NULL,
+  `storage_hdd` int DEFAULT NULL,
+  `storage_sdd` int DEFAULT NULL,
+  `release_year` int DEFAULT NULL,
+  `optical_drive` varchar(255) DEFAULT NULL,
+  `operative_system` varchar(255) DEFAULT NULL,
+  `price` float DEFAULT NULL,
+  `scrape_source` varchar(255) DEFAULT NULL,
+  `scrape_url` varchar(255) DEFAULT NULL,
+  `scrape_date` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
-DROP TABLE IF EXISTS `laptop`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+DROP TABLE IF EXISTS laptop;
 CREATE TABLE `laptop` (
   `brand` varchar(255) DEFAULT NULL,
   `model` varchar(255) DEFAULT NULL,
@@ -40,24 +35,68 @@ CREATE TABLE `laptop` (
   `valid_from` timestamp NULL DEFAULT NULL,
   `valid_to` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Dumping data for table `laptop`
---
+DROP TABLE IF EXISTS monitor;
+CREATE TABLE `monitor` (
+  `brand` varchar(255) DEFAULT NULL,
+  `model` varchar(255) DEFAULT NULL,
+  `screen_size` float DEFAULT NULL,
+  `price` float DEFAULT NULL,
+  `scrape_source` varchar(255) DEFAULT NULL,
+  `scrape_url` varchar(255) DEFAULT NULL,
+  `scrape_date` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
-LOCK TABLES `laptop` WRITE;
-/*!40000 ALTER TABLE `laptop` DISABLE KEYS */;
-/*!40000 ALTER TABLE `laptop` ENABLE KEYS */;
-UNLOCK TABLES;
-/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+DROP TABLE IF EXISTS printer;
+CREATE TABLE `printer` (
+  `brand` varchar(255) DEFAULT NULL,
+  `model` varchar(255) DEFAULT NULL,
+  `functions` varchar(255) DEFAULT NULL,
+  `printing_speed_ppm` int DEFAULT NULL,
+  `print_resolution` varchar(255) DEFAULT NULL,
+  `connectivity` varchar(255) DEFAULT NULL,
+  `release_year` int DEFAULT NULL,
+  `price` float DEFAULT NULL,
+  `scrape_source` varchar(255) DEFAULT NULL,
+  `scrape_url` varchar(255) DEFAULT NULL,
+  `scrape_date` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
-/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
-/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
-/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
-/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+DROP TABLE IF EXISTS tablet;
+CREATE TABLE `tablet` (
+  `brand` varchar(255) DEFAULT NULL,
+  `model` varchar(255) DEFAULT NULL,
+  `processor` varchar(255) DEFAULT NULL,
+  `screen_size` float DEFAULT NULL,
+  `screen_resolution` varchar(255) DEFAULT NULL,
+  `storage` int DEFAULT NULL,
+  `release_year` int DEFAULT NULL,
+  `price` float DEFAULT NULL,
+  `currenty` varchar(255) DEFAULT NULL,
+  `scrape_source` varchar(255) DEFAULT NULL,
+  `scrape_url` varchar(255) DEFAULT NULL,
+  `scrape_date` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Dump completed on 2021-01-30 18:35:36
+DROP TABLE IF EXISTS wifi_dongle;
+CREATE TABLE `wifi_dongle` (
+  `provider` varchar(255) DEFAULT NULL,
+  `service_name` varchar(255) DEFAULT NULL,
+  `upfront_cost` varchar(255) DEFAULT NULL,
+  `total_cost` float DEFAULT NULL,
+  `data_allowance` varchar(255) DEFAULT NULL,
+  `contract_months` int DEFAULT NULL,
+  `monthly_cost` float DEFAULT NULL,
+  `scrape_source` varchar(255) DEFAULT NULL,
+  `scrape_url` varchar(255) DEFAULT NULL,
+  `scrape_date` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+
+
+
+
+
+
+
+
