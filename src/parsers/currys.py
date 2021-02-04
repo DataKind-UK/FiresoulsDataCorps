@@ -168,7 +168,7 @@ class CurrysProjectorParser(CurrysBaseParser):
         screen = tech_specs.get('Screen size range')
         if screen is None:
             return screen
-        size = re.search(r"- (\d+)\"", screen).group(1)
+        size = re.search(r"(\d+)\"$", screen).group(1)
         return int(size)
 
     @staticmethod
@@ -192,7 +192,7 @@ class CurrysProjectorParser(CurrysBaseParser):
         res = tech_specs.get('Brightness')
         if res is None:
             return res
-        res = re.search(r"(\d+) lumens", res).group(1)
+        res = re.search(r"(\d+)", res.replace(',' ,'')).group(1)
         return int(res)
 
     @staticmethod
@@ -222,7 +222,7 @@ class CurrysProjectorParser(CurrysBaseParser):
             count = 0
             for product in products:
                 count += 1
-                print(f"Parsing laptop {count} of {len(products)}")
+                print(f"Parsing projector {count} of {len(products)}")
                 scrape_url = self._parse_scrape_url(product)
                 brand = self._parse_brand(product)
                 model = self._parse_model(product)
