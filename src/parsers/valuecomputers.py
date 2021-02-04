@@ -282,17 +282,17 @@ class ValueComputersDesktopParser(BaseParser):
         if storage == "nan":
             return None, None
         else:
-            if 'hdd' in storage.lower():
+            if "hdd" in storage.lower():
                 storage_hdd = re.search(r"([0-9]*)", storage).group(1)
                 storage_hdd = float(storage_hdd)
-                if 'tb' in storage.lower():
+                if "tb" in storage.lower():
                     return storage_hdd * 1000, None
                 else:
                     return storage_hdd, None
-            elif 'ssd' in storage.lower():
+            elif "ssd" in storage.lower():
                 storage_ssd = re.search(r"([0-9]*)", storage).group(1)
                 storage_ssd = float(storage_ssd)
-                if 'tb' in storage.lower():
+                if "tb" in storage.lower():
                     return None, storage_ssd * 1000
                 else:
                     return None, storage_ssd

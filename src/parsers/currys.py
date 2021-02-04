@@ -59,7 +59,9 @@ class CurrysLaptopParser(CurrysBaseParser):
         return processor
 
     @staticmethod
-    def _parse_ram_storage(product: BeautifulSoup) -> Tuple[Optional[int], Optional[int]]:
+    def _parse_ram_storage(
+        product: BeautifulSoup,
+    ) -> Tuple[Optional[int], Optional[int]]:
         ram = None
         storage = None
         feats = product.find("ul", {"class": "productDescription"})
@@ -88,7 +90,7 @@ class CurrysLaptopParser(CurrysBaseParser):
 
     def _parse_scrape_url(self, product) -> str:
         url = product.find("div", {"class": "desc"})
-        url = url.find("a", {"class": "in"})['href']
+        url = url.find("a", {"class": "in"})["href"]
         return url
 
     def parse(self) -> List[Laptop]:
@@ -97,7 +99,7 @@ class CurrysLaptopParser(CurrysBaseParser):
         laptops = []
         for i in range(num_pages):
             print(f"Downloading page: {i+1}/{num_pages}")
-            self.soup = self._make_soup(self._structure_url(i+1))
+            self.soup = self._make_soup(self._structure_url(i + 1))
             products = self._get_items()
             count = 0
             for product in products:
@@ -154,18 +156,18 @@ class CurrysProjectorParser(CurrysBaseParser):
         price = re.search(r".(\d{1,4}[.]{0,1}\d{0,2})", price).group(1)
         price = float(price)
         return price
-    
+
     @staticmethod
     def _parse_tech_specs(product_page: BeautifulSoup) -> Dict[str, str]:
-        table = product_page.find('div', {'class': ['tab-tech-specs']})
-        keys = [x.text for x in table.findAll('th')]
-        values = [x.text for x in table.findAll('td')]
+        table = product_page.find("div", {"class": ["tab-tech-specs"]})
+        keys = [x.text for x in table.findAll("th")]
+        values = [x.text for x in table.findAll("td")]
         tech_specs = dict(zip(keys, values))
         return tech_specs
 
     @staticmethod
     def _parse_screen_size(tech_specs: Dict[str, str]) -> Optional[int]:
-        screen = tech_specs.get('Screen size range')
+        screen = tech_specs.get("Screen size range")
         if screen is None:
             return screen
         size = re.search(r"(\d+)\"$", screen).group(1)
@@ -173,7 +175,7 @@ class CurrysProjectorParser(CurrysBaseParser):
 
     @staticmethod
     def _parse_projection_type(tech_specs: Dict[str, str]) -> Optional[str]:
-        res = tech_specs.get('Projection type')
+        res = tech_specs.get("Projection type")
         if res is None:
             return res
         res = res.strip().lower()
@@ -181,7 +183,7 @@ class CurrysProjectorParser(CurrysBaseParser):
 
     @staticmethod
     def _parse_resolution(tech_specs: Dict[str, str]) -> Optional[str]:
-        res = tech_specs.get('Resolution')
+        res = tech_specs.get("Resolution")
         if res is None:
             return res
         res = res.strip().lower()
@@ -189,15 +191,15 @@ class CurrysProjectorParser(CurrysBaseParser):
 
     @staticmethod
     def _parse_brightness(tech_specs: Dict[str, str]) -> Optional[int]:
-        res = tech_specs.get('Brightness')
+        res = tech_specs.get("Brightness")
         if res is None:
             return res
-        res = re.search(r"(\d+)", res.replace(',' ,'')).group(1)
+        res = re.search(r"(\d+)", res.replace(",", "")).group(1)
         return int(res)
 
     @staticmethod
     def _parse_technology(tech_specs: Dict[str, str]) -> Optional[str]:
-        res = tech_specs.get('Technology')
+        res = tech_specs.get("Technology")
         if res is None:
             return res
         res = res.strip().lower()
@@ -208,7 +210,7 @@ class CurrysProjectorParser(CurrysBaseParser):
 
     def _parse_scrape_url(self, product) -> str:
         url = product.find("header", {"class": "productTitle"})
-        url = url.find("a")['href']
+        url = url.find("a")["href"]
         return url
 
     def parse(self) -> List[Projector]:
@@ -217,7 +219,7 @@ class CurrysProjectorParser(CurrysBaseParser):
         projectors = []
         for i in range(num_pages):
             print(f"Downloading page: {i+1}/{num_pages}")
-            self.soup = self._make_soup(self._structure_url(i+1))
+            self.soup = self._make_soup(self._structure_url(i + 1))
             products = self._get_items()
             count = 0
             for product in products:
@@ -236,7 +238,7 @@ class CurrysProjectorParser(CurrysBaseParser):
                 brightness = self._parse_brightness(product_tech_specs)
                 technology = self._parse_technology(product_tech_specs)
                 source = self._scrape_source()
-                
+
                 p = Projector(
                     brand,
                     model,

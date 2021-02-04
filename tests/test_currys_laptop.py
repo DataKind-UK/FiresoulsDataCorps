@@ -87,6 +87,7 @@ def test_parse_ram_storage(products):
     res3a, res3b = clp._parse_ram_storage(products[1])
     assert (res3a, res3b) == (None, 512)
 
+
 def test_parse_price(products):
     clp = CurrysLaptopParser()
     res = clp._parse_price(products[0])
@@ -94,14 +95,22 @@ def test_parse_price(products):
     res = clp._parse_price(products[5])
     assert res == 499.0
 
+
 def test_parse_source():
     clp = CurrysLaptopParser()
     res = clp._scrape_source()
     assert res == "currys.co.uk"
 
+
 def test_parse_scrape_url(products):
     clp = CurrysLaptopParser()
     res = clp._parse_scrape_url(products[0])
-    assert res == "https://www.currys.co.uk/gbuk/computing/laptops/laptops/lenovo-ideapad-slim-1-11-6-laptop-amd-athlon-silver-64-gb-emmc-grey-10219103-pdt.html"
+    assert (
+        res
+        == "https://www.currys.co.uk/gbuk/computing/laptops/laptops/lenovo-ideapad-slim-1-11-6-laptop-amd-athlon-silver-64-gb-emmc-grey-10219103-pdt.html"
+    )
     res = clp._parse_scrape_url(products[5])
-    assert res == "https://www.currys.co.uk/gbuk/computing/laptops/laptops/dell-inspiron-15-3000-15-6-laptop-amd-ryzen-5-256-gb-ssd-black-10214380-pdt.html"
+    assert (
+        res
+        == "https://www.currys.co.uk/gbuk/computing/laptops/laptops/dell-inspiron-15-3000-15-6-laptop-amd-ryzen-5-256-gb-ssd-black-10214380-pdt.html"
+    )
