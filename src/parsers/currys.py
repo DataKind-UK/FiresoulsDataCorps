@@ -11,7 +11,7 @@ class CurrysBaseParser(BaseParser):
     scrape_source = "currys.co.uk"
 
     def _get_items(self) -> List[BeautifulSoup]:
-        products = self.soup.findAll("article", {"class": "product result-prd"})
+        products = self.soup.findAll("article", {"class": ["product", "result-prd"]})
         return products
 
     def _get_num_pages(self) -> int:
@@ -33,7 +33,7 @@ class CurrysLaptopParser(CurrysBaseParser):
         return self.url.format(page)
 
     @staticmethod
-    def _parse_brand(product: BeautifulSoup) -> Tuple[str, str]:
+    def _parse_brand(product: BeautifulSoup) -> str:
         brand = product.find("span", {"data-product": "brand"}).text
         brand = brand.strip().lower()
         return brand
@@ -127,3 +127,22 @@ class CurrysLaptopParser(CurrysBaseParser):
                 )
                 laptops.append(l)
         return laptops
+
+
+class CurrysProjectorParser(CurrysBaseParser):
+    url = "https://www.currys.co.uk/gbuk/computing/projectors/projectors/570_4432_32094_xx_xx/{}_50/relevance-desc/xx-criteria.html"
+
+    def _structure_url(self, page: int = 1) -> str:
+        return self.url.format(page)
+
+    @staticmethod
+    def _parse_brand(product: BeautifulSoup) -> Tuple[str, str]:
+        brand = product.find("span", {"data-product": "brand"}).text
+        brand = brand.strip().lower()
+        return brand
+
+    @staticmethod
+    def _parse_model(product: BeautifulSoup) -> str:
+        model = product.find("span", {"data-product": "name"}).text
+        model = model.strip().lower()
+        return model
