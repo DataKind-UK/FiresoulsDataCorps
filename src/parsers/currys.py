@@ -146,3 +146,68 @@ class CurrysProjectorParser(CurrysBaseParser):
         model = product.find("span", {"data-product": "name"}).text
         model = model.strip().lower()
         return model
+
+    @staticmethod
+    def _parse_price(product: BeautifulSoup) -> float:
+        price = product.find("div", {"class": "productPrices"}).text
+        price = price.strip()
+        price = price.replace(",", "")
+        price = re.search(r".(\d{1,4}[.]{0,1}\d{0,2})", price).group(1)
+        price = float(price)
+        return price
+    
+    @staticmethod
+    def _parse_tech_specs(product_page: BeautifulSoup) -> Dict[str, str]:
+        table = product_page.find('div', {'class': ['tab-tech-specs']})
+        keys = [x.text for x in table.findAll('th')]
+        values = [x.text for x in table.findAll('td')]
+        tech_specs = dict(zip(keys, values))
+        return tech_specs
+
+    @staticmethod
+    def _parse_screen_size(tech_specs: Dict[str, str]) -> Optional[int]:
+        screen = tech_specs.get('Screen size range')
+        if screen is None:
+            return screen
+        size = re.search(r"- (\d+)\"", screen).group(1)
+        return int(size)
+
+    @staticmethod
+    def _parse_projection_type(tech_specs: Dict[str, str]) -> Optional[str]:
+        res = tech_specs.get('Projection type')
+        if res is None:
+            return res
+        res = res.strip().lower()
+        return res
+
+    @staticmethod
+    def _parse_resolution(tech_specs: Dict[str, str]) -> Optional[str]:
+        res = tech_specs.get('Resolution')
+        if res is None:
+            return res
+        res = res.strip().lower()
+        return res
+
+    @staticmethod
+    def _parse_brightness(tech_specs: Dict[str, str]) -> Optional[int]:
+        res = tech_specs.get('Brightness')
+        if res is None:
+            return res
+        res = re.search(r"(\d+) lumens", res).group(1)
+        return int(res)
+
+    @staticmethod
+    def _parse_technology(tech_specs: Dict[str, str]) -> Optional[str]:
+        res = tech_specs.get('Technology')
+        if res is None:
+            return res
+        res = res.strip().lower()
+        return res
+
+    def _scrape_source(self) -> str:
+        return self.scrape_source
+
+    def _parse_scrape_url(self, product) -> str:
+        url = product.find("header", {"class": "productTitle"})
+        url = url.find("a")['href']
+        return url
