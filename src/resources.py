@@ -90,6 +90,7 @@ class WiFiDongle(BaseResource):
     scrape_url: str
     scrape_date: datetime.date = datetime.datetime.today().date()
 
+
 @dataclass
 class Printer(BaseResource):
     brand: str
@@ -99,6 +100,21 @@ class Printer(BaseResource):
     print_resolution: str
     connectivity: str
     release_year: int
+    price: float
+    scrape_source: str
+    scrape_url: str
+    scrape_date: datetime.date = datetime.datetime.today().date()
+
+
+@dataclass
+class Projector(BaseResource):
+    brand: str
+    model: str
+    screen_size: float
+    projection_type: str
+    resolution: str
+    brightness: int
+    technology: str
     price: float
     scrape_source: str
     scrape_url: str
