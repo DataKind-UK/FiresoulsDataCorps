@@ -4,7 +4,7 @@ from datetime import datetime
 from typing import Tuple, List, Dict, Optional
 from bs4 import BeautifulSoup
 from .base import BaseParser
-from src.resources import Laptop, Projector
+from src.resources import Laptop, Projector, Desktop
 
 
 class CurrysBaseParser(BaseParser):
@@ -299,36 +299,60 @@ class CurrysDesktopParser(CurrysBaseParser):
         return float(size)
 
     @staticmethod
-    def _parse_projection_type(tech_specs: Dict[str, str]) -> Optional[str]:
-        res = tech_specs.get("Projection type")
-        if res is None:
-            return res
-        res = res.strip().lower()
-        return res
+    def _parse_ram(tech_specs: Dict[str, str]) -> Optional[int]:
+        ram = tech_specs.get("RAM")
+        if ram is None:
+            return None
+        ram = re.search(r"(\d+) GB", ram).group(1)
+        return int(ram)
 
     @staticmethod
-    def _parse_resolution(tech_specs: Dict[str, str]) -> Optional[str]:
-        res = tech_specs.get("Resolution")
-        if res is None:
-            return res
-        res = res.strip().lower()
-        return res
+    def _parse_processor(tech_specs: Dict[str, str]) -> Optional[str]:
+        proc = tech_specs.get("Processor")
+        if proc is None:
+            return proc
+        proc = proc.lower().split("\n")[0]
+        proc = proc.replace("processor", "").replace("- ","").strip()
+        return proc
+        
+    @staticmethod
+    def _parse_storage_hdd(tech_specs: Dict[str, str]) -> Optional[int]:
+        storage = tech_specs.get("Storage")
+        if storage is None:
+            return storage
+        storage = re.search(r"(\d+) (TB|GB) HDD", storage)
+        if storage is None:
+            return storage
+        storage = storage.group(1)
+        storage = int(storage)
+        if storage < 10:
+            storage = storage * 1000
+        return storage
 
     @staticmethod
-    def _parse_brightness(tech_specs: Dict[str, str]) -> Optional[int]:
-        res = tech_specs.get("Brightness")
-        if res is None:
-            return res
-        res = re.search(r"(\d+)", res.replace(",", "")).group(1)
-        return int(res)
+    def _parse_storage_ssd(tech_specs: Dict[str, str]) -> Optional[int]:
+        storage = tech_specs.get("Storage")
+        if storage is None:
+            return storage
+        storage = re.search(r"(\d+) (TB|GB) SSD", storage)
+        if storage is None:
+            return storage
+        storage = storage.group(1)
+        storage = int(storage)
+        if storage < 10:
+            storage = storage * 1000
+        return storage
 
     @staticmethod
-    def _parse_technology(tech_specs: Dict[str, str]) -> Optional[str]:
-        res = tech_specs.get("Technology")
-        if res is None:
-            return res
-        res = res.strip().lower()
-        return res
+    def _parse_optical_drive(tech_specs: Dict[str, str]) -> Optional[str]:
+        drive = tech_specs.get("Disc drive", "No")
+        drive = drive.strip()
+        return drive
+
+    @staticmethod
+    def _parse_operating_system(tech_specs: Dict[str, str]) -> Optional[str]:
+        os = tech_specs.get("Operating system")
+        return os
 
     def _scrape_source(self) -> str:
         return self.scrape_source
@@ -338,10 +362,10 @@ class CurrysDesktopParser(CurrysBaseParser):
         url = url.find("a")["href"]
         return url
 
-    def parse(self) -> List[Projector]:
+    def parse(self) -> List[Desktop]:
         self.soup = self._make_soup(self._structure_url())
         num_pages = self._get_num_pages()
-        projectors = []
+        desktops = []
         for i in range(num_pages):
             print(f"Downloading page: {i+1}/{num_pages}")
             self.soup = self._make_soup(self._structure_url(i + 1))
@@ -349,8 +373,7 @@ class CurrysDesktopParser(CurrysBaseParser):
             count = 0
             for product in products:
                 count += 1
-                print(f"Parsing projector {count} of {len(products)}")
-                scrape_url = self._parse_scrape_url(product)
+                print(f"Parsing desktop {count} of {len(products)}")
                 brand = self._parse_brand(product)
                 model = self._parse_model(product)
                 price = self._parse_price(product)
@@ -358,23 +381,29 @@ class CurrysDesktopParser(CurrysBaseParser):
                 product_soup = self._make_soup(scrape_url)
                 product_tech_specs = self._parse_tech_specs(product_soup)
                 screen_size = self._parse_screen_size(product_tech_specs)
-                projection_type = self._parse_projection_type(product_tech_specs)
-                resolution = self._parse_resolution(product_tech_specs)
-                brightness = self._parse_brightness(product_tech_specs)
-                technology = self._parse_technology(product_tech_specs)
+                processor = self._parse_processor(product_tech_specs)
+                ram = self._parse_ram(product_tech_specs)
+                storage_hdd = self._parse_storage_hdd(product_tech_specs)
+                storage_ssd = self._parse_storage_ssd(product_tech_specs)
+                release_year = datetime.now().year - 1
+                optical_drive = self._parse_optical_drive(product_tech_specs)
+                os = self._parse_operating_system(product_tech_specs)
                 source = self._scrape_source()
 
-                p = Projector(
+                p = Desktop(
                     brand,
                     model,
+                    processor,
                     screen_size,
-                    projection_type,
-                    resolution,
-                    brightness,
-                    technology,
+                    ram,
+                    storage_hdd,
+                    storage_ssd,
+                    release_year,
+                    optical_drive,
+                    os,
                     price,
                     source,
-                    scrape_url,
+                    scrape_url
                 )
-                projectors.append(p)
-        return projectors
+                desktops.append(p)
+        return desktops

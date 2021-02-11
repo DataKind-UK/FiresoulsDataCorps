@@ -126,25 +126,47 @@ def test_parse_screen_size_no_screen(tech_specs_no_screen):
     res1a = clp._parse_screen_size(tech_specs_no_screen)
     assert res1a == None
 
-# def test_parse_projection_type(tech_specs):
-#     clp = CurrysDesktopParser()
-#     res1a = clp._parse_projection_type(tech_specs)
-#     assert res1a == "short throw"
+def test_parse_ram(tech_specs_no_screen):
+    clp = CurrysDesktopParser()
+    res1a = clp._parse_ram(tech_specs_no_screen)
+    assert res1a == 8
 
+def test_parse_processor(tech_specs_screen):
+    clp = CurrysDesktopParser()
+    res1a = clp._parse_processor(tech_specs_screen)
+    assert res1a == "intel® core™ i3"
 
-# def test_parse_resolution(tech_specs):
-#     clp = CurrysDesktopParser()
-#     res1a = clp._parse_resolution(tech_specs)
-#     assert res1a == "1920 x 1080"
+def test_parse_storage_hdd(tech_specs_no_screen):
+    clp = CurrysDesktopParser()
+    res1a = clp._parse_storage_hdd(tech_specs_no_screen)
+    assert res1a == 1000
 
+def test_parse_storage_hdd_missing(tech_specs_screen):
+    clp = CurrysDesktopParser()
+    res1a = clp._parse_storage_hdd(tech_specs_screen)
+    assert res1a == None
 
-# def test_parse_brightness(tech_specs):
-#     clp = CurrysDesktopParser()
-#     res1a = clp._parse_brightness(tech_specs)
-#     assert res1a == 3000
+def test_parse_storage_ssd_missing(tech_specs_no_screen):
+    clp = CurrysDesktopParser()
+    res1a = clp._parse_storage_ssd(tech_specs_no_screen)
+    assert res1a == None
 
+def test_parse_storage_ssd(tech_specs_screen):
+    clp = CurrysDesktopParser()
+    res1a = clp._parse_storage_ssd(tech_specs_screen)
+    assert res1a == 256
 
-# def test_parse_technology(tech_specs):
-#     clp = CurrysDesktopParser()
-#     res1a = clp._parse_technology(tech_specs)
-#     assert res1a == "dlp"
+def test_parse_optical_drive_missing(tech_specs_screen):
+    clp = CurrysDesktopParser()
+    res1a = clp._parse_optical_drive(tech_specs_screen)
+    assert res1a == "No"
+
+def test_parse_optical_drive(tech_specs_no_screen):
+    clp = CurrysDesktopParser()
+    res1a = clp._parse_optical_drive(tech_specs_no_screen)
+    assert res1a == "DVD"
+
+def test_parse_operating_system(tech_specs_no_screen):
+    clp = CurrysDesktopParser()
+    res1a = clp._parse_operating_system(tech_specs_no_screen)
+    assert res1a == "Windows 10"
