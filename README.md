@@ -32,6 +32,20 @@ python main.py scrape backmarket laptop
 
 This script will output a file called `{site}_{resource}_{timestamp}.json` which contains the data for the scraped items.
 
+#### Commands
+
+Currently the following commands are usable to download data about resources.
+
+```
+python main.py scrape backmarket laptop
+python main.py scrape backmarket tablet
+python main.py scrape valuecomputers laptop
+python main.py scrape valuecomputers desktop
+python main.py scrape broadbandchoices dongle
+python main.py scrape tabletmonkeys tablet
+python main.py scrape printerland printer
+```
+
 ### Summarise  
 
 This command allows for the automatic generation of summary statistics for the price.

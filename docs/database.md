@@ -2,6 +2,10 @@
 
 We used the [official MySQL 8.0] [Docker image](https://hub.docker.com/_/mysql) to test the database.
 
+## PyMySQL
+
+To connect to the MySQL database we are using [PyMySQL](https://github.com/PyMySQL/PyMySQL) Python library.
+
 ## MySQL
 After installing docker or a MySQL server in the server that will host the database.
 

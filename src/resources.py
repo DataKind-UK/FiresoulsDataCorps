@@ -40,7 +40,7 @@ class Desktop(BaseResource):
     screen_size: float
     ram: int
     storage_hdd: int
-    storage_sdd: int
+    storage_ssd: int
     release_year: int
     optical_drive: str
     operative_system: str

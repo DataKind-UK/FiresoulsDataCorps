@@ -68,7 +68,10 @@ class ValueComputersLaptopParser(BaseParser):
     @staticmethod
     def _parse_screen_size(screen_size: str):
         screen_size = screen_size.replace('"', "")
-        screen_size = float(screen_size)
+        try:
+            screen_size = float(screen_size)
+        except:
+            screen_size = None
         return screen_size
 
     @staticmethod
@@ -277,7 +280,7 @@ class ValueComputersDesktopParser(BaseParser):
     @staticmethod
     def _parse_storage(storage: str):
         storage_hdd = None
-        storage_sdd = None
+        storage_ssd = None
 
         if storage == "nan":
             return None, None
@@ -336,7 +339,7 @@ class ValueComputersDesktopParser(BaseParser):
             model = ""
             processor = r["Processor"]
             ram = self._parse_ram(r["RAM"])
-            storage_hdd, storage_sdd = self._parse_storage(str(r["Storage"]))
+            storage_hdd, storage_ssd = self._parse_storage(str(r["Storage"]))
             optical_drive = r["Optical Drive"]
             operative_system = r["Operating System"]
             screen_size = r["Screen Size"]
@@ -352,7 +355,7 @@ class ValueComputersDesktopParser(BaseParser):
                 screen_size,
                 ram,
                 storage_hdd,
-                storage_sdd,
+                storage_ssd,
                 release_year,
                 optical_drive,
                 operative_system,
