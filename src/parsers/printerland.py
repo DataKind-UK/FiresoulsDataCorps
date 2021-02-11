@@ -47,7 +47,7 @@ class PrinterlandParser(BaseParser):
         try:
             speed = match.group(1)
         except AttributeError:
-            print('\t Printing speed not found')
+            print("\t Printing speed not found")
             return None
         return int(speed)
 
@@ -60,7 +60,7 @@ class PrinterlandParser(BaseParser):
         try:
             res = match.group(1)
         except AttributeError:
-            print('\tPrint resolution not found')
+            print("\tPrint resolution not found")
             return None
         return res
 
@@ -74,14 +74,13 @@ class PrinterlandParser(BaseParser):
 
     @staticmethod
     def _get_price(item: BeautifulSoup) -> float:
-        price_box = item.find('span', {'class': 'price-ex'})
-        price = price_box.find('span', {'class': 'price'}).text
-        price = price.replace('£', '').replace(',','')
+        price_box = item.find("span", {"class": "price-ex"})
+        price = price_box.find("span", {"class": "price"}).text
+        price = price.replace("£", "").replace(",", "")
         return float(price)
 
     def _get_scrape_url(self, item: BeautifulSoup) -> str:
         return self.source + "/" + item.find("a")["href"]
-
 
     def parse(self) -> List[Printer]:
         self.soup = self._make_soup(self.url)
@@ -105,7 +104,7 @@ class PrinterlandParser(BaseParser):
                 try:
                     price = self._get_price(product)
                 except AttributeError:
-                    print('\tPrice not available for item')
+                    print("\tPrice not available for item")
                     continue
                 source = self.source
                 scrape_url = self._get_scrape_url(product)

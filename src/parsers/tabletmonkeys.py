@@ -39,11 +39,10 @@ class TabletMonkeysTablets(BaseParser):
         )
         return df
 
-    
     @staticmethod
     def _parse_brand(brand: str) -> Union[str, str]:
         tablet_brand = brand.split()[0]
-        tablet_model = ' '.join(brand.split()[1:])
+        tablet_model = " ".join(brand.split()[1:])
         return tablet_brand, tablet_model
 
     @staticmethod
@@ -52,21 +51,19 @@ class TabletMonkeysTablets(BaseParser):
         price = float(price)
         return price
 
-
     def _scrape_source(self) -> str:
         return self.scrape_source
-
 
     def cast_tablets(self, df: pd.DataFrame):
         tablets = []
         for i, r in tqdm(df.iterrows(), total=len(df)):
-            brand, model = self._parse_brand(r['Tablet'])
-            processor = r['Processor']
-            screen_size = r['Size']
-            screen_resolution = r['Resolution']
+            brand, model = self._parse_brand(r["Tablet"])
+            processor = r["Processor"]
+            screen_size = r["Size"]
+            screen_resolution = r["Resolution"]
             storage = None
             release_year = None
-            price = self._parse_price(r['Tablet Prices'])
+            price = self._parse_price(r["Tablet Prices"])
             currency = "USD$"
             scrape_source = self._scrape_source()
             scrape_url = self.url
@@ -82,8 +79,8 @@ class TabletMonkeysTablets(BaseParser):
                 price,
                 currency,
                 scrape_source,
-                scrape_url
-                )
+                scrape_url,
+            )
             tablets.append(t)
         return tablets
 
