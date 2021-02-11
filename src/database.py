@@ -38,18 +38,18 @@ def insert_into_desktop(df: pd.DataFrame):
             scrape_source, 
             scrape_url, 
             scrape_date) values (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s);"""
-            for i, r in tqdm(df1.iterrows(), total = len(df), desc = "desktops"):
-                #print(r)
-                #for c in df.columns:
+            for i, r in tqdm(df1.iterrows(), total=len(df), desc="desktops"):
+                # print(r)
+                # for c in df.columns:
                 #    if isinstance(r[c], float):
                 #        if math.isnan(r[c]):
                 #            r[c] = None
                 cursor.execute(
-                    sql, 
+                    sql,
                     (
-                        r["brand"], 
-                        r["model"], 
-                        r["processor"], 
+                        r["brand"],
+                        r["model"],
+                        r["processor"],
                         str(r["screen_size"]),
                         r["ram"],
                         r["storage_hdd"],
@@ -60,8 +60,8 @@ def insert_into_desktop(df: pd.DataFrame):
                         r["price"],
                         r["scrape_source"],
                         r["scrape_url"],
-                        r["scrape_date"]
-                    )
+                        r["scrape_date"],
+                    ),
                 )
         connection.commit()
 
@@ -82,7 +82,7 @@ def insert_into_laptop(df: pd.DataFrame):
             scrape_source, 
             scrape_url, 
             scrape_date) values (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s);"""
-            for i, r in tqdm(df.iterrows(), total = len(df), desc = "laptops"):
+            for i, r in tqdm(df.iterrows(), total=len(df), desc="laptops"):
                 cursor.execute(
                     sql,
                     (
@@ -102,15 +102,21 @@ def insert_into_laptop(df: pd.DataFrame):
         connection.commit()
 
 
-import pandas as pd
-from tqdm import tqdm
+def insert_into_tablet():
+    pass
 
-laptop_test_file = pd.read_json(
-    "/Users/darenasc/Documents/datakinduk/datacorps/firesouls/FiresoulsDataCorps/backmarket_laptop_2021-02-05_18-06-35.json"
-)
-desktop_test_file = pd.read_json(
-    "/Users/darenasc/Documents/datakinduk/datacorps/firesouls/FiresoulsDataCorps/valuecomputers_desktop_2021-02-06_14-28-27.json"
-)
-#print(test_file.head())
-#insert_into_laptop(laptop_test_file)
-insert_into_desktop(desktop_test_file)
+
+def insert_into_monitor():
+    pass
+
+
+def insert_into_wifi_dongle():
+    pass
+
+
+def insert_into_printer():
+    pass
+
+
+def insert_into_projector():
+    pass

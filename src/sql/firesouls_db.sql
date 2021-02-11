@@ -92,11 +92,18 @@ CREATE TABLE `wifi_dongle` (
   `scrape_date` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
-
-
-
-
-
-
-
+DROP TABLE IF EXISTS projector;
+CREATE TABLE `projector` (
+  `brand` varchar(255) DEFAULT NULL,
+  `model` varchar(255) DEFAULT NULL,
+  `screen_size` float DEFAULT NULL,
+  `projection_type` varchar(255) DEFAULT NULL,
+  `resolution` varchar(255) DEFAULT NULL,
+  `brightness` int DEFAULT NULL,
+  `technology` varchar(255) DEFAULT NULL,
+  `price` float DEFAULT NULL,
+  `scrape_source` varchar(255) DEFAULT NULL,
+  `scrape_url` varchar(255) DEFAULT NULL,
+  `scrape_date` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
