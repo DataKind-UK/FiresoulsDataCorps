@@ -306,7 +306,10 @@ class CurrysDesktopParser(CurrysBaseParser):
         ram = tech_specs.get("RAM")
         if ram is None:
             return None
-        ram = re.search(r"(\d+) GB", ram).group(1)
+        ram = re.search(r"(\d+) GB", ram)
+        if ram is None:
+            return ram
+        ram = ram.group(1)
         return int(ram)
 
     @staticmethod
