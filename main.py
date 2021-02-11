@@ -52,7 +52,7 @@ def scrape(site: str, product: str):
         if product == "projector":
             cpp = CurrysProjectorParser()
             items = cpp.parse()
-        if product == "Desktop":
+        if product == "desktop":
             cdp = CurrysDesktopParser()
             items = cdp.parse()
     else:

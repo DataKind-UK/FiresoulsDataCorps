@@ -295,7 +295,10 @@ class CurrysDesktopParser(CurrysBaseParser):
         screen = tech_specs.get("Screen size")
         if screen is None:
             return screen
-        size = re.search(r"(\d{2}[.]{0,1}\d{0,2})\"$", screen).group(1)
+        size = re.search(r"(\d{2}[.]{0,1}\d{0,2})\"$", screen)
+        if size is None:
+            return size
+        size = size.group(1)
         return float(size)
 
     @staticmethod
