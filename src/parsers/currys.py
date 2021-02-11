@@ -270,7 +270,7 @@ class CurrysDesktopParser(CurrysBaseParser):
     @staticmethod
     def _parse_model(product: BeautifulSoup) -> str:
         model = product.find("span", {"data-product": "name"}).text
-        model = model.split(' - ')[0].strip().lower()
+        model = model.split(" - ")[0].strip().lower()
         return model
 
     @staticmethod
@@ -318,9 +318,9 @@ class CurrysDesktopParser(CurrysBaseParser):
         if proc is None:
             return proc
         proc = proc.lower().split("\n")[0]
-        proc = proc.replace("processor", "").replace("- ","").strip()
+        proc = proc.replace("processor", "").replace("- ", "").strip()
         return proc
-        
+
     @staticmethod
     def _parse_storage_hdd(tech_specs: Dict[str, str]) -> Optional[int]:
         storage = tech_specs.get("Storage")
@@ -409,7 +409,7 @@ class CurrysDesktopParser(CurrysBaseParser):
                     os,
                     price,
                     source,
-                    scrape_url
+                    scrape_url,
                 )
                 desktops.append(p)
         return desktops

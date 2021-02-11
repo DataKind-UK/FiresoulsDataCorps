@@ -10,7 +10,11 @@ from src.parsers.backmarket import BackmarketLaptopParser, BackmarketTabletParse
 from src.parsers.broadbandchoices import BroadbandchoicesDongleParser
 from src.parsers.tabletmonkeys import TabletMonkeysTablets
 from src.parsers.printerland import PrinterlandParser
-from src.parsers.currys import CurrysLaptopParser, CurrysProjectorParser, CurrysDesktopParser
+from src.parsers.currys import (
+    CurrysLaptopParser,
+    CurrysProjectorParser,
+    CurrysDesktopParser,
+)
 from src.summariser import Summary
 
 app = typer.Typer()
