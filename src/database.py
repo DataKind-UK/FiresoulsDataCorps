@@ -32,12 +32,12 @@ def insert_into_desktop(df: pd.DataFrame):
         Returns version and a timestamp for when the record is valid from.
 
         Parameters:
-            url (str): 
+            url (str):
 
         Returns:
             version (int): version to be assigned to the record to be inserted.
-            
-            valid_from (datetime.timestamp): 
+
+            valid_from (datetime.timestamp):
         """
         connection = get_db_connection()
         cursor = connection.cursor()
@@ -128,17 +128,18 @@ def insert_into_laptop(df: pd.DataFrame):
     Parameters:
         df (pd.DataFrame):
     """
+
     def check_if_laptop_exists(url):
         """
         Returns version and a timestamp for when the record is valid from.
 
         Parameters:
-            url (str): 
+            url (str):
 
         Returns:
             version (int): version to be assigned to the record to be inserted.
-            
-            valid_from (datetime.timestamp): 
+
+            valid_from (datetime.timestamp):
         """
         connection = get_db_connection()
         cursor = connection.cursor()
@@ -234,18 +235,3 @@ def insert_into_printer():
 
 def insert_into_projector():
     pass
-
-
-
-import pandas as pd
-from tqdm import tqdm
-
-laptop_test_file = pd.read_json(
-    "/Users/darenasc/Documents/datakinduk/datacorps/firesouls/FiresoulsDataCorps/backmarket_laptop_2021-02-05_18-06-35.json"
-)
-desktop_test_file = pd.read_json(
-    "/Users/darenasc/Documents/datakinduk/datacorps/firesouls/FiresoulsDataCorps/valuecomputers_desktop_2021-02-06_14-28-27.json"
-)
-#print(test_file.head())
-insert_into_laptop(laptop_test_file)
-#insert_into_desktop(desktop_test_file)
