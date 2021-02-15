@@ -16,7 +16,10 @@ CREATE TABLE `desktop` (
   `price` float DEFAULT NULL,
   `scrape_source` varchar(255) DEFAULT NULL,
   `scrape_url` varchar(255) DEFAULT NULL,
-  `scrape_date` timestamp NULL DEFAULT NULL
+  `scrape_date` timestamp NULL DEFAULT NULL,
+  `version` int  NULL DEFAULT NULL,
+  `valid_from` timestamp NULL DEFAULT NULL,
+  `valid_to` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 DROP TABLE IF EXISTS laptop;
@@ -32,6 +35,7 @@ CREATE TABLE `laptop` (
   `scrape_source` varchar(255) DEFAULT NULL,
   `scrape_url` varchar(255) DEFAULT NULL,
   `scrape_date` date DEFAULT NULL,
+  `version` int DEFAULT NULL,
   `valid_from` timestamp NULL DEFAULT NULL,
   `valid_to` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
@@ -44,7 +48,10 @@ CREATE TABLE `monitor` (
   `price` float DEFAULT NULL,
   `scrape_source` varchar(255) DEFAULT NULL,
   `scrape_url` varchar(255) DEFAULT NULL,
-  `scrape_date` timestamp NULL DEFAULT NULL
+  `scrape_date` timestamp NULL DEFAULT NULL,
+  `version` int  NULL DEFAULT NULL,
+  `valid_from` timestamp NULL DEFAULT NULL,
+  `valid_to` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 DROP TABLE IF EXISTS printer;
@@ -59,7 +66,10 @@ CREATE TABLE `printer` (
   `price` float DEFAULT NULL,
   `scrape_source` varchar(255) DEFAULT NULL,
   `scrape_url` varchar(255) DEFAULT NULL,
-  `scrape_date` timestamp NULL DEFAULT NULL
+  `scrape_date` timestamp NULL DEFAULT NULL,
+  `version` int  NULL DEFAULT NULL,
+  `valid_from` timestamp NULL DEFAULT NULL,
+  `valid_to` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 DROP TABLE IF EXISTS tablet;
@@ -75,7 +85,10 @@ CREATE TABLE `tablet` (
   `currenty` varchar(255) DEFAULT NULL,
   `scrape_source` varchar(255) DEFAULT NULL,
   `scrape_url` varchar(255) DEFAULT NULL,
-  `scrape_date` timestamp NULL DEFAULT NULL
+  `scrape_date` timestamp NULL DEFAULT NULL,
+  `version` int  NULL DEFAULT NULL,
+  `valid_from` timestamp NULL DEFAULT NULL,
+  `valid_to` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 DROP TABLE IF EXISTS wifi_dongle;
@@ -89,7 +102,10 @@ CREATE TABLE `wifi_dongle` (
   `monthly_cost` float DEFAULT NULL,
   `scrape_source` varchar(255) DEFAULT NULL,
   `scrape_url` varchar(255) DEFAULT NULL,
-  `scrape_date` timestamp NULL DEFAULT NULL
+  `scrape_date` timestamp NULL DEFAULT NULL,
+  `version` int  NULL DEFAULT NULL,
+  `valid_from` timestamp NULL DEFAULT NULL,
+  `valid_to` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 DROP TABLE IF EXISTS projector;
@@ -104,6 +120,9 @@ CREATE TABLE `projector` (
   `price` float DEFAULT NULL,
   `scrape_source` varchar(255) DEFAULT NULL,
   `scrape_url` varchar(255) DEFAULT NULL,
-  `scrape_date` timestamp NULL DEFAULT NULL
+  `scrape_date` timestamp NULL DEFAULT NULL,
+  `version` int  NULL DEFAULT NULL,
+  `valid_from` timestamp NULL DEFAULT NULL,
+  `valid_to` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
