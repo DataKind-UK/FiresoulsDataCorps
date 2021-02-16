@@ -1,4 +1,5 @@
 import pymysql.cursors
+from typing import Tuple
 import pandas as pd
 import math
 import datetime
@@ -16,6 +17,49 @@ def get_db_connection():
     return connection
 
 
+def check_if_item_exists(table_name: str, url: str) -> Tuple[int, datetime.datetime.timestamp]:
+    """
+    Returns version and a timestamp for when the record is valid from.
+
+    Parameters:
+        url (str):
+
+    Returns:
+        version (int): version to be assigned to the record to be inserted.
+
+        valid_from (datetime.timestamp):
+    """
+    connection = get_db_connection()
+    cursor = connection.cursor()
+
+    valid_from = datetime.datetime.now()
+    sql = """select scrape_url, version
+            from {}
+            where scrape_url = '{}'
+                and valid_to is null;""".format(
+        table_name, url
+    )
+    cursor.execute(sql)
+    rows = cursor.fetchone()
+    cursor.close()
+
+    if rows is None:
+        version = 1
+    else:
+        version = rows["version"]
+        cursor2 = connection.cursor()
+        update_query = """update {} set valid_to = '{}' 
+                            where scrape_url = '{}'
+                            and version = {};""".format(
+            table_name, valid_from, url, version
+        )
+        cursor2.execute(update_query)
+        connection.commit()
+        version += 1
+        cursor2.close()
+    connection.close()
+    return version, valid_from
+
 def get_sql_script(table: str):
     pass
 
@@ -27,49 +71,6 @@ def insert_into_desktop(df: pd.DataFrame):
     Parameters:
         df (pd.DataFrame):
     """
-
-    def check_if_desktop_exists(url):
-        """
-        Returns version and a timestamp for when the record is valid from.
-
-        Parameters:
-            url (str):
-
-        Returns:
-            version (int): version to be assigned to the record to be inserted.
-
-            valid_from (datetime.timestamp):
-        """
-        connection = get_db_connection()
-        cursor = connection.cursor()
-
-        valid_from = datetime.datetime.now()
-        sql = """select scrape_url, version
-                from desktop
-                where scrape_url = '{}'
-                    and valid_to is null;""".format(
-            url
-        )
-        cursor.execute(sql)
-        rows = cursor.fetchone()
-        cursor.close()
-
-        if rows is None:
-            version = 1
-        else:
-            version = rows["version"]
-            cursor2 = connection.cursor()
-            update_query = """update desktop set valid_to = '{}' 
-                                where scrape_url = '{}'
-                                and version = {};""".format(
-                valid_from, url, version
-            )
-            cursor2.execute(update_query)
-            connection.commit()
-            version += 1
-            cursor2.close()
-        connection.close()
-        return version, valid_from
 
     connection = get_db_connection()
     cursor = connection.cursor()
@@ -95,7 +96,7 @@ def insert_into_desktop(df: pd.DataFrame):
         valid_from,
         version) values (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s);"""
     for i, r in tqdm(df1.iterrows(), total=len(df1), desc="desktops"):
-        version, valid_from = check_if_desktop_exists(r["scrape_url"])
+        version, valid_from = check_if_item_exists('desktop', r["scrape_url"])
         cursor.execute(
             sql,
             (
@@ -130,49 +131,6 @@ def insert_into_laptop(df: pd.DataFrame):
         df (pd.DataFrame):
     """
 
-    def check_if_laptop_exists(url):
-        """
-        Returns version and a timestamp for when the record is valid from.
-
-        Parameters:
-            url (str):
-
-        Returns:
-            version (int): version to be assigned to the record to be inserted.
-
-            valid_from (datetime.timestamp):
-        """
-        connection = get_db_connection()
-        cursor = connection.cursor()
-
-        valid_from = datetime.datetime.now()
-        sql = """select scrape_url, version
-                from laptop
-                where scrape_url = '{}'
-                    and valid_to is null;""".format(
-            url
-        )
-        cursor.execute(sql)
-        rows = cursor.fetchone()
-        cursor.close()
-
-        if rows is None:
-            version = 1
-        else:
-            version = rows["version"]
-            cursor2 = connection.cursor()
-            update_query = """update laptop set valid_to = '{}' 
-                                where scrape_url = '{}'
-                                and version = {};""".format(
-                valid_from, url, version
-            )
-            cursor2.execute(update_query)
-            connection.commit()
-            version += 1
-            cursor2.close()
-        connection.close()
-        return version, valid_from
-
     connection = get_db_connection()
     cursor = connection.cursor()
 
@@ -194,7 +152,7 @@ def insert_into_laptop(df: pd.DataFrame):
         valid_from,
         version) values (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s);"""
     for i, r in tqdm(df.iterrows(), total=len(df), desc="laptops"):
-        version, valid_from = check_if_laptop_exists(r["scrape_url"])
+        version, valid_from = check_if_item_exists('laptop', r["scrape_url"])
         cursor.execute(
             sql,
             (
