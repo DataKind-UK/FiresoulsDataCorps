@@ -23,7 +23,8 @@ docker run \
 -e MYSQL_DATABASE=firesouls_db \
 -e MYSQL_USER=scraper \
 -e MYSQL_PASSWORD=firesouls \
--v /Users/darenasc/Documents/datakinduk/datacorps/firesouls/database:/var/lib/mysql \
+-v firesouls_volume:/var/lib/mysql \
+-p 3306:3306
 mysql:8.0
 ```
 
