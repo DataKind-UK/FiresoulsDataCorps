@@ -82,7 +82,7 @@ CREATE TABLE `tablet` (
   `storage` int DEFAULT NULL,
   `release_year` int DEFAULT NULL,
   `price` float DEFAULT NULL,
-  `currenty` varchar(255) DEFAULT NULL,
+  `currency` varchar(255) DEFAULT NULL,
   `scrape_source` varchar(255) DEFAULT NULL,
   `scrape_url` varchar(255) DEFAULT NULL,
   `scrape_date` timestamp NULL DEFAULT NULL,
