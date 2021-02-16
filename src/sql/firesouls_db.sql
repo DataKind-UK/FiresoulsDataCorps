@@ -9,7 +9,7 @@ CREATE TABLE `desktop` (
   `screen_size` float DEFAULT NULL,
   `ram` int DEFAULT NULL,
   `storage_hdd` int DEFAULT NULL,
-  `storage_sdd` int DEFAULT NULL,
+  `storage_ssd` int DEFAULT NULL,
   `release_year` int DEFAULT NULL,
   `optical_drive` varchar(255) DEFAULT NULL,
   `operative_system` varchar(255) DEFAULT NULL,
