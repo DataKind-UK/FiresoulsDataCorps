@@ -176,8 +176,59 @@ def insert_into_laptop(df: pd.DataFrame):
     connection.close()
 
 
-def insert_into_tablet():
-    pass
+def insert_into_tablet(df):
+    """
+    Insert new data in the `tablet` table.
+
+    Parameters:
+        df (pd.DataFrame):
+    """
+
+    connection = get_db_connection()
+    cursor = connection.cursor()
+
+    df1 = df.where(pd.notnull(df), None)
+    df1.drop_duplicates(inplace=True)
+
+    sql = """insert into tablet (
+        brand, 
+        model, 
+        processor, 
+        screen_size, 
+        screen_resolution,
+        storage, 
+        release_year, 
+        price,
+        currency, 
+        scrape_source, 
+        scrape_url, 
+        scrape_date,
+        valid_from,
+        version) values (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s);"""
+    for i, r in tqdm(df.iterrows(), total=len(df), desc="tablets"):
+        version, valid_from = check_if_item_exists('tablet', r["scrape_url"])
+        cursor.execute(
+            sql,
+            (
+                r["brand"],
+                r["model"],
+                r["processor"],
+                r["screen_size"],
+                r["screen_resolution"],
+                r["storage"],
+                r["release_year"],
+                r["price"],
+                r.get('currency','GBP'),
+                r["scrape_source"],
+                r["scrape_url"],
+                r["scrape_date"],
+                valid_from,
+                version,
+            ),
+        )
+        connection.commit()
+    cursor.close()
+    connection.close()
 
 
 def insert_into_monitor():
