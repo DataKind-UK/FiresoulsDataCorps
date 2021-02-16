@@ -2,6 +2,7 @@ import pymysql.cursors
 import pandas as pd
 import math
 import datetime
+from tqdm import tqdm
 
 
 def get_db_connection():
@@ -101,11 +102,11 @@ def insert_into_desktop(df: pd.DataFrame):
                 r["brand"],
                 r["model"],
                 r["processor"],
-                str(r["screen_size"]),
+                r["screen_size"],
                 r["ram"],
                 r["storage_hdd"],
                 r["storage_ssd"],
-                str(r["release_year"]),
+                r["release_year"],
                 r["optical_drive"],
                 r["operative_system"],
                 r["price"],
