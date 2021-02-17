@@ -1,9 +1,11 @@
 import pymysql.cursors
-from typing import Tuple
+from typing import Tuple, List, Any, Dict
 import pandas as pd
 import math
 import datetime
 from tqdm import tqdm
+from .resources import (Laptop, Desktop, Tablet, Monitor, WiFiDongle, Printer,
+                       Projector)
 
 
 def get_db_connection():
@@ -231,17 +233,153 @@ def insert_into_tablet(df):
     connection.close()
 
 
-def insert_into_monitor():
+def insert_into_monitor(df):
     pass
 
 
-def insert_into_wifi_dongle():
+def insert_into_wifi_dongle(df):
+    """
+    Insert new data in the `wifi-dongle` table.
+
+    Parameters:
+        df (pd.DataFrame):
+    """
+
+    connection = get_db_connection()
+    cursor = connection.cursor()
+
+    df1 = df.where(pd.notnull(df), None)
+    df1.drop_duplicates(inplace=True)
+
+    sql = """insert into wifi_dongle (
+        provider, 
+        service_name, 
+        upfront_cost, 
+        total_cost, 
+        data_allowance,
+        contract_months, 
+        monthly_cost, 
+        scrape_source, 
+        scrape_url, 
+        scrape_date,
+        valid_from,
+        version) values (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s);"""
+    for i, r in tqdm(df.iterrows(), total=len(df), desc="wifi_dongles"):
+        version, valid_from = check_if_item_exists('wifi_dongle', r["scrape_url"])
+        cursor.execute(
+            sql,
+            (
+                r["provider"],
+                r["service_name"],
+                r["upfront_cost"],
+                r["total_cost"],
+                r["data_allowance"],
+                r["contract_months"],
+                r["monthly_cost"],
+                r["scrape_source"],
+                r["scrape_url"],
+                r["scrape_date"],
+                valid_from,
+                version,
+            ),
+        )
+        connection.commit()
+    cursor.close()
+    connection.close()
+
+
+def insert_into_printer(df):
+    """
+    Insert new data in the `printer` table.
+
+    Parameters:
+        df (pd.DataFrame):
+    """
+
+    connection = get_db_connection()
+    cursor = connection.cursor()
+
+    df1 = df.where(pd.notnull(df), None)
+    df1.drop_duplicates(inplace=True)
+
+    sql = """insert into printer (
+        brand, 
+        model, 
+        functions, 
+        printing_speed_ppm, 
+        print_resolution,
+        connectivity, 
+        release_year,
+        price, 
+        scrape_source, 
+        scrape_url, 
+        scrape_date,
+        valid_from,
+        version) values (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s);"""
+    for i, r in tqdm(df.iterrows(), total=len(df), desc="printers"):
+        version, valid_from = check_if_item_exists('printer', r["scrape_url"])
+        cursor.execute(
+            sql,
+            (
+                r["brand"],
+                r["model"],
+                r["functions"],
+                r["printing_speed_ppm"],
+                r["print_resolution"],
+                r["connectivity"],
+                r["release_year"],
+                r["price"],
+                r["scrape_source"],
+                r["scrape_url"],
+                r["scrape_date"],
+                valid_from,
+                version,
+            ),
+        )
+        connection.commit()
+    cursor.close()
+    connection.close()
+
+
+def insert_into_projector(df):
     pass
 
 
-def insert_into_printer():
-    pass
 
+def insert_into_database(product_type: str, item_set: List[Dict[str, Any]]):
+    """Channel the scraped products data into the correct insert_into_ method
 
-def insert_into_projector():
-    pass
+    Parameters
+    ----------
+    product_type : str
+        Product type of the item set
+    item_set : List[Dict[str, Any]]
+        List of scraped data
+
+    Raises
+    ------
+    Exception
+        When a product is not identified
+    """
+
+    df = pd.DataFrame(item_set)
+
+    # This step is required since MySql doesn't know how to use NaN
+    df = df.where(pd.notnull(df), None)
+
+    if product_type == 'laptop':
+        insert_into_laptop(df)
+    elif product_type == 'desktop':
+        insert_into_desktop(df)
+    elif product_type == 'tablet':
+        insert_into_tablet(df)
+    elif product_type == 'monitor':
+        insert_into_monitor(df)
+    elif product_type == 'wifi_dongle':
+        insert_into_wifi_dongle(df)
+    elif product_type == 'printer':
+        insert_into_printer(df)
+    elif product_type == 'projector':
+        insert_into_projector(df)
+    else:
+        raise Exception(f"Insert into database method not implemented for {product_type}")
