@@ -16,6 +16,7 @@ from src.parsers.currys import (
     CurrysDesktopParser,
 )
 from src.summariser import Summary
+from src.database import insert_into_database
 
 app = typer.Typer()
 
@@ -38,7 +39,7 @@ def scrape(site: str, product: str):
             items = vcdt.parse()
             pass
     elif site == "broadbandchoices":
-        if product == "dongle":
+        if product == "wifi_dongle":
             bbc = BroadbandchoicesDongleParser()
             items = bbc.parse()
     elif site == "tabletmonkeys":
@@ -66,8 +67,13 @@ def scrape(site: str, product: str):
     json_file = [x.asdict() for x in items]
     timestamp = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
     # TODO Add a function to write these json files
-    with open(f"{site}_{product}_{timestamp}.json", "w") as f:
+    print("Saving json file into folder")
+    with open(f"json/{site}_{product}_{timestamp}.json", "w") as f:
         json.dump(json_file, f)
+    
+    print("Writing new data into database")
+    insert_into_database(product, json_file)
+
 
 
 @app.command()
