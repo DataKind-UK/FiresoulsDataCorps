@@ -173,6 +173,7 @@ class BackmarketTabletParser(BackmarketBaseParser):
     @staticmethod
     def _parse_screen_size(chardict: Dict[str, str]) -> float:
         screen_size = chardict.get("Screen size (in)", "0")
+        screen_size = screen_size.replace(',', '.') if ',' in screen_size else screen_size
         return float(screen_size)
 
     @staticmethod
