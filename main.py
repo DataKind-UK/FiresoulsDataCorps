@@ -15,6 +15,7 @@ from src.parsers.currys import (
     CurrysProjectorParser,
     CurrysDesktopParser,
 )
+from src.parsers.ons import ONSPeopleParser
 from src.summariser import Summary
 from src.database import insert_into_database
 
@@ -60,6 +61,10 @@ def scrape(site: str, product: str):
         if product == "desktop":
             cdp = CurrysDesktopParser()
             items = cdp.parse()
+    elif site == "ons":
+        if product == "people":
+            o = ONSPeopleParser()
+            items = o.parse()
     else:
         print(f"Product {product} not implemented for {site}")
         raise Exception
