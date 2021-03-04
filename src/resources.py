@@ -17,6 +17,8 @@ class BaseResource:
         return dictionary
 
 
+### EQUIPMENT ###
+
 @dataclass
 class Laptop(BaseResource):
     brand: str
@@ -116,6 +118,19 @@ class Projector(BaseResource):
     brightness: int
     technology: str
     price: float
+    scrape_source: str
+    scrape_url: str
+    scrape_date: datetime.date = datetime.datetime.today().date()
+
+### PEOPLE ###
+
+@dataclass
+class People(BaseResource):
+    region: str
+    job_title: str
+    soc_code: str
+    hourly_pay: float
+    aggregation: str
     scrape_source: str
     scrape_url: str
     scrape_date: datetime.date = datetime.datetime.today().date()

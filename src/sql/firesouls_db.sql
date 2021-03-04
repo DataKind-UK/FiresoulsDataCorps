@@ -126,3 +126,18 @@ CREATE TABLE `projector` (
   `valid_to` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
+DROP TABLE IF EXISTS people;
+CREATE TABLE `people` (
+  `region` varchar(255) DEFAULT NULL,
+  `job_title` varchar(255) DEFAULT NULL,
+  `soc_code` varchar(255) DEFAULT NULL,
+  `hourly_pay` float DEFAULT NULL,
+  `aggregation` varchar(255) DEFAULT NULL,
+  `scrape_source` varchar(255) DEFAULT NULL,
+  `scrape_url` varchar(255) DEFAULT NULL,
+  `scrape_date` timestamp NULL DEFAULT NULL,
+  `version` int  NULL DEFAULT NULL,
+  `valid_from` timestamp NULL DEFAULT NULL,
+  `valid_to` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+

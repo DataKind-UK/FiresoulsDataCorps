@@ -344,7 +344,51 @@ def insert_into_printer(df):
 def insert_into_projector(df):
     pass
 
+def insert_into_people(df):
+    """
+    Insert new data in the `people` table.
 
+    Parameters:
+        df (pd.DataFrame):
+    """
+
+    connection = get_db_connection()
+    cursor = connection.cursor()
+
+    df1 = df.where(pd.notnull(df), None)
+    df1.drop_duplicates(inplace=True)
+
+    sql = """insert into people (
+        region, 
+        job_title, 
+        soc_code, 
+        hourly_pay, 
+        aggregation,
+        scrape_source, 
+        scrape_url, 
+        scrape_date,
+        valid_from,
+        version) values (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s);"""
+    for i, r in tqdm(df.iterrows(), total=len(df), desc="people"):
+        version, valid_from = check_if_item_exists('people', r["scrape_url"])
+        cursor.execute(
+            sql,
+            (
+                r["region"],
+                r["job_title"],
+                r["soc_code"],
+                r["hourly_pay"],
+                r["aggregation"],
+                r["scrape_source"],
+                r["scrape_url"],
+                r["scrape_date"],
+                valid_from,
+                version,
+            ),
+        )
+        connection.commit()
+    cursor.close()
+    connection.close()
 
 def insert_into_database(product_type: str, item_set: List[Dict[str, Any]]):
     """Channel the scraped products data into the correct insert_into_ method
@@ -381,5 +425,7 @@ def insert_into_database(product_type: str, item_set: List[Dict[str, Any]]):
         insert_into_printer(df)
     elif product_type == 'projector':
         insert_into_projector(df)
+    elif product_type == 'people':
+        insert_into_people(df)
     else:
         raise Exception(f"Insert into database method not implemented for {product_type}")
