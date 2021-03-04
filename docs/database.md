@@ -45,5 +45,5 @@ Restoring data from a dump.
 docker exec -i some-mysql sh -c 'exec mysql -uroot -p"$MYSQL_ROOT_PASSWORD"' < /Users/darenasc/Documents/datakinduk/datacorps/firesouls/database/all-databases.sql
 
 # Restore the firesouls_db database
-docker exec -i firesouls_db sh -c 'exec mysql -uroot -pscraping -t' < /Users/darenasc/Documents/datakinduk/datacorps/firesouls/database/firesouls_db.sql
+docker exec -i firesouls_db sh -c 'exec mysql -uroot -pscraping -t' < src/firesouls/sql/firesouls_db.sql
 ```

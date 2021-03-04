@@ -57,6 +57,6 @@ class ONSPeopleParser(BaseParser):
                             row['median'],
                             'median',
                             self.scrape_source,
-                            self.scrape_source+row['code'])
+                            self.scrape_source+row['code']+row['region'])
             people.append(person)
         return people
