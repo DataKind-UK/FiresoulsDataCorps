@@ -155,3 +155,17 @@ CREATE TABLE `meeting_rooms` (
   `valid_to` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
+-- People - Management Time
+CREATE OR REPLACE VIEW people_management_time as 
+select region, avg(hourly_pay) as hourly_pay, avg(hourly_pay) * 12 as day_and_half_pay
+from people
+where soc_code in ('1150','113')
+group by region;
+
+-- People - Executive Time
+CREATE OR REPLACE VIEW people_executive_time as
+select region, avg(hourly_pay) as hourly_pay, avg(hourly_pay) * 12 as day_and_half_pay
+from people
+where soc_code in ('111')
+group by region;
+
