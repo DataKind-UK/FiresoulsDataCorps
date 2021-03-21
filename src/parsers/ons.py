@@ -22,7 +22,7 @@ class ONSPeopleParser(BaseParser):
             else:
                 df.columns = df.iloc[0,:]
                 df = df.iloc[1:,:]
-        df = df[['Description', 'Code', 'Median']]
+        df = df[['Description', 'Code', 'Median', 'Mean']]
         df.columns = [x.lower() for x in df.columns]
         return df
 
@@ -32,13 +32,14 @@ class ONSPeopleParser(BaseParser):
         df = df.copy()
         df[['region', 'job_title']] = df['description'].str.strip().str.split(',',1,expand=True)
         df = df[(df['region'].isin(REGIONS)) & (~df['job_title'].isna())]
-        df = df[['region', 'job_title','code', 'median']]
+        df = df[['region', 'job_title','code', 'median', 'mean']]
         return df
 
     @staticmethod
     def _replace_nan_with_none(df: pd.DataFrame) -> pd.DataFrame:
         df = df.copy()
         df.loc[df['median'] == 'x', 'median'] = None
+        df.loc[df['mean'] == 'x', 'mean'] = None
         df[df.isna()] = None
         return df
 
@@ -51,11 +52,13 @@ class ONSPeopleParser(BaseParser):
         df = self._split_region(df)
         df = self._replace_nan_with_none(df)
         for _, row in df.iterrows():
+            value = row['median'] if row['median'] is not None else row['mean']
+            agg_level = 'median' if row['median'] is not None else 'mean'
             person = People(row['region'],
                             row['job_title'],
                             row['code'],
-                            row['median'],
-                            'median',
+                            value,
+                            agg_level,
                             self.scrape_source,
                             self.scrape_source+row['code']+row['region'])
             people.append(person)
