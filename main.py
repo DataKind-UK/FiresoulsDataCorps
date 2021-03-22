@@ -16,6 +16,7 @@ from src.parsers.currys import (
     CurrysDesktopParser,
 )
 from src.parsers.ons import ONSPeopleParser
+from src.parsers.zipcube import ZipcubeParser
 from src.summariser import Summary
 from src.database import insert_into_database
 
@@ -23,7 +24,7 @@ app = typer.Typer()
 
 
 @app.command()
-def scrape(site: str, product: str):
+def scrape(site: str, product: str, city: Optional[str] = None):
     if site == "backmarket":
         if product == "laptop":
             blp = BackmarketLaptopParser()
@@ -65,6 +66,14 @@ def scrape(site: str, product: str):
         if product == "people":
             o = ONSPeopleParser()
             items = o.parse()
+    elif site == "zipcube":
+        if product == "meeting_rooms":
+            if city is None:
+                raise Exception("City argument is required for Zipcube scraper")
+            print("Scraping Zipcube for "+city)
+            z = ZipcubeParser(city)
+            items = z.parse()
+    
     else:
         print(f"Product {product} not implemented for {site}")
         raise Exception
