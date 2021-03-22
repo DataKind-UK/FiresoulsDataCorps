@@ -390,6 +390,50 @@ def insert_into_people(df):
     cursor.close()
     connection.close()
 
+def insert_into_meeting_rooms(df):
+    """
+    Insert new data in the `meeting_rooms` table.
+
+    Parameters:
+        df (pd.DataFrame):
+    """
+
+    connection = get_db_connection()
+    cursor = connection.cursor()
+
+    df1 = df.where(pd.notnull(df), None)
+    df1.drop_duplicates(inplace=True)
+
+    sql = """insert into meeting_rooms (
+        name, 
+        city, 
+        capacity_people, 
+        cost_hour, 
+        scrape_source, 
+        scrape_url, 
+        scrape_date,
+        valid_from,
+        version) values (%s, %s, %s, %s, %s, %s, %s, %s, %s);"""
+    for i, r in tqdm(df.iterrows(), total=len(df), desc="meeting_rooms"):
+        version, valid_from = check_if_item_exists('meeting_rooms', r["scrape_url"])
+        cursor.execute(
+            sql,
+            (
+                r["name"],
+                r["city"],
+                r["capacity_people"],
+                r["cost_hour"],
+                r["scrape_source"],
+                r["scrape_url"],
+                r["scrape_date"],
+                valid_from,
+                version,
+            ),
+        )
+        connection.commit()
+    cursor.close()
+    connection.close()
+
 def insert_into_database(product_type: str, item_set: List[Dict[str, Any]]):
     """Channel the scraped products data into the correct insert_into_ method
 
@@ -427,5 +471,7 @@ def insert_into_database(product_type: str, item_set: List[Dict[str, Any]]):
         insert_into_projector(df)
     elif product_type == 'people':
         insert_into_people(df)
+    elif product_type == 'meeting_rooms':
+        insert_into_meeting_rooms(df)
     else:
         raise Exception(f"Insert into database method not implemented for {product_type}")
