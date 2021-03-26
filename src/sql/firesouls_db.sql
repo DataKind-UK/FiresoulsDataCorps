@@ -141,3 +141,17 @@ CREATE TABLE `people` (
   `valid_to` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
+DROP TABLE IF EXISTS meeting_rooms;
+CREATE TABLE `meeting_rooms` (
+  `name` varchar(255) DEFAULT NULL,
+  `city` varchar(255) DEFAULT NULL,
+  `capacity_people` int DEFAULT NULL,
+  `cost_hour` float DEFAULT NULL,
+  `scrape_source` varchar(255) DEFAULT NULL,
+  `scrape_url` varchar(255) DEFAULT NULL,
+  `scrape_date` timestamp NULL DEFAULT NULL,
+  `version` int  NULL DEFAULT NULL,
+  `valid_from` timestamp NULL DEFAULT NULL,
+  `valid_to` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+

@@ -1,3 +1,4 @@
+import json
 from typing import Dict, Any
 import pandas as pd
 from bs4 import BeautifulSoup
@@ -10,6 +11,12 @@ class BaseParser:
         html = downloadHTML(url, use_proxy)
         soup = BeautifulSoup(html, "html.parser")
         return soup
+
+    @staticmethod
+    def _make_json(url: str, use_proxy: bool = True):
+        text = downloadHTML(url, use_proxy)
+        data = json.loads(text)
+        return data
 
     @staticmethod
     def _download_excel_from_zip(url: str, fname: str, sheet_name: str, use_proxy: bool = False) -> pd.DataFrame:

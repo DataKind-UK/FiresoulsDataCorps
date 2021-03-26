@@ -134,3 +134,16 @@ class People(BaseResource):
     scrape_source: str
     scrape_url: str
     scrape_date: datetime.date = datetime.datetime.today().date()
+
+
+### SPACE ###
+
+@dataclass
+class MeetingRoom(BaseResource):
+    name: str
+    city: str
+    capacity_people: str
+    cost_hour: float
+    scrape_source: str
+    scrape_url: str
+    scrape_date: datetime.date = datetime.datetime.today().date()
