@@ -17,6 +17,7 @@ from src.parsers.currys import (
 )
 from src.parsers.ons import ONSPeopleParser
 from src.parsers.zipcube import ZipcubeParser
+from src.parsers.regus import RegusParser
 from src.summariser import Summary
 from src.database import insert_into_database
 
@@ -73,6 +74,13 @@ def scrape(site: str, product: str, city: Optional[str] = None):
             print("Scraping Zipcube for "+city)
             z = ZipcubeParser(city)
             items = z.parse()
+    elif site == "regus":
+        if product == "meeting_rooms":
+            if city is None:
+                raise Exception("City argument is required for Regus scraper")
+            print("Scraping Regus for "+city)
+            r = RegusParser(city)
+            items = r.parse()
     
     else:
         print(f"Product {product} not implemented for {site}")
