@@ -52,8 +52,8 @@ class ONSPeopleParser(BaseParser):
         df = self._split_region(df)
         df = self._replace_nan_with_none(df)
         for _, row in df.iterrows():
-            value = row['median'] if row['median'] is not None else row['mean']
-            agg_level = 'median' if row['median'] is not None else 'mean'
+            value = row['mean'] if row['mean'] is not None else row['median']
+            agg_level = 'mean' if row['mean'] is not None else 'median'
             person = People(row['region'],
                             row['job_title'],
                             row['code'],
