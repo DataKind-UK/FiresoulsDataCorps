@@ -12,8 +12,12 @@ cd FiresoulsDataCorps
 it with the correct key value. It can be obtained from [ScraperAPI](https://www.scraperapi.com/).
 Rename this file to `.env`
 
-4. Install [`pipenv`](https://pipenv.pypa.io/en/latest/install/#installing-pipenv)
-5. Install the packages using `pipenv`. From the terminal type:
+4. Add credentials to connect to the database. The required credentials are the same as those shown on the
+`sample.env` file.
+
+5. Install [`pipenv`](https://pipenv.pypa.io/en/latest/install/#installing-pipenv)
+
+6. Install the packages using `pipenv`. From the terminal type:
 
 ```
 pipenv shell
