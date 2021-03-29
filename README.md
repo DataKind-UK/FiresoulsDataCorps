@@ -18,32 +18,37 @@ available:
 
 ### Scrape  
 
-This command kickstarts the scraping process for a given site.
+This command kickstarts the scraping process for a given resource type.
 
 ```
-python main.py scrape <site_name> <resource_type>
+python main.py scrape <resource_type> --sites <site_name> --city <city_name>
 ```
+
+The sites argument is optional, and is there to allow the scrape of only specific sites instead of all the ones that have been configured. 
+
+The city argument is also optional and is used exclusively by the meeting_rooms scrapers.
 
 A quick test of this code is through the following command:  
 
 ```
-python main.py scrape backmarket laptop
+python main.py scrape laptop
 ```
 
-This script will output a file called `{site}_{resource}_{timestamp}.json` which contains the data for the scraped items.
+This script will output a file called `{resource}_{timestamp}.json` which contains the data for the scraped items. The data is also automatically inserted into the database. The database credentials will have to have been configured through the `.env` file.
 
 #### Commands
 
 Currently the following commands are usable to download data about resources.
 
 ```
-python main.py scrape backmarket laptop
-python main.py scrape backmarket tablet
-python main.py scrape valuecomputers laptop
-python main.py scrape valuecomputers desktop
-python main.py scrape broadbandchoices dongle
-python main.py scrape tabletmonkeys tablet
-python main.py scrape printerland printer
+python main.py scrape laptop
+python main.py scrape tablet
+python main.py scrape desktop
+python main.py scrape wifi_dongle
+python main.py scrape printer
+python main.py scrape projector
+python main.py scrape people
+python main.py scrape meeting_rooms
 ```
 
 ### Summarise  
