@@ -27,13 +27,13 @@ def data():
 def test_fix_file_headers(data):
      parser = ONSPeopleParser()
      df = parser._fix_headers(data)
-     assert set(df.columns) == {'description', 'code', 'median'}
+     assert set(df.columns) == {'description', 'code', 'median', 'mean'}
 
 def test_split_region(data):
      parser = ONSPeopleParser()
      df = parser._fix_headers(data)
      df = parser._split_region(df)
-     assert set(df.columns) == {'region', 'job_title', 'code', 'median'}
+     assert set(df.columns) == {'region', 'job_title', 'code', 'median', 'mean'}
 
 def test_replace_nan_with_none(data):
      parser = ONSPeopleParser()

@@ -1,3 +1,4 @@
+import os
 import pymysql.cursors
 from typing import Tuple, List, Any, Dict
 import pandas as pd
@@ -10,10 +11,10 @@ from .resources import (Laptop, Desktop, Tablet, Monitor, WiFiDongle, Printer,
 
 def get_db_connection():
     connection = pymysql.connect(
-        host="localhost",
-        user="scraper",
-        password="firesouls",
-        database="firesouls_db",
+        host=os.getenv('MYSQL_HOST'),
+        user=os.getenv('MYSQL_USER'),
+        password=os.getenv('MYSQL_PASSWORD'),
+        database=os.getenv('MYSQL_DATABASE'),
         cursorclass=pymysql.cursors.DictCursor,
     )
     return connection
