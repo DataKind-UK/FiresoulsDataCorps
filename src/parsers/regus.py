@@ -3,26 +3,29 @@ from src.resources import MeetingRoom
 from tqdm import tqdm
 import re
 
+
 class RegusParser(BaseParser):
-    scrape_source = 'regus.com'
+    scrape_source = "regus.com"
     url = "https://www.regus.com/en-gb/united-kingdom/{city}/listings"
-    api_url = "https://www.regus.com/en-gb/united-kingdom/{city}/listings?page={page_num}"
+    api_url = (
+        "https://www.regus.com/en-gb/united-kingdom/{city}/listings?page={page_num}"
+    )
 
     def __init__(self, city: str):
-        if ' ' in city:
-            city = city.replace(' ', '-')
+        if " " in city:
+            city = city.replace(" ", "-")
         self.city = city
         self.url = self.url.format(city=city)
         self.api_url = self.api_url.format(page_num=1, city=city)
 
     def _get_num_pages(self):
-        num_pages = self.soup.find_all(class_ = 'css-9vlari')
+        num_pages = self.soup.find_all(class_="css-9vlari")
         pages = int(num_pages[0].text.split()[-2]) // 12 + 1
         return pages
 
     @staticmethod
     def _get_name(soup):
-        name = soup.find_all(class_ = 'css-12hqcib')
+        name = soup.find_all(class_="css-12hqcib")
         name = name[0].text
         return name
 
@@ -36,27 +39,40 @@ class RegusParser(BaseParser):
             pass
         return None
 
+    @staticmethod
+    def _get_link(soup):
+        links = soup.find_all("a")
+        for link in links:
+            names = link.contents[0]
+            url = link.get("href")
+            return url
+        return None
+
     def parse(self):
         rooms = []
-        self.soup = self._make_soup(self.api_url.format(city = self.city))
+        self.soup = self._make_soup(self.api_url.format(city=self.city))
         pages = self._get_num_pages()
 
-        for page in tqdm(range(1, pages), desc='pages'):
-            self.soup = self._make_soup(self.api_url.format(city=self.city, page_num=page))
-            results = self.soup.find_all(class_ = 'css-1n32xsl')
+        for page in tqdm(range(1, pages), desc="pages"):
+            self.soup = self._make_soup(
+                self.api_url.format(city=self.city, page_num=page)
+            )
+            results = self.soup.find_all(class_="css-1n32xsl")
             for result in results:
                 name = self._get_name(result)
-                items = result.find_all(class_ = 'css-1xe3qid')
+                url = self._get_link(result)
+                items = result.find_all(class_="css-1xe3qid")
                 for item in items:
-                    if 'Meeting Rooms' in item.text:
+                    if "Meeting Rooms" in item.text:
                         price = self._get_price(item)
 
-                room = MeetingRoom(name=name,
-                                    city=self.city,
-                                    capacity_people=None,
-                                    cost_hour=price,
-                                    scrape_source=self.scrape_source,
-                                    scrape_url=self.api_url.format(self.city, page)
+                room = MeetingRoom(
+                    name=name,
+                    city=self.city,
+                    capacity_people=None,
+                    cost_hour=price,
+                    scrape_source=self.scrape_source,
+                    scrape_url=url,
                 )
                 rooms.append(room)
         return rooms
