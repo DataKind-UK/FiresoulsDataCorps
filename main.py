@@ -105,7 +105,7 @@ def scrape(product: str, sites: Optional[List[str]] = [], city: Optional[str] = 
             all_items.extend(items)
 
     elif product == "meeting_rooms":
-        MEETING_ROOM_SITES = ["zipcube"]
+        MEETING_ROOM_SITES = ["zipcube", "regus"]
         if len(sites) > 0:
             MEETING_ROOM_SITES = sites
             print(sites)
@@ -115,13 +115,12 @@ def scrape(product: str, sites: Optional[List[str]] = [], city: Optional[str] = 
             print("Scraping Zipcube for "+city)
             items = run_parser(ZipcubeParser(city))
             all_items.extend(items)
-    elif site == "regus":
-        if product == "meeting_rooms":
+        if "regus" in MEETING_ROOM_SITES:
             if city is None:
                 raise Exception("City argument is required for Regus scraper")
             print("Scraping Regus for "+city)
-            r = RegusParser(city)
-            items = r.parse()
+            items = run_parser(RegusParser(city))
+            all_items.extend(items)
     
     else:
         raise Exception(f"Product {product} not implemented")
