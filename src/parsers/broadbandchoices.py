@@ -1,8 +1,9 @@
 """
 Class to extract broadband dongle contracts from the Broadbandchoices price comparison site
 """
-from typing import Tuple, List
+from typing import Tuple, List, Dict, Any
 import re
+import tqdm
 from bs4 import BeautifulSoup
 from .base import BaseParser
 from src.resources import WiFiDongle
@@ -11,75 +12,49 @@ from src.resources import WiFiDongle
 class BroadbandchoicesDongleParser(BaseParser):
     scrape_source = "broadbandchoices.co.uk"
     URL = (
-        "https://www.broadbandchoices.co.uk/mobile-broadband/dongles?unlimitedData=true"
+        "https://www.broadbandchoices.co.uk/mobile/results/devicescontracts?isDataOnlyDevice=true&page={}&deviceCondition=New&unlimitedData=true&unlimitedTexts=false&unlimitedMinutes=false&includeResellers=true&includeExistingCustomersHandset=false"
     )
 
-    def get_elements(self) -> BeautifulSoup:
-        elements = self.soup.findAll("div", {"class": "deal-container"})
-        return elements
+    def _set_api_url(self, page: int):
+        self.api_url = self.URL.format(page)
 
-    @staticmethod
-    def get_provider_service(product: BeautifulSoup) -> Tuple[str]:
-        header = product.find("div", {"class": "deal-container__title"}).text
-        provider = re.search(r"(.+)\s\d{1}G", header).group(1)
-        service = header.replace(provider, "", 1).strip()
-        return provider, service
-
-    @staticmethod
-    def _get_data(product: BeautifulSoup) -> List[BeautifulSoup]:
-        data = product.findAll("div", {"class": "deal-info__wrapper"})
+    def _get_data(self, page: int = 1):
+        self._set_api_url(page)
+        data = self._make_json(self.api_url)
         return data
 
-    @staticmethod
-    def _get_value(container: BeautifulSoup) -> str:
-        value = container.find("span", {"class": "deal-info__value"}).text
-        return value
-
-    def get_upfront_cost(self, data: List[BeautifulSoup]) -> float:
-        upfront_cost = self._get_value(data[0])
-        upfront_cost = upfront_cost.replace("£", "")
-        return float(upfront_cost)
-
-    def get_total_cost(self, data: List[BeautifulSoup]) -> float:
-        total_cost = self._get_value(data[1])
-        total_cost = total_cost.replace("£", "")
-        return float(total_cost)
-
-    def get_allowance(self, data: List[BeautifulSoup]) -> str:
-        allowance = self._get_value(data[2])
-        return allowance
-
-    def get_contract_months(self, data: List[BeautifulSoup]) -> int:
-        contract_months = self._get_value(data[3])
-        return int(contract_months)
-
-    def get_monthly_cost(self, data: List[BeautifulSoup]) -> int:
-        monthly_cost = self._get_value(data[4])
-        monthly_cost = monthly_cost.replace("£", "")
-        return float(monthly_cost)
+    def _get_deals(self, data: Dict[str, Any]) -> List[Dict[str, Any]]:
+        return data.get('deals', [])
 
     def parse(self) -> List[WiFiDongle]:
         dongles = []
-        self.soup = self._make_soup(self.URL)
-        elems = self.get_elements()
-        for elem in elems:
-            data = self._get_data(elem)
-            provider, service = self.get_provider_service(elem)
-            upfront_cost = self.get_upfront_cost(data)
-            total_cost = self.get_total_cost(data)
-            data_allowance = self.get_allowance(data)
-            contract_months = self.get_contract_months(data)
-            monthly_cost = self.get_monthly_cost(data)
-            prod = WiFiDongle(
-                provider,
-                service,
-                upfront_cost,
-                total_cost,
-                data_allowance,
-                contract_months,
-                monthly_cost,
-                self.scrape_source,
-                self.URL,
-            )
-            dongles.append(prod)
+        data = self._get_data()
+        deals = self._get_deals(data)
+        page = 1
+        while len(deals) > 0:
+            print(f"Scraping page {page} of {self.scrape_source}")
+            for deal in tqdm.tqdm(deals):
+                provider = deal.get('merchant', {}).get('name')
+                service = deal.get('tariff', {}).get('connectionType', {}).get('label')
+                upfront_cost = deal.get('tariff', {}).get('upfrontCosts', {}).get('sortValue')
+                monthly_cost = deal.get('tariff', {}).get('totalMonthlyCost')
+                total_cost = deal.get('tariff', {}).get('totalContractCost')
+                data_allowance = deal.get('tariff', {}).get('data', {}).get('label')
+                contract_months = deal.get('tariff', {}).get('contractLength', {}).get('sortValue')
+                iden = deal.get('dealHash')
+                prod = WiFiDongle(
+                    provider,
+                    service,
+                    upfront_cost,
+                    total_cost,
+                    data_allowance,
+                    contract_months,
+                    monthly_cost,
+                    self.scrape_source,
+                    iden,
+                )
+                dongles.append(prod)
+            page+=1
+            data = self._get_data(page=page)
+            deals = self._get_deals(data)
         return dongles
