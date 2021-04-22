@@ -1,0 +1,940 @@
+{
+    "deals": [
+        {
+            "id": "354dd0f3-fcac-43af-8957-4ffaca75d222",
+            "typeDescription": "handset",
+            "dealHash": "D02DDFE293DC419778F60F1F3852AD75-BB8f-68991a9b-5a39-4d53-803e-e0b277240f52",
+            "name": "Vodafone K5161 Data Dongle",
+            "bestBuySlug": "Vodafone-K5161 Data Dongle-Vodafone-Vodafone-Unlimited-0",
+            "returnPolicyInDays": 14,
+            "gifts": [],
+            "merchant": {
+                "id": "e6a016b1-f705-4619-a592-351770ba70d1",
+                "name": "Vodafone",
+                "logo": "https://bucket.cdndtl.co.uk/_v1/celsus/providers/logos_500px/vodafone.v1.png",
+                "isReseller": false
+            },
+            "linkTrackerId": "b083d81f-e0e4-473e-b11c-d695ad756239",
+            "deviceCondition": "New",
+            "seasonalPromotion": null,
+            "isRefurbished": false,
+            "manufacturer": "Vodafone",
+            "existingCustomerOnly": false,
+            "tariff": {
+                "totalMonthlyCost": 62.00,
+                "totalContractCost": 62.00,
+                "deliveryCost": {
+                    "label": "0.00",
+                    "sortValue": 0.0
+                },
+                "automaticCashback": {
+                    "label": "0.00",
+                    "sortValue": 0.0
+                },
+                "cashback": {
+                    "label": "0.00",
+                    "sortValue": 0.0
+                },
+                "isUnlimitedSameNetworkMinutes": false,
+                "averageMonthlyCost": 62.0,
+                "network": {
+                    "id": "1a986123-cfc8-4089-a2d7-ac49915d0a31",
+                    "name": "Vodafone",
+                    "logo": "https://bucket.cdndtl.co.uk/mobile/providers/200x100/vodafone.png"
+                },
+                "recurringCosts": {
+                    "label": "32.00",
+                    "sortValue": 32.00
+                },
+                "texts": {
+                    "label": "0",
+                    "sortValue": 0.0
+                },
+                "minutes": {
+                    "label": "0",
+                    "sortValue": 0.0
+                },
+                "data": {
+                    "label": "Unlimited",
+                    "sortValue": 2147483647.0
+                },
+                "contractLength": {
+                    "label": "1",
+                    "sortValue": 1.0
+                },
+                "connectionType": {
+                    "label": "4G",
+                    "sortValue": 4.0
+                },
+                "upfrontCosts": {
+                    "label": "30.00",
+                    "sortValue": 30.00
+                },
+                "downloadSpeedLimit": null
+            },
+            "productImageUrl": "https://bucket.cdndtl.co.uk/mobile/devices/vodafone/vodafone-mbb-k5151.png",
+            "baseDeviceId": "b49cdec2-9ae3-4f44-8701-7bc22e19436a",
+            "deviceName": "K5161 Data Dongle",
+            "colour": "White",
+            "model": "K5161 Data Dongle",
+            "deviceSlug": "vodafone-k5161-data-dongle",
+            "deviceInternalStorageGb": 0,
+            "devicePagePath": null,
+            "isExclusive": false,
+            "exclusiveFor": null,
+            "exclusiveDealTitle": null,
+            "exclusiveDealSubtitle": null,
+            "isFeatured": false,
+            "isCallout": false
+        },
+        {
+            "id": "82ee204d-0b4f-4d34-bd1a-464af3f943af",
+            "typeDescription": "handset",
+            "dealHash": "44FA611EC0F9834CCE493C6E1196E9A5-BB8f-68991a9b-5a39-4d53-803e-e0b277240f52",
+            "name": "Vodafone K5161 Data Dongle",
+            "bestBuySlug": "Vodafone-K5161 Data Dongle-Vodafone-Vodafone-Unlimited-0",
+            "returnPolicyInDays": 14,
+            "gifts": [],
+            "merchant": {
+                "id": "e6a016b1-f705-4619-a592-351770ba70d1",
+                "name": "Vodafone",
+                "logo": "https://bucket.cdndtl.co.uk/_v1/celsus/providers/logos_500px/vodafone.v1.png",
+                "isReseller": false
+            },
+            "linkTrackerId": "470dc5bf-8a62-43eb-9541-bf48dfc91a4b",
+            "deviceCondition": "New",
+            "seasonalPromotion": null,
+            "isRefurbished": false,
+            "manufacturer": "Vodafone",
+            "existingCustomerOnly": false,
+            "tariff": {
+                "totalMonthlyCost": 67.00,
+                "totalContractCost": 67.00,
+                "deliveryCost": {
+                    "label": "0.00",
+                    "sortValue": 0.0
+                },
+                "automaticCashback": {
+                    "label": "0.00",
+                    "sortValue": 0.0
+                },
+                "cashback": {
+                    "label": "0.00",
+                    "sortValue": 0.0
+                },
+                "isUnlimitedSameNetworkMinutes": false,
+                "averageMonthlyCost": 67.0,
+                "network": {
+                    "id": "1a986123-cfc8-4089-a2d7-ac49915d0a31",
+                    "name": "Vodafone",
+                    "logo": "https://bucket.cdndtl.co.uk/mobile/providers/200x100/vodafone.png"
+                },
+                "recurringCosts": {
+                    "label": "37.00",
+                    "sortValue": 37.00
+                },
+                "texts": {
+                    "label": "0",
+                    "sortValue": 0.0
+                },
+                "minutes": {
+                    "label": "0",
+                    "sortValue": 0.0
+                },
+                "data": {
+                    "label": "Unlimited",
+                    "sortValue": 2147483647.0
+                },
+                "contractLength": {
+                    "label": "1",
+                    "sortValue": 1.0
+                },
+                "connectionType": {
+                    "label": "4G",
+                    "sortValue": 4.0
+                },
+                "upfrontCosts": {
+                    "label": "30.00",
+                    "sortValue": 30.00
+                },
+                "downloadSpeedLimit": null
+            },
+            "productImageUrl": "https://bucket.cdndtl.co.uk/mobile/devices/vodafone/vodafone-mbb-k5151.png",
+            "baseDeviceId": "b49cdec2-9ae3-4f44-8701-7bc22e19436a",
+            "deviceName": "K5161 Data Dongle",
+            "colour": "White",
+            "model": "K5161 Data Dongle",
+            "deviceSlug": "vodafone-k5161-data-dongle",
+            "deviceInternalStorageGb": 0,
+            "devicePagePath": null,
+            "isExclusive": false,
+            "exclusiveFor": null,
+            "exclusiveDealTitle": null,
+            "exclusiveDealSubtitle": null,
+            "isFeatured": false,
+            "isCallout": false
+        },
+        {
+            "id": "3bb67746-ecdf-4e16-9774-73f99024dfc7",
+            "typeDescription": "handset",
+            "dealHash": "A49A1DFA8EF8E642DD06C2D0D729EB06-708f-d93e178e-c029-41b1-af6c-a51dbff962bf",
+            "name": "Three 4G Hub",
+            "bestBuySlug": "Three-4G Hub-Three-Three Mobile-Unlimited-0",
+            "returnPolicyInDays": 14,
+            "gifts": [],
+            "merchant": {
+                "id": "0ba8bb2f-16aa-41ff-8f4a-98b9392dc08a",
+                "name": "Three Mobile",
+                "logo": "https://bucket.cdndtl.co.uk/MobileProviderLogos/Three.png",
+                "isReseller": false
+            },
+            "linkTrackerId": "26c6fa71-9410-4bc2-a861-805425f72c44",
+            "deviceCondition": "New",
+            "seasonalPromotion": null,
+            "isRefurbished": false,
+            "manufacturer": "Three",
+            "existingCustomerOnly": false,
+            "tariff": {
+                "totalMonthlyCost": 21.5,
+                "totalContractCost": 258.0,
+                "deliveryCost": {
+                    "label": "0.00",
+                    "sortValue": 0.0
+                },
+                "automaticCashback": {
+                    "label": "0.00",
+                    "sortValue": 0.0
+                },
+                "cashback": {
+                    "label": "0.00",
+                    "sortValue": 0.0
+                },
+                "isUnlimitedSameNetworkMinutes": false,
+                "averageMonthlyCost": 21.5,
+                "network": {
+                    "id": "fa7d55d1-58f3-41f4-beec-5f47e7eaeaf3",
+                    "name": "Three",
+                    "logo": "https://bucket.cdndtl.co.uk/mobile/providers/200x100/3.png"
+                },
+                "recurringCosts": {
+                    "label": "20.00",
+                    "sortValue": 20.0
+                },
+                "texts": {
+                    "label": "0",
+                    "sortValue": 0.0
+                },
+                "minutes": {
+                    "label": "0",
+                    "sortValue": 0.0
+                },
+                "data": {
+                    "label": "Unlimited",
+                    "sortValue": 2147483647.0
+                },
+                "contractLength": {
+                    "label": "12",
+                    "sortValue": 12.0
+                },
+                "connectionType": {
+                    "label": "4G",
+                    "sortValue": 4.0
+                },
+                "upfrontCosts": {
+                    "label": "18.0",
+                    "sortValue": 18.0
+                },
+                "downloadSpeedLimit": null
+            },
+            "productImageUrl": "https://bucket.cdndtl.co.uk/mobile/devices/three/handset-holder-180.png",
+            "baseDeviceId": "47f53064-aa97-4c95-940c-17ff825bc6d6",
+            "deviceName": "4G Hub",
+            "colour": "White",
+            "model": "4G Hub",
+            "deviceSlug": "three-4g-hub",
+            "deviceInternalStorageGb": 0,
+            "devicePagePath": null,
+            "isExclusive": false,
+            "exclusiveFor": null,
+            "exclusiveDealTitle": null,
+            "exclusiveDealSubtitle": null,
+            "isFeatured": false,
+            "isCallout": false
+        },
+        {
+            "id": "152dff78-35f8-44b0-ae43-44792c164689",
+            "typeDescription": "handset",
+            "dealHash": "7A133D63C55487BA1C723044B0D16799-3E8f-68991a9b-5a39-4d53-803e-e0b277240f52",
+            "name": "Vodafone K5161 Data Dongle",
+            "bestBuySlug": "Vodafone-K5161 Data Dongle-Vodafone-Vodafone-Unlimited-0",
+            "returnPolicyInDays": 14,
+            "gifts": [],
+            "merchant": {
+                "id": "e6a016b1-f705-4619-a592-351770ba70d1",
+                "name": "Vodafone",
+                "logo": "https://bucket.cdndtl.co.uk/_v1/celsus/providers/logos_500px/vodafone.v1.png",
+                "isReseller": false
+            },
+            "linkTrackerId": "9b8ad9e0-8adc-4433-aca2-d2a6d27cd112",
+            "deviceCondition": "New",
+            "seasonalPromotion": null,
+            "isRefurbished": false,
+            "manufacturer": "Vodafone",
+            "existingCustomerOnly": false,
+            "tariff": {
+                "totalMonthlyCost": 28.83,
+                "totalContractCost": 346.00,
+                "deliveryCost": {
+                    "label": "0.00",
+                    "sortValue": 0.0
+                },
+                "automaticCashback": {
+                    "label": "0.00",
+                    "sortValue": 0.0
+                },
+                "cashback": {
+                    "label": "0.00",
+                    "sortValue": 0.0
+                },
+                "isUnlimitedSameNetworkMinutes": false,
+                "averageMonthlyCost": 28.84,
+                "network": {
+                    "id": "1a986123-cfc8-4089-a2d7-ac49915d0a31",
+                    "name": "Vodafone",
+                    "logo": "https://bucket.cdndtl.co.uk/mobile/providers/200x100/vodafone.png"
+                },
+                "recurringCosts": {
+                    "label": "28.00",
+                    "sortValue": 28.00
+                },
+                "texts": {
+                    "label": "0",
+                    "sortValue": 0.0
+                },
+                "minutes": {
+                    "label": "0",
+                    "sortValue": 0.0
+                },
+                "data": {
+                    "label": "Unlimited",
+                    "sortValue": 2147483647.0
+                },
+                "contractLength": {
+                    "label": "12",
+                    "sortValue": 12.0
+                },
+                "connectionType": {
+                    "label": "4G",
+                    "sortValue": 4.0
+                },
+                "upfrontCosts": {
+                    "label": "10.00",
+                    "sortValue": 10.00
+                },
+                "downloadSpeedLimit": null
+            },
+            "productImageUrl": "https://bucket.cdndtl.co.uk/mobile/devices/vodafone/vodafone-mbb-k5151.png",
+            "baseDeviceId": "b49cdec2-9ae3-4f44-8701-7bc22e19436a",
+            "deviceName": "K5161 Data Dongle",
+            "colour": "White",
+            "model": "K5161 Data Dongle",
+            "deviceSlug": "vodafone-k5161-data-dongle",
+            "deviceInternalStorageGb": 0,
+            "devicePagePath": null,
+            "isExclusive": false,
+            "exclusiveFor": null,
+            "exclusiveDealTitle": null,
+            "exclusiveDealSubtitle": null,
+            "isFeatured": false,
+            "isCallout": false
+        },
+        {
+            "id": "f911d955-f49c-42f6-8023-6d2ac18cca20",
+            "typeDescription": "handset",
+            "dealHash": "8FAB00FD809155901BFB728F9E154D58-0f-95110787-8d31-4dff-8ff7-173f2f9ba709",
+            "name": "Three 5G Hub",
+            "bestBuySlug": "Three-5G Hub-Three-Three Mobile-Unlimited-0",
+            "returnPolicyInDays": 14,
+            "gifts": [],
+            "merchant": {
+                "id": "0ba8bb2f-16aa-41ff-8f4a-98b9392dc08a",
+                "name": "Three Mobile",
+                "logo": "https://bucket.cdndtl.co.uk/MobileProviderLogos/Three.png",
+                "isReseller": false
+            },
+            "linkTrackerId": "26c6fa71-9410-4bc2-a861-805425f72c44",
+            "deviceCondition": "New",
+            "seasonalPromotion": null,
+            "isRefurbished": false,
+            "manufacturer": "Three",
+            "existingCustomerOnly": false,
+            "tariff": {
+                "totalMonthlyCost": 29.0,
+                "totalContractCost": 348.0,
+                "deliveryCost": {
+                    "label": "0.00",
+                    "sortValue": 0.0
+                },
+                "automaticCashback": {
+                    "label": "0.00",
+                    "sortValue": 0.0
+                },
+                "cashback": {
+                    "label": "0.00",
+                    "sortValue": 0.0
+                },
+                "isUnlimitedSameNetworkMinutes": false,
+                "averageMonthlyCost": 29.0,
+                "network": {
+                    "id": "fa7d55d1-58f3-41f4-beec-5f47e7eaeaf3",
+                    "name": "Three",
+                    "logo": "https://bucket.cdndtl.co.uk/mobile/providers/200x100/3.png"
+                },
+                "recurringCosts": {
+                    "label": "29.00",
+                    "sortValue": 29.0
+                },
+                "texts": {
+                    "label": "0",
+                    "sortValue": 0.0
+                },
+                "minutes": {
+                    "label": "0",
+                    "sortValue": 0.0
+                },
+                "data": {
+                    "label": "Unlimited",
+                    "sortValue": 2147483647.0
+                },
+                "contractLength": {
+                    "label": "12",
+                    "sortValue": 12.0
+                },
+                "connectionType": {
+                    "label": "5G",
+                    "sortValue": 5.0
+                },
+                "upfrontCosts": {
+                    "label": "Free",
+                    "sortValue": 0.0
+                },
+                "downloadSpeedLimit": null
+            },
+            "productImageUrl": "https://bucket.cdndtl.co.uk/mobile/devices/three/handset-holder-180.png",
+            "baseDeviceId": "b9631e41-dcb5-4293-a952-9f0d416f1569",
+            "deviceName": "5G Hub",
+            "colour": "White",
+            "model": "5G Hub",
+            "deviceSlug": "three-5g-hub",
+            "deviceInternalStorageGb": 0,
+            "devicePagePath": null,
+            "isExclusive": false,
+            "exclusiveFor": null,
+            "exclusiveDealTitle": null,
+            "exclusiveDealSubtitle": null,
+            "isFeatured": false,
+            "isCallout": false
+        },
+        {
+            "id": "7095407f-3c63-445a-b7a6-0dbeed4a9106",
+            "typeDescription": "handset",
+            "dealHash": "F551C7A68FDA6FE9E96CA2B66FF90B09-3E8f-68991a9b-5a39-4d53-803e-e0b277240f52",
+            "name": "Vodafone K5161 Data Dongle",
+            "bestBuySlug": "Vodafone-K5161 Data Dongle-Vodafone-Vodafone-Unlimited-0",
+            "returnPolicyInDays": 14,
+            "gifts": [],
+            "merchant": {
+                "id": "e6a016b1-f705-4619-a592-351770ba70d1",
+                "name": "Vodafone",
+                "logo": "https://bucket.cdndtl.co.uk/_v1/celsus/providers/logos_500px/vodafone.v1.png",
+                "isReseller": false
+            },
+            "linkTrackerId": "7711df48-4edc-4726-ac4a-a9210bd5cad1",
+            "deviceCondition": "New",
+            "seasonalPromotion": null,
+            "isRefurbished": false,
+            "manufacturer": "Vodafone",
+            "existingCustomerOnly": false,
+            "tariff": {
+                "totalMonthlyCost": 33.83,
+                "totalContractCost": 406.00,
+                "deliveryCost": {
+                    "label": "0.00",
+                    "sortValue": 0.0
+                },
+                "automaticCashback": {
+                    "label": "0.00",
+                    "sortValue": 0.0
+                },
+                "cashback": {
+                    "label": "0.00",
+                    "sortValue": 0.0
+                },
+                "isUnlimitedSameNetworkMinutes": false,
+                "averageMonthlyCost": 33.84,
+                "network": {
+                    "id": "1a986123-cfc8-4089-a2d7-ac49915d0a31",
+                    "name": "Vodafone",
+                    "logo": "https://bucket.cdndtl.co.uk/mobile/providers/200x100/vodafone.png"
+                },
+                "recurringCosts": {
+                    "label": "33.00",
+                    "sortValue": 33.00
+                },
+                "texts": {
+                    "label": "0",
+                    "sortValue": 0.0
+                },
+                "minutes": {
+                    "label": "0",
+                    "sortValue": 0.0
+                },
+                "data": {
+                    "label": "Unlimited",
+                    "sortValue": 2147483647.0
+                },
+                "contractLength": {
+                    "label": "12",
+                    "sortValue": 12.0
+                },
+                "connectionType": {
+                    "label": "4G",
+                    "sortValue": 4.0
+                },
+                "upfrontCosts": {
+                    "label": "10.00",
+                    "sortValue": 10.00
+                },
+                "downloadSpeedLimit": null
+            },
+            "productImageUrl": "https://bucket.cdndtl.co.uk/mobile/devices/vodafone/vodafone-mbb-k5151.png",
+            "baseDeviceId": "b49cdec2-9ae3-4f44-8701-7bc22e19436a",
+            "deviceName": "K5161 Data Dongle",
+            "colour": "White",
+            "model": "K5161 Data Dongle",
+            "deviceSlug": "vodafone-k5161-data-dongle",
+            "deviceInternalStorageGb": 0,
+            "devicePagePath": null,
+            "isExclusive": false,
+            "exclusiveFor": null,
+            "exclusiveDealTitle": null,
+            "exclusiveDealSubtitle": null,
+            "isFeatured": false,
+            "isCallout": false
+        },
+        {
+            "id": "d40c08b2-72dc-4e9b-9ea3-3c3926ba6d92",
+            "typeDescription": "handset",
+            "dealHash": "6775A01969B93017C40CF06FFF393948-0f-d93e178e-c029-41b1-af6c-a51dbff962bf",
+            "name": "Three 4G Hub",
+            "bestBuySlug": "Three-4G Hub-Three-Three Mobile-Unlimited-0",
+            "returnPolicyInDays": 14,
+            "gifts": [],
+            "merchant": {
+                "id": "0ba8bb2f-16aa-41ff-8f4a-98b9392dc08a",
+                "name": "Three Mobile",
+                "logo": "https://bucket.cdndtl.co.uk/MobileProviderLogos/Three.png",
+                "isReseller": false
+            },
+            "linkTrackerId": "26c6fa71-9410-4bc2-a861-805425f72c44",
+            "deviceCondition": "New",
+            "seasonalPromotion": null,
+            "isRefurbished": false,
+            "manufacturer": "Three",
+            "existingCustomerOnly": false,
+            "tariff": {
+                "totalMonthlyCost": 17.0,
+                "totalContractCost": 408.0,
+                "deliveryCost": {
+                    "label": "0.00",
+                    "sortValue": 0.0
+                },
+                "automaticCashback": {
+                    "label": "0.00",
+                    "sortValue": 0.0
+                },
+                "cashback": {
+                    "label": "0.00",
+                    "sortValue": 0.0
+                },
+                "isUnlimitedSameNetworkMinutes": false,
+                "averageMonthlyCost": 17.0,
+                "network": {
+                    "id": "fa7d55d1-58f3-41f4-beec-5f47e7eaeaf3",
+                    "name": "Three",
+                    "logo": "https://bucket.cdndtl.co.uk/mobile/providers/200x100/3.png"
+                },
+                "recurringCosts": {
+                    "label": "17.00",
+                    "sortValue": 17.0
+                },
+                "texts": {
+                    "label": "0",
+                    "sortValue": 0.0
+                },
+                "minutes": {
+                    "label": "0",
+                    "sortValue": 0.0
+                },
+                "data": {
+                    "label": "Unlimited",
+                    "sortValue": 2147483647.0
+                },
+                "contractLength": {
+                    "label": "24",
+                    "sortValue": 24.0
+                },
+                "connectionType": {
+                    "label": "4G",
+                    "sortValue": 4.0
+                },
+                "upfrontCosts": {
+                    "label": "Free",
+                    "sortValue": 0.0
+                },
+                "downloadSpeedLimit": null
+            },
+            "productImageUrl": "https://bucket.cdndtl.co.uk/mobile/devices/three/handset-holder-180.png",
+            "baseDeviceId": "47f53064-aa97-4c95-940c-17ff825bc6d6",
+            "deviceName": "4G Hub",
+            "colour": "White",
+            "model": "4G Hub",
+            "deviceSlug": "three-4g-hub",
+            "deviceInternalStorageGb": 0,
+            "devicePagePath": null,
+            "isExclusive": false,
+            "exclusiveFor": null,
+            "exclusiveDealTitle": null,
+            "exclusiveDealSubtitle": null,
+            "isFeatured": false,
+            "isCallout": false
+        },
+        {
+            "id": "71deb8a3-e281-4c4e-bb9c-8b5e1e13b978",
+            "typeDescription": "handset",
+            "dealHash": "3DF3CE3FFF0520EE4CD049B5032DC734-BB8f-7e11b4cc-d80a-49b7-ac4a-5b75ffba5a8a",
+            "name": "Netgear Nighthawk M1",
+            "bestBuySlug": "Netgear-Nighthawk M1-O2-O2-Unlimited-0",
+            "returnPolicyInDays": 14,
+            "gifts": [],
+            "merchant": {
+                "id": "827f7344-c022-4339-8bc4-d82fa20d70c6",
+                "name": "O2",
+                "logo": "https://bucket.cdndtl.co.uk/mobile/providers/200x100/O2.png",
+                "isReseller": false
+            },
+            "linkTrackerId": "bab20664-96a5-4140-a569-e69b9dd45c87",
+            "deviceCondition": "New",
+            "seasonalPromotion": null,
+            "isRefurbished": false,
+            "manufacturer": "Netgear",
+            "existingCustomerOnly": false,
+            "tariff": {
+                "totalMonthlyCost": 45.50,
+                "totalContractCost": 546.00,
+                "deliveryCost": {
+                    "label": "0.00",
+                    "sortValue": 0.0
+                },
+                "automaticCashback": {
+                    "label": "0.00",
+                    "sortValue": 0.0
+                },
+                "cashback": {
+                    "label": "0.00",
+                    "sortValue": 0.0
+                },
+                "isUnlimitedSameNetworkMinutes": false,
+                "averageMonthlyCost": 45.5,
+                "network": {
+                    "id": "faf4df39-eaa1-40b9-9215-e9fa20aea14c",
+                    "name": "O2",
+                    "logo": "https://bucket.cdndtl.co.uk/mobile/providers/200x100/O2.png"
+                },
+                "recurringCosts": {
+                    "label": "43.00",
+                    "sortValue": 43.00
+                },
+                "texts": {
+                    "label": "100",
+                    "sortValue": 100.0
+                },
+                "minutes": {
+                    "label": "0",
+                    "sortValue": 0.0
+                },
+                "data": {
+                    "label": "Unlimited",
+                    "sortValue": 2147483647.0
+                },
+                "contractLength": {
+                    "label": "12",
+                    "sortValue": 12.0
+                },
+                "connectionType": {
+                    "label": "4G",
+                    "sortValue": 4.0
+                },
+                "upfrontCosts": {
+                    "label": "30.00",
+                    "sortValue": 30.00
+                },
+                "downloadSpeedLimit": null
+            },
+            "productImageUrl": "https://bucket.cdndtl.co.uk/mobile/devices/netgear/handset-holder-180.png",
+            "baseDeviceId": "b880aef1-2e8c-47ef-a951-434015e1e9c1",
+            "deviceName": "Nighthawk M1",
+            "colour": "Black",
+            "model": "Nighthawk M1",
+            "deviceSlug": "netgear-nighthawk-m1",
+            "deviceInternalStorageGb": 0,
+            "devicePagePath": null,
+            "isExclusive": false,
+            "exclusiveFor": null,
+            "exclusiveDealTitle": null,
+            "exclusiveDealSubtitle": null,
+            "isFeatured": false,
+            "isCallout": false
+        },
+        {
+            "id": "49447157-807a-47a5-b40d-dc2768567285",
+            "typeDescription": "handset",
+            "dealHash": "246199B8F60F3F60126B4AD04E07DB87-0f-95110787-8d31-4dff-8ff7-173f2f9ba709",
+            "name": "Three 5G Hub",
+            "bestBuySlug": "Three-5G Hub-Three-Three Mobile-Unlimited-0",
+            "returnPolicyInDays": 14,
+            "gifts": [],
+            "merchant": {
+                "id": "0ba8bb2f-16aa-41ff-8f4a-98b9392dc08a",
+                "name": "Three Mobile",
+                "logo": "https://bucket.cdndtl.co.uk/MobileProviderLogos/Three.png",
+                "isReseller": false
+            },
+            "linkTrackerId": "26c6fa71-9410-4bc2-a861-805425f72c44",
+            "deviceCondition": "New",
+            "seasonalPromotion": null,
+            "isRefurbished": false,
+            "manufacturer": "Three",
+            "existingCustomerOnly": false,
+            "tariff": {
+                "totalMonthlyCost": 24.0,
+                "totalContractCost": 576.0,
+                "deliveryCost": {
+                    "label": "0.00",
+                    "sortValue": 0.0
+                },
+                "automaticCashback": {
+                    "label": "0.00",
+                    "sortValue": 0.0
+                },
+                "cashback": {
+                    "label": "0.00",
+                    "sortValue": 0.0
+                },
+                "isUnlimitedSameNetworkMinutes": false,
+                "averageMonthlyCost": 24.0,
+                "network": {
+                    "id": "fa7d55d1-58f3-41f4-beec-5f47e7eaeaf3",
+                    "name": "Three",
+                    "logo": "https://bucket.cdndtl.co.uk/mobile/providers/200x100/3.png"
+                },
+                "recurringCosts": {
+                    "label": "24.00",
+                    "sortValue": 24.0
+                },
+                "texts": {
+                    "label": "0",
+                    "sortValue": 0.0
+                },
+                "minutes": {
+                    "label": "0",
+                    "sortValue": 0.0
+                },
+                "data": {
+                    "label": "Unlimited",
+                    "sortValue": 2147483647.0
+                },
+                "contractLength": {
+                    "label": "24",
+                    "sortValue": 24.0
+                },
+                "connectionType": {
+                    "label": "5G",
+                    "sortValue": 5.0
+                },
+                "upfrontCosts": {
+                    "label": "Free",
+                    "sortValue": 0.0
+                },
+                "downloadSpeedLimit": null
+            },
+            "productImageUrl": "https://bucket.cdndtl.co.uk/mobile/devices/three/handset-holder-180.png",
+            "baseDeviceId": "b9631e41-dcb5-4293-a952-9f0d416f1569",
+            "deviceName": "5G Hub",
+            "colour": "White",
+            "model": "5G Hub",
+            "deviceSlug": "three-5g-hub",
+            "deviceInternalStorageGb": 0,
+            "devicePagePath": null,
+            "isExclusive": false,
+            "exclusiveFor": null,
+            "exclusiveDealTitle": null,
+            "exclusiveDealSubtitle": null,
+            "isFeatured": false,
+            "isCallout": false
+        },
+        {
+            "id": "b5293f20-f556-4aab-b743-a67c3b035803",
+            "typeDescription": "handset",
+            "dealHash": "86BE412FFD30ECF33C4441F72C430833-0f-68991a9b-5a39-4d53-803e-e0b277240f52",
+            "name": "Vodafone K5161 Data Dongle",
+            "bestBuySlug": "Vodafone-K5161 Data Dongle-Vodafone-Vodafone-Unlimited-0",
+            "returnPolicyInDays": 14,
+            "gifts": [],
+            "merchant": {
+                "id": "e6a016b1-f705-4619-a592-351770ba70d1",
+                "name": "Vodafone",
+                "logo": "https://bucket.cdndtl.co.uk/_v1/celsus/providers/logos_500px/vodafone.v1.png",
+                "isReseller": false
+            },
+            "linkTrackerId": "d7ac3a73-c354-4724-ae07-ba24fad0c08a",
+            "deviceCondition": "New",
+            "seasonalPromotion": null,
+            "isRefurbished": false,
+            "manufacturer": "Vodafone",
+            "existingCustomerOnly": false,
+            "tariff": {
+                "totalMonthlyCost": 26.00,
+                "totalContractCost": 624.00,
+                "deliveryCost": {
+                    "label": "0.00",
+                    "sortValue": 0.0
+                },
+                "automaticCashback": {
+                    "label": "0.00",
+                    "sortValue": 0.0
+                },
+                "cashback": {
+                    "label": "0.00",
+                    "sortValue": 0.0
+                },
+                "isUnlimitedSameNetworkMinutes": false,
+                "averageMonthlyCost": 26.0,
+                "network": {
+                    "id": "1a986123-cfc8-4089-a2d7-ac49915d0a31",
+                    "name": "Vodafone",
+                    "logo": "https://bucket.cdndtl.co.uk/mobile/providers/200x100/vodafone.png"
+                },
+                "recurringCosts": {
+                    "label": "26.00",
+                    "sortValue": 26.00
+                },
+                "texts": {
+                    "label": "0",
+                    "sortValue": 0.0
+                },
+                "minutes": {
+                    "label": "0",
+                    "sortValue": 0.0
+                },
+                "data": {
+                    "label": "Unlimited",
+                    "sortValue": 2147483647.0
+                },
+                "contractLength": {
+                    "label": "24",
+                    "sortValue": 24.0
+                },
+                "connectionType": {
+                    "label": "4G",
+                    "sortValue": 4.0
+                },
+                "upfrontCosts": {
+                    "label": "Free",
+                    "sortValue": 0.00
+                },
+                "downloadSpeedLimit": null
+            },
+            "productImageUrl": "https://bucket.cdndtl.co.uk/mobile/devices/vodafone/vodafone-mbb-k5151.png",
+            "baseDeviceId": "b49cdec2-9ae3-4f44-8701-7bc22e19436a",
+            "deviceName": "K5161 Data Dongle",
+            "colour": "White",
+            "model": "K5161 Data Dongle",
+            "deviceSlug": "vodafone-k5161-data-dongle",
+            "deviceInternalStorageGb": 0,
+            "devicePagePath": null,
+            "isExclusive": false,
+            "exclusiveFor": null,
+            "exclusiveDealTitle": null,
+            "exclusiveDealSubtitle": null,
+            "isFeatured": false,
+            "isCallout": false
+        }
+    ],
+    "dealImportFinished": "2021-04-16T06:18:23.9521652Z",
+    "moreDealsAvailable": true,
+    "heroTenancyDeal": null,
+    "query": {
+        "minutes": 0,
+        "unlimitedMinutesOnly": false,
+        "minutesRange": {
+            "from": 0,
+            "to": null
+        },
+        "data": 0,
+        "unlimitedDataOnly": true,
+        "dataRange": {
+            "from": 0,
+            "to": null
+        },
+        "texts": 0,
+        "unlimitedTextsOnly": false,
+        "textsRange": {
+            "from": 0,
+            "to": null
+        },
+        "monthlyCost": 85.0,
+        "monthlyCostRange": {
+            "from": 0.0,
+            "to": 85.0
+        },
+        "phoneCost": 450.0,
+        "phoneCostRange": {
+            "from": 0.0,
+            "to": 450.0
+        },
+        "contractLengths": [],
+        "deviceCondition": 1,
+        "deviceConditions": [
+            1,
+            1
+        ],
+        "isFourG": false,
+        "isFiveG": false,
+        "isFreeHandset": false,
+        "includeExistingCustomersHandset": false,
+        "handsets": [],
+        "page": 1,
+        "pagination": {
+            "pageSize": 10,
+            "page": 1
+        },
+        "networks": [],
+        "isDeliveryCharge": true,
+        "giftCategories": [],
+        "merchants": [],
+        "sortBy": "TotalContractCost",
+        "bestBuys": null,
+        "handsetColours": [],
+        "internalStorage": null,
+        "modelInternalStorage": null,
+        "includeResellers": true,
+        "includeNextAvailableDeal": true,
+        "deviceType": [],
+        "isDataOnlyDevice": true,
+        "isExclusiveDeal": false,
+        "variants": [],
+        "manufacturers": [],
+        "cashbackTypes": []
+    }
+}
