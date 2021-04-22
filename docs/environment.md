@@ -39,7 +39,7 @@ This should install all the necessary python packages to work with this project.
 ## To recreate the environment from scratch
 
 The following commands were used to create the environment in the first place.
-> **_NOTE:_** Do not try this if the step 5 was successfull.
+> **_NOTE:_** Do not try this if the step 6 was successful.
 
 ```
 pipenv shell
