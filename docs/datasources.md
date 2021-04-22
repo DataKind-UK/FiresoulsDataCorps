@@ -14,6 +14,11 @@ The sources are described in the below:
 | [Printerland](https://www.printerland.co.uk) | Printing equipment supplier.|
 | [Broadbandchoices](https://www.broadbandchoices.co.uk/mobile-broadband/dongles) | Price comparison site for broadband services. They have a specific section for mobile broadband dongles. |
 | [Currys](currys.co.uk) | Retailer of new technological products. Very detailed information.|
+| [ValuComputers](https://www.valucomputers.co.uk/) | Computer retailer. Detailed information. |
+| [TabletMonkeys](https://tabletmonkeys.com/) | Tablet price comparison site. Detailed information. |
+| [ONS](https://www.ons.gov.uk/) | Office for National Statistics. Very detailed and reliable information. |
+
+<br>
 
 ### 1. Laptop
 
@@ -21,9 +26,7 @@ The sources are described in the below:
 |---|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
 | BackMarket | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: |
 | Curry's | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | | :white_check_mark: | :white_check_mark: |
-| Source 3 | | | | | | :white_check_mark: | :white_check_mark: | :white_check_mark: |
-| Source 4 | | | | | | :white_check_mark: | :white_check_mark: | :white_check_mark: |
-| Source 5 | | | | | | | | :white_check_mark: |
+| ValuComputers | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | | :white_check_mark: | :white_check_mark: |
 
 <br>
 
@@ -32,9 +35,6 @@ The sources are described in the below:
 | Source | Network Speed | Price per month | Data Allowance |
 |---|:---:|:---:|:---:|
 | Broadbandchoices* | :white_check_mark: | :white_check_mark: | :white_check_mark: |
-| Source 2          | :white_check_mark: | :white_check_mark: | :white_check_mark: |
-
-*Broadbandchoices only shows information for two providers, Vodafone and EE.
 
 <br>
 
@@ -60,20 +60,6 @@ Desktop computers are often sold without a screen, keyboard and mouse. We might 
 | BackMarket | :white_check_mark: | :white_check_mark: | :white_check_mark: |
 | Curry's | :white_check_mark: | :white_check_mark: | :white_check_mark: |
 
-#### 3.3 **Keyboard**
-
-| Source | Brand | Model |
-|------------|:---:|:---:|
-| BackMarket | :white_check_mark: | :white_check_mark: |
-| Curry's | :white_check_mark: | :white_check_mark: |
-
-#### 3.4 **Mouse**
-
-| Source | Brand | Model |
-|------------|:---:|:---:|
-| BackMarket | :white_check_mark: | :white_check_mark: |
-| Curry's | :white_check_mark: | :white_check_mark: |
-
 <br>
 
 ### 5. Projector
@@ -94,7 +80,6 @@ Not sure what these are:
 | Source | Brand | Model | DPI Print Resolution |
 |-------------|:---:|:---:|:---:|
 | Printerland | :white_check_mark: | :white_check_mark: | :white_check_mark: |
-| Curry's | :white_check_mark: | :white_check_mark: | :white_check_mark: |
 
 <br>
 
@@ -103,8 +88,23 @@ Not sure what these are:
 | Source | Brand | Model | Resolution | Processor | Screen Size | Battery Life | Release Year | Storage |
 |------------|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
 | BackMarket | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: |
-| Curry's | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: |
+| Tabletmonkeys | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: |
+
+<br>
+
+## **People and Employment and Skills**
 
 
-## **Peolpe**
-- [Official Labour Market Statistics](https://www.nomisweb.co.uk)
+| Source | Description |
+|---|---|
+| [ONS](https://www.ons.gov.uk/) | Office for National Statistics. Very detailed and representative information.|
+
+<br>
+
+## **Space**
+
+
+| Source | Description |
+|---|---|
+| [Regus](https://www.regus.com/en-gb) | Serviced office and meeting room space provicer accross the country. |
+| [Zipcube](https://zipcube.com/uk) | Serviced office and meeting room space listings page. |

@@ -51,6 +51,7 @@ python main.py scrape people
 python main.py scrape meeting_rooms
 ```
 
+
 ### Summarise  
 
 This command allows for the automatic generation of summary statistics for the price.
