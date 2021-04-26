@@ -84,7 +84,7 @@ def scrape(product: str, sites: Optional[List[str]] = [], city: Optional[str] = 
         PROJECTOR_SITES = ["currys"]
         if len(sites) > 0:
             PROJECTOR_SITES = sites
-        if "printerland" in PROJECTOR_SITES:
+        if "currys" in PROJECTOR_SITES:
             items = run_parser(CurrysProjectorParser())
             all_items.extend(items)
 
