@@ -116,7 +116,7 @@ The following table shows the [SOC code](https://onsdigital.github.io/dp-classif
 | Employment - Work experience placement for working age | |
 | Employment - Work experience placement for learning difficulties| |
 
-
+_Note: we use the mean value published by ONS rather than the median because it's available for more regions and job roles._
 <br>
 
 ## **Space**
