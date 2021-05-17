@@ -8,17 +8,20 @@ Following is a list of the different data sources evaluated for the scrape as we
 
 The sources are described in the below:
 
-| Source | Description |
-|---|---|
-| [BackMarket](https://www.backmarket.co.uk) | Supplier of refurbished technological products. Very detailed information and easy to access. |
-| [Printerland](https://www.printerland.co.uk) | Printing equipment supplier.|
-| [Broadbandchoices](https://www.broadbandchoices.co.uk/mobile-broadband/dongles) | Price comparison site for broadband services. They have a specific section for mobile broadband dongles. |
-| [Currys](currys.co.uk) | Retailer of new technological products. Very detailed information.|
-| [ValuComputers](https://www.valucomputers.co.uk/) | Computer retailer. Detailed information. |
-| [TabletMonkeys](https://tabletmonkeys.com/) | Tablet price comparison site. Detailed information. |
-| [ONS](https://www.ons.gov.uk/) | Office for National Statistics. Very detailed and reliable information. |
+| Source | Description | Requests per scrape |
+|---|---|--|
+| [BackMarket](https://www.backmarket.co.uk) | Supplier of refurbished technological products. Very detailed information and easy to access. | One per result item. |
+| [Printerland](https://www.printerland.co.uk) | Printing equipment supplier.| One per results page. |
+| [Broadbandchoices](https://www.broadbandchoices.co.uk/mobile-broadband/dongles) | Price comparison site for broadband services. They have a specific section for mobile broadband dongles. | One per results page. |
+| [Currys](currys.co.uk) | Retailer of new technological products. Very detailed information.| One per result item. |
+| [ValuComputers](https://www.valucomputers.co.uk/) | Computer retailer. Detailed information. | One per result item. |
+| [TabletMonkeys](https://tabletmonkeys.com/) | Tablet price comparison site. Detailed information. | One per results page. |
+| [ONS](https://www.ons.gov.uk/) | Office for National Statistics. Very detailed and reliable information. | Single |
+
+_Note: All of the sources, except for the ONS data need to be aggregated in the database. The ONS data has been preaggregated by the ONS to mean and median calculations. In this project, we use the mean value because it's available for more regions and job roles that the median._
 
 <br>
+
 
 ### 1. Laptop
 
@@ -99,6 +102,21 @@ Not sure what these are:
 |---|---|
 | [ONS](https://www.ons.gov.uk/) | Office for National Statistics. Very detailed and representative information.|
 
+The following table shows the [SOC code](https://onsdigital.github.io/dp-classification-tools/standard-occupational-classification/ONS_SOC_hierarchy_view.html) mappings for each of the resource type:
+
+| Category | Codes |
+|---|---|
+| People - Management Time | 1150, 113 |
+| People - Executive Time | 111 |
+| Employment - Local Recruitment | |
+| Employment - Local Apprenticeship | |
+| Employment - Employment Scheme | |
+| Employment - Graduate Placement | |
+| Employment - Supporting local job fairs | |
+| Employment - Work experience placement for working age | |
+| Employment - Work experience placement for learning difficulties| |
+
+_Note: we use the mean value published by ONS rather than the median because it's available for more regions and job roles._
 <br>
 
 ## **Space**

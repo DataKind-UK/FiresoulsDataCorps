@@ -104,29 +104,32 @@ class CurrysLaptopParser(CurrysBaseParser):
             count = 0
             for product in products:
                 count += 1
-                print(f"Parsing laptop {count} of {len(products)}")
-                scrape_url = self._parse_scrape_url(product)
-                brand = self._parse_brand(product)
-                model, screen_size = self._parse_model_screen_size(product)
-                processor = self._parse_processor(product)
-                ram, storage = self._parse_ram_storage(product)
-                release_year = datetime.now().year - 1
-                price = self._parse_price(product)
-                source = self._scrape_source()
-                scrape_url = self._parse_scrape_url(product)
-                l = Laptop(
-                    brand,
-                    model,
-                    processor,
-                    ram,
-                    storage,
-                    release_year,
-                    screen_size,
-                    price,
-                    source,
-                    scrape_url,
-                )
-                laptops.append(l)
+                try:
+                    print(f"Parsing laptop {count} of {len(products)}")
+                    scrape_url = self._parse_scrape_url(product)
+                    brand = self._parse_brand(product)
+                    model, screen_size = self._parse_model_screen_size(product)
+                    processor = self._parse_processor(product)
+                    ram, storage = self._parse_ram_storage(product)
+                    release_year = datetime.now().year - 1
+                    price = self._parse_price(product)
+                    source = self._scrape_source()
+                    scrape_url = self._parse_scrape_url(product)
+                    l = Laptop(
+                        brand,
+                        model,
+                        processor,
+                        ram,
+                        storage,
+                        release_year,
+                        screen_size,
+                        price,
+                        source,
+                        scrape_url,
+                    )
+                    laptops.append(l)
+                except Exception as e:
+                    print(f"Scraping of item {count} failed with error {e}")
         return laptops
 
 
@@ -224,34 +227,37 @@ class CurrysProjectorParser(CurrysBaseParser):
             count = 0
             for product in products:
                 count += 1
-                print(f"Parsing projector {count} of {len(products)}")
-                scrape_url = self._parse_scrape_url(product)
-                brand = self._parse_brand(product)
-                model = self._parse_model(product)
-                price = self._parse_price(product)
-                scrape_url = self._parse_scrape_url(product)
-                product_soup = self._make_soup(scrape_url)
-                product_tech_specs = self._parse_tech_specs(product_soup)
-                screen_size = self._parse_screen_size(product_tech_specs)
-                projection_type = self._parse_projection_type(product_tech_specs)
-                resolution = self._parse_resolution(product_tech_specs)
-                brightness = self._parse_brightness(product_tech_specs)
-                technology = self._parse_technology(product_tech_specs)
-                source = self._scrape_source()
+                try:
+                    print(f"Parsing projector {count} of {len(products)}")
+                    scrape_url = self._parse_scrape_url(product)
+                    brand = self._parse_brand(product)
+                    model = self._parse_model(product)
+                    price = self._parse_price(product)
+                    scrape_url = self._parse_scrape_url(product)
+                    product_soup = self._make_soup(scrape_url)
+                    product_tech_specs = self._parse_tech_specs(product_soup)
+                    screen_size = self._parse_screen_size(product_tech_specs)
+                    projection_type = self._parse_projection_type(product_tech_specs)
+                    resolution = self._parse_resolution(product_tech_specs)
+                    brightness = self._parse_brightness(product_tech_specs)
+                    technology = self._parse_technology(product_tech_specs)
+                    source = self._scrape_source()
 
-                p = Projector(
-                    brand,
-                    model,
-                    screen_size,
-                    projection_type,
-                    resolution,
-                    brightness,
-                    technology,
-                    price,
-                    source,
-                    scrape_url,
-                )
-                projectors.append(p)
+                    p = Projector(
+                        brand,
+                        model,
+                        screen_size,
+                        projection_type,
+                        resolution,
+                        brightness,
+                        technology,
+                        price,
+                        source,
+                        scrape_url,
+                    )
+                    projectors.append(p)
+                except Exception as e:
+                    print(f"Scraping of item {count} failed with error {e}")
         return projectors
 
 
@@ -380,36 +386,39 @@ class CurrysDesktopParser(CurrysBaseParser):
             for product in products:
                 count += 1
                 print(f"Parsing desktop {count} of {len(products)}")
-                brand = self._parse_brand(product)
-                model = self._parse_model(product)
-                price = self._parse_price(product)
-                scrape_url = self._parse_scrape_url(product)
-                product_soup = self._make_soup(scrape_url)
-                product_tech_specs = self._parse_tech_specs(product_soup)
-                screen_size = self._parse_screen_size(product_tech_specs)
-                processor = self._parse_processor(product_tech_specs)
-                ram = self._parse_ram(product_tech_specs)
-                storage_hdd = self._parse_storage_hdd(product_tech_specs)
-                storage_ssd = self._parse_storage_ssd(product_tech_specs)
-                release_year = datetime.now().year - 1
-                optical_drive = self._parse_optical_drive(product_tech_specs)
-                os = self._parse_operating_system(product_tech_specs)
-                source = self._scrape_source()
+                try:
+                    brand = self._parse_brand(product)
+                    model = self._parse_model(product)
+                    price = self._parse_price(product)
+                    scrape_url = self._parse_scrape_url(product)
+                    product_soup = self._make_soup(scrape_url)
+                    product_tech_specs = self._parse_tech_specs(product_soup)
+                    screen_size = self._parse_screen_size(product_tech_specs)
+                    processor = self._parse_processor(product_tech_specs)
+                    ram = self._parse_ram(product_tech_specs)
+                    storage_hdd = self._parse_storage_hdd(product_tech_specs)
+                    storage_ssd = self._parse_storage_ssd(product_tech_specs)
+                    release_year = datetime.now().year - 1
+                    optical_drive = self._parse_optical_drive(product_tech_specs)
+                    os = self._parse_operating_system(product_tech_specs)
+                    source = self._scrape_source()
 
-                p = Desktop(
-                    brand,
-                    model,
-                    processor,
-                    screen_size,
-                    ram,
-                    storage_hdd,
-                    storage_ssd,
-                    release_year,
-                    optical_drive,
-                    os,
-                    price,
-                    source,
-                    scrape_url,
-                )
-                desktops.append(p)
+                    p = Desktop(
+                        brand,
+                        model,
+                        processor,
+                        screen_size,
+                        ram,
+                        storage_hdd,
+                        storage_ssd,
+                        release_year,
+                        optical_drive,
+                        os,
+                        price,
+                        source,
+                        scrape_url,
+                    )
+                    desktops.append(p)
+                except Exception as e:
+                    print(f"Scraping of item {count} failed with error {e}")
         return desktops

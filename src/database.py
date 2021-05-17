@@ -343,7 +343,56 @@ def insert_into_printer(df):
 
 
 def insert_into_projector(df):
-    pass
+    """
+    Insert new data in the `projectors` table.
+
+    Parameters:
+        df (pd.DataFrame):
+    """
+
+    connection = get_db_connection()
+    cursor = connection.cursor()
+
+    df1 = df.where(pd.notnull(df), None)
+    df1.drop_duplicates(inplace=True)
+
+    sql = """insert into projector (
+        brand, 
+        model, 
+        screen_size, 
+        projection_type, 
+        resolution,
+        brightness, 
+        technology, 
+        price,
+        scrape_source,
+        scrape_url,
+        scrape_date,
+        valid_from,
+        version) values (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s);"""
+    for i, r in tqdm(df.iterrows(), total=len(df), desc="projector"):
+        version, valid_from = check_if_item_exists('projector', r["scrape_url"])
+        cursor.execute(
+            sql,
+            (
+                r["brand"],
+                r["model"],
+                r["screen_size"],
+                r["projection_type"],
+                r["resolution"],
+                r["brightness"],
+                r["technology"],
+                r["price"],
+                r["scrape_source"],
+                r["scrape_url"],
+                r["scrape_date"],
+                valid_from,
+                version,
+            ),
+        )
+        connection.commit()
+    cursor.close()
+    connection.close()
 
 def insert_into_people(df):
     """
