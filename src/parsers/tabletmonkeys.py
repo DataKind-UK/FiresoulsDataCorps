@@ -57,31 +57,34 @@ class TabletMonkeysTablets(BaseParser):
     def cast_tablets(self, df: pd.DataFrame):
         tablets = []
         for i, r in tqdm(df.iterrows(), total=len(df)):
-            brand, model = self._parse_brand(r["Tablet"])
-            processor = r["Processor"]
-            screen_size = r["Size"]
-            screen_resolution = r["Resolution"]
-            storage = None
-            release_year = None
-            price = self._parse_price(r["Tablet Prices"])
-            currency = "USD$"
-            scrape_source = self._scrape_source()
-            scrape_url = self.url
+            try:
+                brand, model = self._parse_brand(r["Tablet"])
+                processor = r["Processor"]
+                screen_size = r["Size"]
+                screen_resolution = r["Resolution"]
+                storage = None
+                release_year = None
+                price = self._parse_price(r["Tablet Prices"])
+                currency = "USD$"
+                scrape_source = self._scrape_source()
+                scrape_url = self.url
 
-            t = Tablet(
-                brand,
-                model,
-                processor,
-                screen_size,
-                screen_resolution,
-                storage,
-                release_year,
-                price,
-                currency,
-                scrape_source,
-                scrape_url,
-            )
-            tablets.append(t)
+                t = Tablet(
+                    brand,
+                    model,
+                    processor,
+                    screen_size,
+                    screen_resolution,
+                    storage,
+                    release_year,
+                    price,
+                    currency,
+                    scrape_source,
+                    scrape_url,
+                )
+                tablets.append(t)
+            except Exception as e:
+                print(f"Scraping of item {i} failed with error {e}")
         return tablets
 
     def parse(self) -> List[Tablet]:

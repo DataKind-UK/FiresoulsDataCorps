@@ -29,7 +29,7 @@ def run_parser(parser: BaseParser):
     try:
         items = parser.parse()
     except Exception as e:
-        print(f"Parser {str(parser)} errored out:\n{e}")
+        print(f"Parser {str(parser)} errored out with error:\n{e}")
         return []
     return items
 

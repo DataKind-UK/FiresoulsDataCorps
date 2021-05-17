@@ -105,29 +105,32 @@ class BackmarketLaptopParser(BackmarketBaseParser):
             count = 0
             for product in products:
                 count += 1
-                print(f"Parsing laptop {count} of {len(products)}")
-                brand, model = self._parse_brand_model(product)
-                processor = self._parse_processor(product)
-                ram = self._parse_ram(product)
-                storage = self._parse_storage(product)
-                release_year = self._parse_release_year(product)
-                screen_size = self._parse_screen_size(product)
-                price = self._parse_price(product)
-                source = self._scrape_source()
-                scrape_url = self._parse_scrape_url(product)
-                l = Laptop(
-                    brand,
-                    model,
-                    processor,
-                    ram,
-                    storage,
-                    release_year,
-                    screen_size,
-                    price,
-                    source,
-                    scrape_url,
-                )
-                laptops.append(l)
+                try:
+                    print(f"Parsing laptop {count} of {len(products)}")
+                    brand, model = self._parse_brand_model(product)
+                    processor = self._parse_processor(product)
+                    ram = self._parse_ram(product)
+                    storage = self._parse_storage(product)
+                    release_year = self._parse_release_year(product)
+                    screen_size = self._parse_screen_size(product)
+                    price = self._parse_price(product)
+                    source = self._scrape_source()
+                    scrape_url = self._parse_scrape_url(product)
+                    l = Laptop(
+                        brand,
+                        model,
+                        processor,
+                        ram,
+                        storage,
+                        release_year,
+                        screen_size,
+                        price,
+                        source,
+                        scrape_url,
+                    )
+                    laptops.append(l)
+                except Exception as e:
+                    print(f"Scraping of item {count} failed with error {e}")
         return laptops
 
 
@@ -230,6 +233,9 @@ class BackmarketTabletParser(BackmarketBaseParser):
             for product in products:
                 count += 1
                 print(f"Parsing tablet {count} of {len(products)}")
-                t = self.parse_single("www.backmarket.co.uk" + product["href"])
-                tablets.append(t)
+                try:
+                    t = self.parse_single("www.backmarket.co.uk" + product["href"])
+                    tablets.append(t)
+                except Exception as e:
+                    print(f"Scraping of item {count} failed with error {e}")
         return tablets

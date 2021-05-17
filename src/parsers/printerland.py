@@ -93,32 +93,35 @@ class PrinterlandParser(BaseParser):
             count = 0
             for product in products:
                 count += 1
-                print(f"Parsing printer {count} of {len(products)}")
-                brand, model = self._get_brand_model(product)
-                key_features = self._get_key_features(product)
-                functions = self._get_functions(key_features)
-                printing_speed_ppm = self._get_printing_speed_ppm(key_features)
-                print_resolution = self._get_print_resolution(key_features)
-                connectivity = self._get_connectivity(key_features)
-                release_year = None
                 try:
-                    price = self._get_price(product)
-                except AttributeError:
-                    print("\tPrice not available for item")
-                    continue
-                source = self.source
-                scrape_url = self._get_scrape_url(product)
-                l = Printer(
-                    brand,
-                    model,
-                    functions,
-                    printing_speed_ppm,
-                    print_resolution,
-                    connectivity,
-                    release_year,
-                    price,
-                    source,
-                    scrape_url,
-                )
-                printers.append(l)
+                    print(f"Parsing printer {count} of {len(products)}")
+                    brand, model = self._get_brand_model(product)
+                    key_features = self._get_key_features(product)
+                    functions = self._get_functions(key_features)
+                    printing_speed_ppm = self._get_printing_speed_ppm(key_features)
+                    print_resolution = self._get_print_resolution(key_features)
+                    connectivity = self._get_connectivity(key_features)
+                    release_year = None
+                    try:
+                        price = self._get_price(product)
+                    except AttributeError:
+                        print("\tPrice not available for item")
+                        continue
+                    source = self.source
+                    scrape_url = self._get_scrape_url(product)
+                    l = Printer(
+                        brand,
+                        model,
+                        functions,
+                        printing_speed_ppm,
+                        print_resolution,
+                        connectivity,
+                        release_year,
+                        price,
+                        source,
+                        scrape_url,
+                    )
+                    printers.append(l)
+                except Exception as e:
+                    print(f"Scraping of item {count} failed with error {e}")
         return printers
