@@ -102,6 +102,21 @@ Not sure what these are:
 |---|---|
 | [ONS](https://www.ons.gov.uk/) | Office for National Statistics. Very detailed and representative information.|
 
+The following table shows the [SOC code](https://onsdigital.github.io/dp-classification-tools/standard-occupational-classification/ONS_SOC_hierarchy_view.html) mappings for each of the resource type:
+
+| Category | Codes |
+|---|---|
+| People - Management Time | 1150, 113 |
+| People - Executive Time | 111 |
+| Employment - Local Recruitment | |
+| Employment - Local Apprenticeship | |
+| Employment - Employment Scheme | |
+| Employment - Graduate Placement | |
+| Employment - Supporting local job fairs | |
+| Employment - Work experience placement for working age | |
+| Employment - Work experience placement for learning difficulties| |
+
+
 <br>
 
 ## **Space**
