@@ -173,8 +173,14 @@ group by region;
 
 -- People - Graduates
 CREATE OR REPLACE VIEW people_graduates as
-select region, avg(mean) as mean_hourly_pay, avg(mean) * 12 as mean_day_and_half_pay
+select region, avg(first_quartile) as first_quartile_hourly_pay, avg(first_quartile) * 8 * 5 * 48 as first_quartile_yearly_pay
 from people
 where soc_code in ('21', '22', '23', '31', '32', '33', '34', '35') and valid_to is NULL
 group by region;
 
+-- People - Local Apprenticeships
+CREATE OR REPLACE VIEW people_local_apprenticeships as
+select region, avg(mean) as mean_hourly_pay, avg(mean) * 8 * 5 * 48 as mean_yearly_pay
+from people
+where soc_code in ('91', '92') and valid_to is NULL
+group by region;
