@@ -19,6 +19,7 @@ class BaseResource:
 
 ### EQUIPMENT ###
 
+
 @dataclass
 class Laptop(BaseResource):
     brand: str
@@ -122,7 +123,9 @@ class Projector(BaseResource):
     scrape_url: str
     scrape_date: datetime.date = datetime.datetime.today().date()
 
+
 ### PEOPLE ###
+
 
 @dataclass
 class People(BaseResource):
@@ -132,13 +135,14 @@ class People(BaseResource):
     mean: float
     first_quartile: float
     median: float
-    third_quartile:float
+    third_quartile: float
     scrape_source: str
     scrape_url: str
     scrape_date: datetime.date = datetime.datetime.today().date()
 
 
 ### SPACE ###
+
 
 @dataclass
 class MeetingRoom(BaseResource):

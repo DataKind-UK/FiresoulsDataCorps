@@ -1,9 +1,9 @@
 from bs4 import BeautifulSoup
 import pandas as pd
 from tqdm import tqdm
+from typing import Optional
 import time
 import re
-import math
 from typing import List
 from src.parsers.base import BaseParser
 from src.resources import Laptop, Desktop
@@ -66,13 +66,13 @@ class ValueComputersLaptopParser(BaseParser):
                 return int(ram.replace("GB", ""))
 
     @staticmethod
-    def _parse_screen_size(screen_size: str):
+    def _parse_screen_size(screen_size: str) -> Optional[float]:
         screen_size = screen_size.replace('"', "")
         try:
-            screen_size = float(screen_size)
+            screen_size_res = float(screen_size)
         except:
-            screen_size = None
-        return screen_size
+            return None
+        return screen_size_res
 
     @staticmethod
     def _parse_storage(storage: str):
