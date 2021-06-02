@@ -22,7 +22,8 @@ class ONSPeopleParser(BaseParser):
             else:
                 df.columns = df.iloc[0,:]
                 df = df.iloc[1:,:]
-        df = df[['Description', 'Code', 'Median', 'Mean']]
+        df = df[['Description', 'Code', 'Median', 'Mean', 25, 75]]
+        df = df.rename(columns={25: 'first_quartile', 75: 'third_quartile'})
         df.columns = [x.lower() for x in df.columns]
         return df
 
@@ -32,7 +33,7 @@ class ONSPeopleParser(BaseParser):
         df = df.copy()
         df[['region', 'job_title']] = df['description'].str.strip().str.split(',',1,expand=True)
         df = df[(df['region'].isin(REGIONS)) & (~df['job_title'].isna())]
-        df = df[['region', 'job_title','code', 'median', 'mean']]
+        df = df[['region', 'job_title','code', 'median', 'mean', 'first_quartile', 'third_quartile']]
         return df
 
     @staticmethod
@@ -40,6 +41,8 @@ class ONSPeopleParser(BaseParser):
         df = df.copy()
         df.loc[df['median'] == 'x', 'median'] = None
         df.loc[df['mean'] == 'x', 'mean'] = None
+        df.loc[df['first_quartile'] == 'x', 'first_quartile'] = None
+        df.loc[df['third_quartile'] == 'x', 'third_quartile'] = None
         df[df.isna()] = None
         return df
 
@@ -52,13 +55,13 @@ class ONSPeopleParser(BaseParser):
         df = self._split_region(df)
         df = self._replace_nan_with_none(df)
         for _, row in df.iterrows():
-            value = row['mean'] if row['mean'] is not None else row['median']
-            agg_level = 'mean' if row['mean'] is not None else 'median'
             person = People(row['region'],
                             row['job_title'],
                             row['code'],
-                            value,
-                            agg_level,
+                            row['mean'],
+                            row['first_quartile'],
+                            row['median'],
+                            row['third_quartile'],
                             self.scrape_source,
                             self.scrape_source+row['code']+row['region'])
             people.append(person)

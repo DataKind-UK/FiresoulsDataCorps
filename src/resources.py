@@ -129,8 +129,10 @@ class People(BaseResource):
     region: str
     job_title: str
     soc_code: str
-    hourly_pay: float
-    aggregation: str
+    mean: float
+    first_quartile: float
+    median: float
+    third_quartile:float
     scrape_source: str
     scrape_url: str
     scrape_date: datetime.date = datetime.datetime.today().date()
