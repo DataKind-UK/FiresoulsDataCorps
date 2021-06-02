@@ -25,6 +25,7 @@ from src.database import insert_into_database
 
 app = typer.Typer()
 
+
 def run_parser(parser: BaseParser):
     try:
         items = parser.parse()
@@ -32,6 +33,7 @@ def run_parser(parser: BaseParser):
         print(f"Parser {str(parser)} errored out with error:\n{e}")
         return []
     return items
+
 
 @app.command()
 def scrape(product: str, sites: Optional[List[str]] = [], city: Optional[str] = None):
@@ -49,7 +51,7 @@ def scrape(product: str, sites: Optional[List[str]] = [], city: Optional[str] = 
         if "currys" in LAPTOP_SITES:
             items = run_parser(CurrysLaptopParser())
             all_items.extend(items)
-    
+
     elif product == "tablet":
         TABLET_SITES = ["backmarket", "tabletmonkeys", "currys"]
         if len(sites) > 0:
@@ -71,7 +73,7 @@ def scrape(product: str, sites: Optional[List[str]] = [], city: Optional[str] = 
         if "currys" in DESKTOP_SITES:
             items = run_parser(CurrysDesktopParser())
             all_items.extend(items)
-    
+
     elif product == "printer":
         PRINTER_SITES = ["printerland"]
         if len(sites) > 0:
@@ -112,21 +114,23 @@ def scrape(product: str, sites: Optional[List[str]] = [], city: Optional[str] = 
         if "zipcube" in MEETING_ROOM_SITES:
             if city is None:
                 raise Exception("City argument is required for Zipcube scraper")
-            print("Scraping Zipcube for "+city)
+            print("Scraping Zipcube for " + city)
             items = run_parser(ZipcubeParser(city))
             all_items.extend(items)
         if "regus" in MEETING_ROOM_SITES:
             if city is None:
                 raise Exception("City argument is required for Regus scraper")
-            print("Scraping Regus for "+city)
+            print("Scraping Regus for " + city)
             items = run_parser(RegusParser(city))
             all_items.extend(items)
-    
+
     else:
         raise Exception(f"Product {product} not implemented")
 
     if len(all_items) == 0:
-        raise Exception("No data was scraped. Verify that given sites have been set up for the product")
+        raise Exception(
+            "No data was scraped. Verify that given sites have been set up for the product"
+        )
 
     json_file = [x.asdict() for x in items]
     timestamp = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
@@ -135,10 +139,9 @@ def scrape(product: str, sites: Optional[List[str]] = [], city: Optional[str] = 
     print("Saving json file into folder")
     with open(f"json/{product}_{timestamp}.json", "w") as f:
         json.dump(json_file, f)
-    
+
     print("Writing new data into database")
     insert_into_database(product, json_file)
-
 
 
 @app.command()

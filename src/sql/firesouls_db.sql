@@ -131,8 +131,10 @@ CREATE TABLE `people` (
   `region` varchar(255) DEFAULT NULL,
   `job_title` varchar(255) DEFAULT NULL,
   `soc_code` varchar(255) DEFAULT NULL,
-  `hourly_pay` float DEFAULT NULL,
-  `aggregation` varchar(255) DEFAULT NULL,
+  `mean` float DEFAULT NULL,
+  `first_quartile` float DEFAULT NULL,
+  `median` float DEFAULT NULL,
+  `third_quartile` float DEFAULT NULL,
   `scrape_source` varchar(255) DEFAULT NULL,
   `scrape_url` varchar(255) DEFAULT NULL,
   `scrape_date` timestamp NULL DEFAULT NULL,
@@ -157,15 +159,28 @@ CREATE TABLE `meeting_rooms` (
 
 -- People - Management Time
 CREATE OR REPLACE VIEW people_management_time as 
-select region, avg(hourly_pay) as hourly_pay, avg(hourly_pay) * 12 as day_and_half_pay
+select region, avg(mean) as mean_hourly_pay, avg(mean) * 12 as mean_day_and_half_pay
 from people
 where soc_code in ('1150','113') and valid_to is NULL
 group by region;
 
 -- People - Executive Time
 CREATE OR REPLACE VIEW people_executive_time as
-select region, avg(hourly_pay) as hourly_pay, avg(hourly_pay) * 12 as day_and_half_pay
+select region, avg(mean) as mean_hourly_pay, avg(mean) * 12 as mean_day_and_half_pay
 from people
 where soc_code in ('111') and valid_to is NULL
 group by region;
 
+-- People - Graduates
+CREATE OR REPLACE VIEW people_graduates as
+select region, avg(first_quartile) as first_quartile_hourly_pay, avg(first_quartile) * 8 * 5 * 48 as first_quartile_yearly_pay
+from people
+where soc_code in ('21', '22', '23', '31', '32', '33', '34', '35') and valid_to is NULL
+group by region;
+
+-- People - Local Apprenticeships
+CREATE OR REPLACE VIEW people_local_apprenticeships as
+select region, avg(mean) as mean_hourly_pay, avg(mean) * 8 * 5 * 48 as mean_yearly_pay
+from people
+where soc_code in ('91', '92') and valid_to is NULL
+group by region;

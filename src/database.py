@@ -5,22 +5,23 @@ import pandas as pd
 import math
 import datetime
 from tqdm import tqdm
-from .resources import (Laptop, Desktop, Tablet, Monitor, WiFiDongle, Printer,
-                       Projector)
+from .resources import Laptop, Desktop, Tablet, Monitor, WiFiDongle, Printer, Projector
 
 
 def get_db_connection():
     connection = pymysql.connect(
-        host=os.getenv('MYSQL_HOST'),
-        user=os.getenv('MYSQL_USER'),
-        password=os.getenv('MYSQL_PASSWORD'),
-        database=os.getenv('MYSQL_DATABASE'),
+        host=os.getenv("MYSQL_HOST"),
+        user=os.getenv("MYSQL_USER"),
+        password=os.getenv("MYSQL_PASSWORD"),
+        database=os.getenv("MYSQL_DATABASE"),
         cursorclass=pymysql.cursors.DictCursor,
     )
     return connection
 
 
-def check_if_item_exists(table_name: str, url: str) -> Tuple[int, datetime.datetime.timestamp]:
+def check_if_item_exists(
+    table_name: str, url: str
+) -> Tuple[int, datetime.datetime.timestamp]:
     """
     Returns version and a timestamp for when the record is valid from.
 
@@ -63,6 +64,7 @@ def check_if_item_exists(table_name: str, url: str) -> Tuple[int, datetime.datet
     connection.close()
     return version, valid_from
 
+
 def get_sql_script(table: str):
     pass
 
@@ -99,7 +101,7 @@ def insert_into_desktop(df: pd.DataFrame):
         valid_from,
         version) values (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s);"""
     for i, r in tqdm(df1.iterrows(), total=len(df1), desc="desktops"):
-        version, valid_from = check_if_item_exists('desktop', r["scrape_url"])
+        version, valid_from = check_if_item_exists("desktop", r["scrape_url"])
         cursor.execute(
             sql,
             (
@@ -155,7 +157,7 @@ def insert_into_laptop(df: pd.DataFrame):
         valid_from,
         version) values (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s);"""
     for i, r in tqdm(df.iterrows(), total=len(df), desc="laptops"):
-        version, valid_from = check_if_item_exists('laptop', r["scrape_url"])
+        version, valid_from = check_if_item_exists("laptop", r["scrape_url"])
         cursor.execute(
             sql,
             (
@@ -209,7 +211,7 @@ def insert_into_tablet(df):
         valid_from,
         version) values (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s);"""
     for i, r in tqdm(df.iterrows(), total=len(df), desc="tablets"):
-        version, valid_from = check_if_item_exists('tablet', r["scrape_url"])
+        version, valid_from = check_if_item_exists("tablet", r["scrape_url"])
         cursor.execute(
             sql,
             (
@@ -221,7 +223,7 @@ def insert_into_tablet(df):
                 r["storage"],
                 r["release_year"],
                 r["price"],
-                r.get('currency','GBP'),
+                r.get("currency", "GBP"),
                 r["scrape_source"],
                 r["scrape_url"],
                 r["scrape_date"],
@@ -266,7 +268,7 @@ def insert_into_wifi_dongle(df):
         valid_from,
         version) values (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s);"""
     for i, r in tqdm(df.iterrows(), total=len(df), desc="wifi_dongles"):
-        version, valid_from = check_if_item_exists('wifi_dongle', r["scrape_url"])
+        version, valid_from = check_if_item_exists("wifi_dongle", r["scrape_url"])
         cursor.execute(
             sql,
             (
@@ -318,7 +320,7 @@ def insert_into_printer(df):
         valid_from,
         version) values (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s);"""
     for i, r in tqdm(df.iterrows(), total=len(df), desc="printers"):
-        version, valid_from = check_if_item_exists('printer', r["scrape_url"])
+        version, valid_from = check_if_item_exists("printer", r["scrape_url"])
         cursor.execute(
             sql,
             (
@@ -371,7 +373,7 @@ def insert_into_projector(df):
         valid_from,
         version) values (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s);"""
     for i, r in tqdm(df.iterrows(), total=len(df), desc="projector"):
-        version, valid_from = check_if_item_exists('projector', r["scrape_url"])
+        version, valid_from = check_if_item_exists("projector", r["scrape_url"])
         cursor.execute(
             sql,
             (
@@ -394,6 +396,7 @@ def insert_into_projector(df):
     cursor.close()
     connection.close()
 
+
 def insert_into_people(df):
     """
     Insert new data in the `people` table.
@@ -412,23 +415,27 @@ def insert_into_people(df):
         region, 
         job_title, 
         soc_code, 
-        hourly_pay, 
-        aggregation,
+        mean, 
+        first_quartile,
+        median,
+        third_quartile,
         scrape_source, 
         scrape_url, 
         scrape_date,
         valid_from,
-        version) values (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s);"""
+        version) values (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s);"""
     for i, r in tqdm(df.iterrows(), total=len(df), desc="people"):
-        version, valid_from = check_if_item_exists('people', r["scrape_url"])
+        version, valid_from = check_if_item_exists("people", r["scrape_url"])
         cursor.execute(
             sql,
             (
                 r["region"],
                 r["job_title"],
                 r["soc_code"],
-                r["hourly_pay"],
-                r["aggregation"],
+                r["mean"],
+                r["first_quartile"],
+                r["median"],
+                r["third_quartile"],
                 r["scrape_source"],
                 r["scrape_url"],
                 r["scrape_date"],
@@ -439,6 +446,7 @@ def insert_into_people(df):
         connection.commit()
     cursor.close()
     connection.close()
+
 
 def insert_into_meeting_rooms(df):
     """
@@ -465,7 +473,7 @@ def insert_into_meeting_rooms(df):
         valid_from,
         version) values (%s, %s, %s, %s, %s, %s, %s, %s, %s);"""
     for i, r in tqdm(df.iterrows(), total=len(df), desc="meeting_rooms"):
-        version, valid_from = check_if_item_exists('meeting_rooms', r["scrape_url"])
+        version, valid_from = check_if_item_exists("meeting_rooms", r["scrape_url"])
         cursor.execute(
             sql,
             (
@@ -483,6 +491,7 @@ def insert_into_meeting_rooms(df):
         connection.commit()
     cursor.close()
     connection.close()
+
 
 def insert_into_database(product_type: str, item_set: List[Dict[str, Any]]):
     """Channel the scraped products data into the correct insert_into_ method
@@ -505,23 +514,25 @@ def insert_into_database(product_type: str, item_set: List[Dict[str, Any]]):
     # This step is required since MySql doesn't know how to use NaN
     df = df.where(pd.notnull(df), None)
 
-    if product_type == 'laptop':
+    if product_type == "laptop":
         insert_into_laptop(df)
-    elif product_type == 'desktop':
+    elif product_type == "desktop":
         insert_into_desktop(df)
-    elif product_type == 'tablet':
+    elif product_type == "tablet":
         insert_into_tablet(df)
-    elif product_type == 'monitor':
+    elif product_type == "monitor":
         insert_into_monitor(df)
-    elif product_type == 'wifi_dongle':
+    elif product_type == "wifi_dongle":
         insert_into_wifi_dongle(df)
-    elif product_type == 'printer':
+    elif product_type == "printer":
         insert_into_printer(df)
-    elif product_type == 'projector':
+    elif product_type == "projector":
         insert_into_projector(df)
-    elif product_type == 'people':
+    elif product_type == "people":
         insert_into_people(df)
-    elif product_type == 'meeting_rooms':
+    elif product_type == "meeting_rooms":
         insert_into_meeting_rooms(df)
     else:
-        raise Exception(f"Insert into database method not implemented for {product_type}")
+        raise Exception(
+            f"Insert into database method not implemented for {product_type}"
+        )
