@@ -183,7 +183,7 @@ class ValueComputersLaptopParser(BaseParser):
             processor = r["Processor"]
             ram = self._parse_ram(r["RAM"])
             storage = self._parse_storage(str(r["Storage"]))
-            release_year = ""
+            release_year = None
             screen_size = self._parse_screen_size(r["Screen Size"])
             price = r["price"]
             source = self._scrape_source()
