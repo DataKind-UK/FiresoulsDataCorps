@@ -21,7 +21,7 @@ def test_laptop_get_items(soup):
     bls.soup = soup
 
     items = bls._get_items()
-    assert len(items) == 20
+    assert len(items) == 50
 
 
 def test_get_num_pages(soup):
@@ -29,7 +29,7 @@ def test_get_num_pages(soup):
     bls.soup = soup
 
     pages = bls._get_num_pages()
-    assert pages == 21
+    assert pages == 7
 
 
 def test_structure_url():
@@ -59,41 +59,41 @@ def test_parse_brand(products):
     brand1 = clp._parse_brand(products[0])
     assert brand1 == "lenovo"
     brand2 = clp._parse_brand(products[5])
-    assert brand2 == "dell"
+    assert brand2 == "hp"
 
 
 def test_parse_model_screen_size(products):
     clp = CurrysLaptopParser()
     res1a, res1b = clp._parse_model_screen_size(products[0])
-    assert (res1a, res1b) == ("ideapad slim 1", 11.6)
+    assert (res1a, res1b) == ("ideapad flex 5i  2 in 1", 14.0)
     res2a, res2b = clp._parse_model_screen_size(products[5])
-    assert (res2a, res2b) == ("inspiron 15 3000", 15.6)
+    assert (res2a, res2b) == ('14a  chromebook', 14.0)
 
 
 def test_parse_processor(products):
     clp = CurrysLaptopParser()
     res1a = clp._parse_processor(products[0])
-    assert res1a == "amd athlon silver 3050e"
+    assert res1a == "intel® core™ i3-1005g1"
     res2a = clp._parse_processor(products[5])
-    assert res2a == "amd ryzen 5 3500u"
+    assert res2a == "intel® celeron® n4020"
 
 
 def test_parse_ram_storage(products):
     clp = CurrysLaptopParser()
     res1a, res1b = clp._parse_ram_storage(products[0])
-    assert (res1a, res1b) == (4, 64)
+    assert (res1a, res1b) == (4, 128)
     res2a, res2b = clp._parse_ram_storage(products[5])
-    assert (res2a, res2b) == (8, 256)
+    assert (res2a, res2b) == (4, 64)
     res3a, res3b = clp._parse_ram_storage(products[1])
-    assert (res3a, res3b) == (None, 512)
+    assert (res3a, res3b) == (8, 256)
 
 
 def test_parse_price(products):
     clp = CurrysLaptopParser()
     res = clp._parse_price(products[0])
-    assert res == 199.0
+    assert res == 449.0
     res = clp._parse_price(products[5])
-    assert res == 499.0
+    assert res == 279.0
 
 
 def test_parse_source():
@@ -107,10 +107,10 @@ def test_parse_scrape_url(products):
     res = clp._parse_scrape_url(products[0])
     assert (
         res
-        == "https://www.currys.co.uk/gbuk/computing/laptops/laptops/lenovo-ideapad-slim-1-11-6-laptop-amd-athlon-silver-64-gb-emmc-grey-10219103-pdt.html"
+        == "https://www.currys.co.uk/gbuk/computing/laptops/laptops/lenovo-ideapad-flex-5i-14-2-in-1-laptop-intel-core-i3-128-gb-ssd-grey-10207981-pdt.html"
     )
     res = clp._parse_scrape_url(products[5])
     assert (
         res
-        == "https://www.currys.co.uk/gbuk/computing/laptops/laptops/dell-inspiron-15-3000-15-6-laptop-amd-ryzen-5-256-gb-ssd-black-10214380-pdt.html"
+        == "https://www.currys.co.uk/gbuk/computing/laptops/laptops/hp-14a-14-chromebook-intel-celeron-64-gb-emmc-white-10207665-pdt.html"
     )
