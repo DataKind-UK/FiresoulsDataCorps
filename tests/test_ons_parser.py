@@ -37,8 +37,12 @@ def test_fix_file_headers(data):
         "code",
         "median",
         "mean",
+        "first_decile",
         "first_quartile",
+        "third_decile",
+        "seventh_decile",
         "third_quartile",
+        "ninth_decile"
     }
 
 
@@ -52,8 +56,12 @@ def test_split_region(data):
         "code",
         "median",
         "mean",
+        "first_decile",
         "first_quartile",
+        "third_decile",
+        "seventh_decile",
         "third_quartile",
+        "ninth_decile"
     }
 
 

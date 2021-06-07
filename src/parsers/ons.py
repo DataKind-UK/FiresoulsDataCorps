@@ -27,8 +27,10 @@ class ONSPeopleParser(BaseParser):
             else:
                 df.columns = df.iloc[0, :]
                 df = df.iloc[1:, :]
-        df = df[["Description", "Code", "Median", "Mean", 25, 75]]
-        df = df.rename(columns={25: "first_quartile", 75: "third_quartile"})
+        df = df[["Description", "Code", "Median", "Mean", 10, 25, 30, 70, 75, 90]]
+        df = df.rename(columns={10: "first_decile", 25: "first_quartile",
+                                30: "third_decile", 70: "seventh_decile",
+                                75: "third_quartile", 90: "ninth_decile"})
         df.columns = [x.lower() for x in df.columns]
         return df
 
@@ -59,8 +61,12 @@ class ONSPeopleParser(BaseParser):
                 "code",
                 "median",
                 "mean",
+                "first_decile",
                 "first_quartile",
+                "third_decile",
+                "seventh_decile",
                 "third_quartile",
+                "ninth_decile"
             ]
         ]
         return df
@@ -70,8 +76,12 @@ class ONSPeopleParser(BaseParser):
         df = df.copy()
         df.loc[df["median"] == "x", "median"] = None
         df.loc[df["mean"] == "x", "mean"] = None
+        df.loc[df["first_decile"] == "x", "first_decile"] = None
         df.loc[df["first_quartile"] == "x", "first_quartile"] = None
+        df.loc[df["third_decile"] == "x", "third_decile"] = None
+        df.loc[df["seventh_decile"] == "x", "seventh_decile"] = None
         df.loc[df["third_quartile"] == "x", "third_quartile"] = None
+        df.loc[df["ninth_decile"] == "x", "ninth_decile"] = None
         df[df.isna()] = None
         return df
 
@@ -89,9 +99,13 @@ class ONSPeopleParser(BaseParser):
                 row["job_title"],
                 row["code"],
                 row["mean"],
+                row["first_decile"],
                 row["first_quartile"],
+                row["third_decile"],
                 row["median"],
+                row["seventh_decile"],
                 row["third_quartile"],
+                row["ninth_decile"],
                 self.scrape_source,
                 self.scrape_source + row["code"] + row["region"],
             )
