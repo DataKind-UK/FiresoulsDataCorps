@@ -133,9 +133,13 @@ class People(BaseResource):
     job_title: str
     soc_code: str
     mean: float
+    first_decile: float
     first_quartile: float
+    third_decile: float
     median: float
+    seventh_decile: float
     third_quartile: float
+    ninth_decile: float
     scrape_source: str
     scrape_url: str
     scrape_date: datetime.date = datetime.datetime.today().date()

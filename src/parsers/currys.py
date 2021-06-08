@@ -89,8 +89,8 @@ class CurrysLaptopParser(CurrysBaseParser):
         return self.scrape_source
 
     def _parse_scrape_url(self, product) -> str:
-        url = product.find("div", {"class": "desc"})
-        url = url.find("a", {"class": "in"})["href"]
+        url = product.find("div", {"class":"productListImage"})
+        url = url.find("a")["href"]
         return url
 
     def parse(self) -> List[Laptop]:

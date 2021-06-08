@@ -415,15 +415,19 @@ def insert_into_people(df):
         region, 
         job_title, 
         soc_code, 
-        mean, 
+        mean,
+        first_decile,
         first_quartile,
+        third_decile,
         median,
+        seventh_decile,
         third_quartile,
+        ninth_decile,
         scrape_source, 
         scrape_url, 
         scrape_date,
         valid_from,
-        version) values (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s);"""
+        version) values (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s);"""
     for i, r in tqdm(df.iterrows(), total=len(df), desc="people"):
         version, valid_from = check_if_item_exists("people", r["scrape_url"])
         cursor.execute(
@@ -433,9 +437,13 @@ def insert_into_people(df):
                 r["job_title"],
                 r["soc_code"],
                 r["mean"],
+                r["first_decile"],
                 r["first_quartile"],
+                r["third_decile"],
                 r["median"],
+                r["seventh_decile"],
                 r["third_quartile"],
+                r["ninth_decile"],
                 r["scrape_source"],
                 r["scrape_url"],
                 r["scrape_date"],
