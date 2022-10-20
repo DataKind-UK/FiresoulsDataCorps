@@ -79,7 +79,7 @@ class ValueComputersLaptopParser(BaseParser):
         if storage == "nan":
             return None
         else:
-            storage = re.search(r"([0-9]*)", storage).group(0)
+            storage = re.search(r"([0-9]*)", storage).group(1)
             storage = float(storage)
             return storage
 
@@ -302,7 +302,7 @@ class ValueComputersDesktopParser(BaseParser):
             else:
                 return None, None
 
-    def get_desktop_specs(self, row):_parse_storage
+    def get_desktop_specs(self, row):
         """
         Returns a dataframe
         """
