@@ -79,7 +79,7 @@ class ValueComputersLaptopParser(BaseParser):
         if storage == "nan":
             return None
         else:
-            storage = re.search(r"([0-9]*)", storage).group(1)
+            storage = re.search(r"([0-9]*)", storage).group(0)
             storage = float(storage)
             return storage
 
