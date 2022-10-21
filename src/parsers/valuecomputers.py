@@ -5,7 +5,7 @@ from typing import Optional
 import time
 import re
 from typing import List
-from base import BaseParser
+from src.parsers.base import BaseParser
 from src.resources import Laptop, Desktop
 
 
@@ -125,8 +125,7 @@ class ValueComputersLaptopParser(BaseParser):
             specs = item.find(id="specs")
             table = specs.find("table")
             for row in table.find_all("tr"):
-                cels = row.find_all("td")
-                cols = cels.find_all("strong")
+                cols = row.find_all("td")
                 specs_list.append((url, cols[0].text, cols[1].text))
 
         columns = ["url", "spec", "value"]
