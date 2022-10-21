@@ -126,7 +126,7 @@ class ValueComputersLaptopParser(BaseParser):
             table = specs.find("table")
             for row in table.find_all("tr"):
                 cels = row.find_all("td")
-                cols = find_all("strong")
+                cols = cels.find_all("strong")
                 specs_list.append((url, cols[0].text, cols[1].text))
 
         columns = ["url", "spec", "value"]
