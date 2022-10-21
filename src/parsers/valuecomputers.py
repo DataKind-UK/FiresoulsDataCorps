@@ -5,7 +5,7 @@ from typing import Optional
 import time
 import re
 from typing import List
-from src.parsers.base import BaseParser
+from base import BaseParser
 from src.resources import Laptop, Desktop
 
 
